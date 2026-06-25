@@ -67,12 +67,12 @@ export const background = {
 
 /* ----------------------------- INTERESTS -------------------------------- */
 export const interests = [
-  { title: '3D & Motion', text: 'Real-time graphics, shaders, and animation that gives interfaces life.', emoji: '🌀' },
-  { title: 'Film & Cinematography', text: 'Framing, lighting, and pacing — storytelling I steal from constantly.', emoji: '🎬' },
+  { title: 'VFX', text: 'Visual effects and compositing — bending reality one frame at a time.', emoji: '✨' },
+  { title: 'CyberSecurity', text: 'Breaking things to understand them; the cat-and-mouse of staying a step ahead.', emoji: '🛡️' },
   { title: 'Music', text: 'This gold AP got em fascinated. Aint no fabrication, im on medication.', emoji: '🎧' },
-  { title: 'Photography', text: 'Chasing light and composition out in the world.', emoji: '📷' },
-  { title: 'Gaming', text: 'Great games are masterclasses in feedback, UI, and feel.', emoji: '🎮' },
-  { title: 'Travel', text: 'New places, new perspectives, new design languages.', emoji: '🌍' },
+  { title: 'Travel', text: 'New places, new perspectives, new ways of seeing the world.', emoji: '🌍' },
+  { title: 'Sports', text: 'Competition, teamwork, and the thrill of the game — on the field and the screen.', emoji: '⚽' },
+  { title: 'Films', text: 'Framing, lighting, and pacing — storytelling I steal from constantly.', emoji: '🎬' },
 ]
 
 /* ------------------------------- SKILLS --------------------------------- */
