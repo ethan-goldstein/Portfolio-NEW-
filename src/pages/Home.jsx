@@ -27,7 +27,7 @@ export default function Home() {
       <motion.h1 variants={fade} custom={1} initial="hidden" animate="show" className="home-title">
         <FluidText as="span" text="ETHAN" />
         <br />
-        <FluidText as="span" className="l2" text="GOLDSTEIN" />
+        <FluidText as="span" className="l2" text="GOLDSTEIN" hoverColor="234,179,8" hoverOpacity={0.7} />
       </motion.h1>
 
       <motion.p variants={fade} custom={2} initial="hidden" animate="show" className="home-tagline">
@@ -38,18 +38,6 @@ export default function Home() {
       <motion.div variants={fade} custom={3} initial="hidden" animate="show" className="home-hud bl">
         <div>{profile.location}</div>
         <a href={`mailto:${profile.email}`}>{profile.email}</a>
-      </motion.div>
-
-      <motion.div variants={fade} custom={3} initial="hidden" animate="show" className="home-hud br">
-        <div className="home-enter">
-          {quick.map((n) => (
-            <Magnetic key={n.path} strength={0.3}>
-              <Link to={n.path}>
-                <span className="num">{n.id}</span> {n.label} →
-              </Link>
-            </Magnetic>
-          ))}
-        </div>
       </motion.div>
     </section>
   )

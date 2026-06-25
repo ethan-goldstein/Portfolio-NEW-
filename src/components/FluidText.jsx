@@ -3,7 +3,14 @@ import { useRef } from 'react'
 /* Cursor-reactive heading. Each letter lifts, scales and brightens based on
    how close the cursor is — a smooth fluid "wave" that follows the pointer.
    Words are kept intact so they never break mid-word. */
-export default function FluidText({ text, as = 'span', className = '', radius = 150 }) {
+export default function FluidText({
+  text,
+  as = 'span',
+  className = '',
+  radius = 150,
+  hoverColor = '255,255,255',
+  hoverOpacity = 1,
+}) {
   const ref = useRef(null)
   const Tag = as
 
@@ -16,7 +23,8 @@ export default function FluidText({ text, as = 'span', className = '', radius = 
       const dy = e.clientY - (r.top + r.height / 2)
       const f = Math.max(0, 1 - Math.hypot(dx, dy) / radius)
       l.style.transform = `translateY(${-f * 28}px) scale(${1 + f * 0.38})`
-      l.style.color = f > 0.04 ? `rgba(255,255,255,${0.55 + f * 0.45})` : ''
+      const alpha = (0.55 + f * 0.45) * hoverOpacity
+      l.style.color = f > 0.04 ? `rgba(${hoverColor},${alpha})` : ''
     })
   }
 

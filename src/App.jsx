@@ -24,8 +24,8 @@ function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
     window.scrollTo(0, 0)
-    const isHome = pathname === '/'
-    document.body.classList.toggle('home-lock', isHome)
+    const noScroll = pathname === '/' || pathname === '/skills' || pathname === '/interests'
+    document.body.classList.toggle('home-lock', noScroll)
     return () => document.body.classList.remove('home-lock')
   }, [pathname])
   return null
@@ -47,10 +47,10 @@ function PageTransition({ children }) {
   )
 }
 
-/* The home screen is a single no-scroll viewport, so it gets no footer. */
+/* Single no-scroll viewports (home + skills) get no footer. */
 function ConditionalFooter() {
   const { pathname } = useLocation()
-  if (pathname === '/') return null
+  if (pathname === '/' || pathname === '/skills' || pathname === '/interests') return null
   return <Footer />
 }
 
@@ -98,7 +98,7 @@ export default function App() {
     <>
       <AnimatePresence>{loading && <Loader onDone={() => setLoading(false)} />}</AnimatePresence>
 
-      <SiteBackground scrollRef={scrollRef} />
+      <SiteBackground />
       <div className="bg-vignette" />
       <Cursor />
       <ScrollProgress />

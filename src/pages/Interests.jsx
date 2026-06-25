@@ -1,67 +1,66 @@
-import { useRef } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { interests } from '../content/data'
-import Reveal from '../components/Reveal'
-import FluidText from '../components/FluidText'
-import Pager from '../components/Pager'
-
-/* A card that tilts in 3D toward the pointer. */
-function TiltCard({ item, index }) {
-  const ref = useRef(null)
-  const mx = useMotionValue(0)
-  const my = useMotionValue(0)
-  const rx = useSpring(useTransform(my, [-0.5, 0.5], [10, -10]), { stiffness: 150, damping: 15 })
-  const ry = useSpring(useTransform(mx, [-0.5, 0.5], [-12, 12]), { stiffness: 150, damping: 15 })
-
-  const onMove = (e) => {
-    const r = ref.current.getBoundingClientRect()
-    mx.set((e.clientX - r.left) / r.width - 0.5)
-    my.set((e.clientY - r.top) / r.height - 0.5)
-  }
-  const reset = () => {
-    mx.set(0)
-    my.set(0)
-  }
-
-  return (
-    <Reveal delay={index * 0.08}>
-      <motion.div
-        ref={ref}
-        className="card"
-        data-cursor="hover"
-        onMouseMove={onMove}
-        onMouseLeave={reset}
-        style={{ rotateX: rx, rotateY: ry, transformPerspective: 900, transformStyle: 'preserve-3d' }}
-      >
-        <span className="emoji" style={{ transform: 'translateZ(40px)' }}>{item.emoji}</span>
-        <h3 style={{ transform: 'translateZ(28px)' }}>{item.title}</h3>
-        <p style={{ transform: 'translateZ(18px)' }}>{item.text}</p>
-      </motion.div>
-    </Reveal>
-  )
-}
 
 export default function Interests() {
-  return (
-    <>
-      <div className="page container">
-        <header className="page-header">
-          <Reveal>
-            <p className="page-index">02 — Interests</p>
-            <h1 className="display"><FluidText text="What" /><br /><FluidText className="l2" text="Fuels Me" /></h1>
-            <p className="lead mt-2">The obsessions outside the canvas that feed everything I make.</p>
-          </Reveal>
-        </header>
+  const [active, setActive] = useState(null)
 
-        <section className="section" style={{ paddingTop: 0 }}>
-          <div className="grid cols-3">
-            {interests.map((item, i) => (
-              <TiltCard key={item.title} item={item} index={i} />
+  return (
+    <section className="interests-stage">
+      <div className="crt">
+        <img className="crt-img" src="/tv2.png" alt="Retro computer" draggable="false" />
+
+        {/* the interactive screen sits over the computer's display */}
+        <div className="crt-screen" onMouseLeave={() => setActive(null)}>
+          <div className="crt-scanlines" />
+          <div className="crt-flicker" />
+
+          <div className="crt-grid">
+            {interests.map((it, i) => (
+              <div key={it.title} className={`crt-app ${active === i ? 'is-active' : ''}`}>
+                {/* only the icon itself is the hover / focus target */}
+                <button
+                  className="crt-app-btn"
+                  data-cursor="hover"
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  aria-label={it.title}
+                >
+                  <span className="crt-app-icon">{it.emoji}</span>
+                </button>
+                <span className="crt-app-label">{it.title}</span>
+              </div>
             ))}
           </div>
-        </section>
+
+          {/* zoomed "window" with the summary, opens over the screen on hover */}
+          <AnimatePresence>
+            {active !== null && (
+              <motion.div
+                className="crt-window"
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.7 }}
+                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="crt-window-bar">
+                  <span className="dots"><i /><i /><i /></span>
+                  <span className="crt-window-title">{interests[active].title}</span>
+                </div>
+                <div className="crt-window-body">
+                  <span className="crt-window-emoji">{interests[active].emoji}</span>
+                  <p className="crt-window-text">{interests[active].text}</p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
-      <Pager current="/interests" />
-    </>
+
+      <p className="interests-hint">
+        <span className="page-index">02 — Interests</span>
+        Hover an icon on the screen to open it
+      </p>
+    </section>
   )
 }

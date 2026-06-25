@@ -8,14 +8,14 @@
 export const profile = {
   name: 'Ethan Goldstein',
   initials: 'EG',
-  role: 'Design / Creative',
+  role: 'Software Engineer',
   // Short punchy tagline shown big on the home hero
-  tagline: 'UX/UI Designer crafting immersive, story-driven experiences.',
+  tagline: 'AI Systems | Workflow Automation | LLM Integration',
   // One or two sentences under the hero
   intro:
     'I design interfaces and motion that feel alive — blending thoughtful UX, bold visuals, and a love for 3D and interaction.',
-  location: 'Your City, Country', // PLACEHOLDER
-  availability: 'Open to opportunities', // e.g. "Available for freelance"
+  location: 'Washington, DC', // PLACEHOLDER
+  availability: 'GovCIO', // e.g. "Available for freelance"
   email: 'ethancgoldstein@gmail.com',
   // Resume file: drop a PDF into /public/assets and point here (optional)
   resumeUrl: '', // e.g. '/assets/ethan-goldstein-resume.pdf'
@@ -69,49 +69,33 @@ export const background = {
 export const interests = [
   { title: '3D & Motion', text: 'Real-time graphics, shaders, and animation that gives interfaces life.', emoji: '🌀' },
   { title: 'Film & Cinematography', text: 'Framing, lighting, and pacing — storytelling I steal from constantly.', emoji: '🎬' },
-  { title: 'Music', text: 'Always a soundtrack. Rhythm shapes how I think about flow and timing.', emoji: '🎧' },
+  { title: 'Music', text: 'This gold AP got em fascinated. Aint no fabrication, im on medication.', emoji: '🎧' },
   { title: 'Photography', text: 'Chasing light and composition out in the world.', emoji: '📷' },
   { title: 'Gaming', text: 'Great games are masterclasses in feedback, UI, and feel.', emoji: '🎮' },
   { title: 'Travel', text: 'New places, new perspectives, new design languages.', emoji: '🌍' },
 ]
 
 /* ------------------------------- SKILLS --------------------------------- */
+// Skills page is a single-screen 4×3 grid of tilted icon cards.
+// `icon` is the devicon icon path (folder/file, no extension) — browse
+// https://devicon.dev and use the colored "-original" (or "-plain") variant.
 export const skills = {
-  // Grouped skills with proficiency 0–100 (used for animated meters)
-  groups: [
-    {
-      title: 'Design',
-      items: [
-        { name: 'UX / UI Design', level: 95 },
-        { name: 'Prototyping', level: 90 },
-        { name: 'Design Systems', level: 85 },
-        { name: 'Motion Design', level: 80 },
-      ],
-    },
-    {
-      title: 'Tools',
-      items: [
-        { name: 'Figma', level: 95 },
-        { name: 'Adobe Suite', level: 85 },
-        { name: 'Blender / 3D', level: 70 },
-        { name: 'After Effects', level: 75 },
-      ],
-    },
-    {
-      title: 'Build',
-      items: [
-        { name: 'HTML / CSS', level: 85 },
-        { name: 'JavaScript / React', level: 70 },
-        { name: 'Three.js / WebGL', level: 60 },
-        { name: 'Webflow / No-code', level: 80 },
-      ],
-    },
-  ],
-  // Free-form tags shown as a marquee / cloud
-  tags: [
-    'User Research', 'Wireframing', 'Interaction Design', 'Branding',
-    'Typography', 'Color', 'Accessibility', 'Storyboarding',
-    'Creative Direction', 'Rapid Prototyping',
+  // Top line shown above the grid
+  intro: 'Different stacks, different problems — the same obsession with craft.',
+  // 12 cards = 4 across × 3 down
+  cards: [
+    { name: 'JavaScript', icon: 'javascript/javascript-original' },
+    { name: 'TypeScript', icon: 'typescript/typescript-original' },
+    { name: 'React', icon: 'react/react-original' },
+    { name: 'HTML5', icon: 'html5/html5-original' },
+    { name: 'CSS3', icon: 'css3/css3-original' },
+    { name: 'C++', icon: 'cplusplus/cplusplus-original' },
+    { name: 'Java', icon: 'java/java-original' },
+    { name: 'Python', icon: 'python/python-original' },
+    { name: 'Node.js', icon: 'nodejs/nodejs-original' },
+    { name: 'Figma', icon: 'figma/figma-original' },
+    { name: 'Git', icon: 'git/git-original' },
+    { name: 'Tailwind', icon: 'tailwindcss/tailwindcss-original' },
   ],
 }
 
