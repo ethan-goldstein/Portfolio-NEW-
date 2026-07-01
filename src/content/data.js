@@ -16,7 +16,7 @@ export const profile = {
   tagline: 'AI Systems | Workflow Automation | LLM Integration',
   // One or two sentences under the hero
   intro:
-    'Computer Information Systems major at the University of South Carolina with a passion for cybersecurity — solving complex problems through technical skills and strategic thinking.',
+    'Computer Information Systems major at the University of South Carolina building scalable, AI-driven applications — from autonomous agent systems to workflow automation that runs real businesses.',
   location: 'Washington, DC',
   availability: 'GovCIO', // e.g. "Available for freelance"
   email: 'ethancgoldstein@gmail.com',
@@ -52,22 +52,22 @@ export const socials = [
 export const background = {
   // Your "mission statement" — keep it personal and confident
   mission:
-    'Ethan Goldstein is a Computer Information Systems major with a minor in Business Information Management at the University of South Carolina. The mission: build a career that protects digital systems and drives innovation in the cyber industry — solving complex problems through technical skills and strategic thinking.',
+    'Ethan Goldstein is a Computer Information Systems major with a minor in Business Information Management at the University of South Carolina. The mission: build scalable, efficient applications and apply AI-driven solutions to real-world problems — from federal data operations to autonomous agent systems that run real businesses.',
   // The story — a few short paragraphs about who you are and how you got here
   story: [
-    "I'm originally from Washington, DC, and currently work as a Data Entry Operator at Oxford Government Consulting in Tysons Corner, VA — supporting federal data operations and helping manage secure information systems.",
-    'I have a strong passion for cybersecurity and enjoy solving complex problems through technical skills and strategic thinking.',
-    'Outside of work and school, I stay sharp through fitness, sports, visual effects and editing, and engaging with movies, podcasts, and books that keep me curious and always learning.',
+    "I'm originally from Washington, DC. At Oxford Government Consulting in Tysons Corner, VA, I supported a federal modernization project with GovCIO — analyzing internal processing software, finding inefficiencies, and helping process 2 million IRS images per day.",
+    'Outside of class I design and build AI agent systems: a self-hosted command center that runs a fleet of autonomous agents handling email triage, lead prospecting, cold outreach, e-commerce, and finance analytics — powered by a local LLM and running 24/7.',
+    'I stay sharp through fitness, sports, visual effects and editing, and engaging with movies, podcasts, and books that keep me curious and always learning.',
   ],
   // Quick stats / facts shown as a strip
   facts: [
+    { value: '7', label: 'AI agents running 24/7' },
     { value: '2M+', label: 'IRS images processed daily' },
     { value: 'Active', label: 'Public Trust clearance' },
-    { value: '∞', label: 'Cups of coffee' },
   ],
   // Things people should know about how you work
   values: [
-    { title: 'Security first', text: 'Accuracy and security drive every decision — from federal data to personal projects.' },
+    { title: 'Automate everything', text: 'If a workflow runs more than twice, I build an agent for it — and let it learn.' },
     { title: 'Details matter', text: 'Detail-oriented and consistent — the 1% of polish is what makes work feel premium.' },
     { title: 'Always learning', text: 'Pursuing Azure (AZ-104, AZ-900), CompTIA Security+ and Network+ certifications.' },
   ],
@@ -98,12 +98,12 @@ export const skills = {
     { name: 'HTML5', icon: 'html5/html5-original' },
     { name: 'CSS3', icon: 'css3/css3-original' },
     { name: 'Git', icon: 'git/git-original' },
-    { name: 'GitHub', icon: 'github/github-original' },
-    { name: 'VS Code', icon: 'vscode/vscode-original' },
+    { name: 'Node.js', icon: 'nodejs/nodejs-original' },
+    { name: 'React', icon: 'react/react-original' },
     { name: 'Blender', icon: 'blender/blender-original' },
     { name: 'After Effects', icon: 'aftereffects/aftereffects-original' },
     { name: 'Photoshop', icon: 'photoshop/photoshop-original' },
-    { name: 'macOS', icon: 'apple/apple-original' },
+    { name: 'VS Code', icon: 'vscode/vscode-original' },
   ],
 }
 
@@ -112,6 +112,39 @@ export const skills = {
 //        Leave media empty ('') to show a stylised gradient placeholder.
 // url:   the project link — put your GitHub repo URL here (shows a "View on GitHub" button).
 export const projects = [
+  {
+    title: 'AI Agent Command Center',
+    year: '2026',
+    category: 'AI · Full-Stack',
+    blurb: 'A self-hosted mission control running a fleet of 7 autonomous AI agents, 24/7.',
+    description:
+      'A local-first automation platform built with Node/Express and React/TypeScript that orchestrates seven persona-driven agents — email triage, lead prospecting, outreach, e-commerce, dropship trend scouting, finance analytics, and a daily AI briefing. Features a real-time dashboard with live SSE updates, an on-device LLM (Ollama) that learns facts across conversations, voice control via the Web Speech API, cron scheduling, SQLite persistence, and 24/7 operation as a background service — fully private, no paid APIs.',
+    tags: ['Node.js', 'React', 'TypeScript', 'Ollama', 'SQLite'],
+    media: '',
+    url: '',
+  },
+  {
+    title: 'Automated Outreach Engine',
+    year: '2026',
+    category: 'AI · Automation',
+    blurb: 'An end-to-end cold-email pipeline: prospecting, CRM, sending, and reply tracking — on autopilot.',
+    description:
+      'A complete outreach system for a web-design business. It discovers local businesses through OpenStreetMap, crawls their websites to scrape contact emails and detect outdated-site signals, deduplicates prospects into a built-in CRM, and sends personalized, template-driven cold emails on a throttled daily schedule with automated IMAP reply tracking. Gathered 120+ qualified prospects and runs hands-free on a daily cron.',
+    tags: ['Node.js', 'SMTP/IMAP', 'Web Scraping', 'Cron', 'SQLite'],
+    media: '',
+    url: '',
+  },
+  {
+    title: 'AI Storefront Automation',
+    year: '2026',
+    category: 'AI · E-commerce',
+    blurb: 'An agent that writes product copy, prices for profit, and manages a live Shopify store.',
+    description:
+      'A Shopify automation agent integrated through the Admin API with OAuth client-credentials auth. It sweeps store listings, rewrites product copy with a local LLM, and applies a tiered profit-pricing engine that guarantees margin after payment fees. Also automates collections, trust pages, and a custom-built animated Liquid theme section for a live dropshipping storefront.',
+    tags: ['Shopify API', 'Node.js', 'LLM', 'Liquid', 'OAuth'],
+    media: '',
+    url: '',
+  },
   {
     title: 'Personal Portfolio',
     year: '2025',
@@ -153,7 +186,7 @@ export const experience = {
     {
       role: 'Data Entry Operator',
       org: 'Oxford Government Consulting',
-      period: '2025 — Present',
+      period: '2025',
       location: 'Tysons Corner, VA',
       points: [
         'Obtained USAccess Credential for Public Trust, U.S. Department of the Treasury — IRS (Active).',
@@ -182,7 +215,7 @@ export const experience = {
       period: '2023 — Present',
       location: 'Columbia, SC',
       points: [
-        'Coursework: Algorithmic Design II, Introduction to Computer Security, Business Calculus, CIS in Business, Introduction to Economics, Principles of Marketing.',
+        'Coursework: Web Applications, Information Security Principles, Data Structures and Algorithms, Computer Hardware Foundations, Capstone Computing Project I, Professional Issues in CS & Engineering.',
         'Theta Chi Fraternity Executive Board Historian.',
         'Pursuing Azure (AZ-104, AZ-900), CompTIA Security+ and Network+ certifications.',
       ],
