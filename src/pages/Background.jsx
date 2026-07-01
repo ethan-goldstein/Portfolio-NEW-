@@ -1,80 +1,87 @@
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { background, profile } from '../content/data'
-import Reveal from '../components/Reveal'
 import FluidText from '../components/FluidText'
-import Pager from '../components/Pager'
+
+const tabs = [
+  { id: 'mission', label: 'Mission' },
+  { id: 'story', label: 'Story' },
+  { id: 'values', label: 'Values' },
+]
 
 export default function Background() {
+  const [tab, setTab] = useState('mission')
+
   return (
-    <>
-      <div className="page container">
-        <header className="page-header">
-          <Reveal>
-            <p className="page-index">01 — Background</p>
-            <h1 className="display"><FluidText text="Who" /><br /><FluidText className="l2" text="I Am" /></h1>
-          </Reveal>
-        </header>
+    <section className="about">
+      <div className="about-panel">
+        <div className="about-left">
+          <p className="page-index">01 — Background</p>
+          <h1 className="about-title">
+            <FluidText text="WHO" /><br />
+            <FluidText className="l2" text="I AM" />
+          </h1>
+          <p className="about-loc">
+            {profile.name} · {profile.location}<br />
+            <span className="about-avail">{profile.availability}</span>
+          </p>
 
-        {/* Mission */}
-        <section className="section" style={{ paddingTop: 0 }}>
-          <Reveal>
-            <p className="eyebrow">Mission</p>
-            <p className="lead mt-1" style={{ fontSize: 'clamp(1.3rem, 3vw, 2.2rem)', color: 'var(--fg)', maxWidth: '24ch' }}>
-              {background.mission}
-            </p>
-          </Reveal>
-        </section>
-
-        {/* Facts */}
-        <section className="section" style={{ paddingTop: 0 }}>
-          <Reveal>
-            <div className="facts">
-              {background.facts.map((f) => (
-                <div className="fact" key={f.label}>
-                  <div className="num gradient-text">{f.value}</div>
-                  <div className="lbl">{f.label}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </section>
-
-        {/* Story */}
-        <section className="section">
-          <div className="split">
-            <Reveal>
-              <p className="page-index">My Story</p>
-              <h2 className="section-title">The Long<br />Version</h2>
-              <p className="text-dim mt-2">Based in {profile.location}.</p>
-            </Reveal>
-            <Reveal delay={0.15}>
-              <div className="stack">
-                {background.story.map((para, i) => (
-                  <p key={i} className="lead">{para}</p>
-                ))}
+          <div className="about-facts">
+            {background.facts.map((f) => (
+              <div className="about-fact" key={f.label}>
+                <span className="num gradient-text">{f.value}</span>
+                <span className="lbl">{f.label}</span>
               </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* Values */}
-        <section className="section">
-          <Reveal>
-            <p className="page-index">How I Work</p>
-            <h2 className="section-title">Principles</h2>
-          </Reveal>
-          <div className="grid cols-3 mt-3">
-            {background.values.map((v, i) => (
-              <Reveal key={v.title} delay={i * 0.1}>
-                <div className="card">
-                  <h3>{v.title}</h3>
-                  <p>{v.text}</p>
-                </div>
-              </Reveal>
             ))}
           </div>
-        </section>
+        </div>
+
+        <div className="about-right">
+          <div className="about-tabs" role="tablist">
+            {tabs.map((t) => (
+              <button
+                key={t.id}
+                className={`about-tab ${tab === t.id ? 'on' : ''}`}
+                onClick={() => setTab(t.id)}
+                data-cursor="hover"
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="about-content">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={tab}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {tab === 'mission' && <p className="about-lead">{background.mission}</p>}
+
+                {tab === 'story' && (
+                  <div className="about-story">
+                    {background.story.map((para, i) => <p key={i}>{para}</p>)}
+                  </div>
+                )}
+
+                {tab === 'values' && (
+                  <div className="about-values">
+                    {background.values.map((v) => (
+                      <div className="about-value" key={v.title} data-cursor="hover">
+                        <h3>{v.title}</h3>
+                        <p>{v.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
       </div>
-      <Pager current="/background" />
-    </>
+    </section>
   )
 }

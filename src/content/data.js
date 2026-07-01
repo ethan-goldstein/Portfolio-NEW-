@@ -5,6 +5,9 @@
  *  "/assets/your-file.jpg".  Search this file for the word "PLACEHOLDER".
  * ========================================================================== */
 
+// Prefixes public files with the site's base URL so they work on GitHub Pages.
+const asset = (file) => import.meta.env.BASE_URL + 'assets/' + file
+
 export const profile = {
   name: 'Ethan Goldstein',
   initials: 'EG',
@@ -13,12 +16,15 @@ export const profile = {
   tagline: 'AI Systems | Workflow Automation | LLM Integration',
   // One or two sentences under the hero
   intro:
-    'I design interfaces and motion that feel alive — blending thoughtful UX, bold visuals, and a love for 3D and interaction.',
-  location: 'Washington, DC', // PLACEHOLDER
+    'Computer Information Systems major at the University of South Carolina with a passion for cybersecurity — solving complex problems through technical skills and strategic thinking.',
+  location: 'Washington, DC',
   availability: 'GovCIO', // e.g. "Available for freelance"
   email: 'ethancgoldstein@gmail.com',
+  // Your photo for the Contact page: drop one in /public/assets and point here.
+  // Leave '' to show a styled placeholder.
+  photo: asset('ProfilePicture.png'),
   // Resume file: drop a PDF into /public/assets and point here (optional)
-  resumeUrl: '', // e.g. '/assets/ethan-goldstein-resume.pdf'
+  resumeUrl: asset('ethan-goldstein-resume.pdf'),
 }
 
 // Order + labels of the navigation / pages. Keep paths matching App.jsx routes.
@@ -32,47 +38,49 @@ export const nav = [
   { id: '06', label: 'Contact', path: '/contact' },
 ]
 
+// `icon` is a simpleicons.org slug — rendered as a white icon on the Contact page.
 export const socials = [
-  { label: 'Email', handle: 'ethancgoldstein@gmail.com', url: 'mailto:ethancgoldstein@gmail.com' },
-  { label: 'LinkedIn', handle: '/in/ethan-goldstein', url: 'https://linkedin.com/' }, // PLACEHOLDER
-  { label: 'GitHub', handle: '@ethan-goldstein', url: 'https://github.com/' }, // PLACEHOLDER
-  { label: 'Instagram', handle: '@ethan', url: 'https://instagram.com/' }, // PLACEHOLDER
-  { label: 'Dribbble', handle: '@ethan', url: 'https://dribbble.com/' }, // PLACEHOLDER
+  { label: 'GitHub', handle: '@ethan-goldstein', url: 'https://github.com/ethan-goldstein', icon: 'github' },
+  { label: 'Instagram', handle: '@ethangoldsteinn', url: 'https://instagram.com/ethangoldsteinn', icon: 'instagram' },
+  { label: 'Twitter / X', handle: '@egolddev', url: 'https://x.com/egolddev', icon: 'x' },
+  { label: 'LinkedIn', handle: '/in/ethangoldstein', url: 'https://linkedin.com/in/ethangoldstein', icon: 'linkedin' },
+  { label: 'Fiverr', handle: '@egold_dev', url: 'https://www.fiverr.com/egold_dev', icon: 'fiverr' },
+  { label: 'Email', handle: 'ethancgoldstein@gmail.com', url: 'mailto:ethancgoldstein@gmail.com', icon: 'gmail' },
 ]
 
 /* ----------------------------- BACKGROUND ------------------------------- */
 export const background = {
   // Your "mission statement" — keep it personal and confident
   mission:
-    'Ethan Goldstein is a designer and creative focused on shaping experiences that are equal parts useful and unforgettable. The mission: turn complex problems into clear, beautiful, and human interfaces — and never stop experimenting with new mediums like 3D and real-time graphics.',
+    'Ethan Goldstein is a Computer Information Systems major with a minor in Business Information Management at the University of South Carolina. The mission: build a career that protects digital systems and drives innovation in the cyber industry — solving complex problems through technical skills and strategic thinking.',
   // The story — a few short paragraphs about who you are and how you got here
   story: [
-    'I started out fascinated by how good design quietly makes things feel effortless — and I have been chasing that feeling ever since.',
-    'Today I work at the intersection of design and technology: prototyping interfaces, sweating the details of motion and type, and building things that people actually enjoy using.',
-    'When I am not designing, I am usually exploring new tools, breaking things to learn how they work, and collecting inspiration from film, music, and art.',
+    "I'm originally from Washington, DC, and currently work as a Data Entry Operator at Oxford Government Consulting in Tysons Corner, VA — supporting federal data operations and helping manage secure information systems.",
+    'I have a strong passion for cybersecurity and enjoy solving complex problems through technical skills and strategic thinking.',
+    'Outside of work and school, I stay sharp through fitness, sports, visual effects and editing, and engaging with movies, podcasts, and books that keep me curious and always learning.',
   ],
   // Quick stats / facts shown as a strip
   facts: [
-    { value: '5+', label: 'Years creating' }, // PLACEHOLDER
-    { value: '20+', label: 'Projects shipped' }, // PLACEHOLDER
+    { value: '2M+', label: 'IRS images processed daily' },
+    { value: 'Active', label: 'Public Trust clearance' },
     { value: '∞', label: 'Cups of coffee' },
   ],
   // Things people should know about how you work
   values: [
-    { title: 'Human first', text: 'Design decisions start with the people who use the thing.' },
-    { title: 'Details matter', text: 'The 1% of polish is what makes work feel premium.' },
-    { title: 'Always learning', text: 'New tools, new mediums, new constraints — I love them all.' },
+    { title: 'Security first', text: 'Accuracy and security drive every decision — from federal data to personal projects.' },
+    { title: 'Details matter', text: 'Detail-oriented and consistent — the 1% of polish is what makes work feel premium.' },
+    { title: 'Always learning', text: 'Pursuing Azure (AZ-104, AZ-900), CompTIA Security+ and Network+ certifications.' },
   ],
 }
 
 /* ----------------------------- INTERESTS -------------------------------- */
 export const interests = [
-  { title: 'VFX', text: 'Visual effects and compositing — bending reality one frame at a time.', emoji: '✨' },
+  { title: 'Editing & VFX', text: 'Experience with visual arts excels my creativity and technical skills to create stunning visual effects and edits.', emoji: '✨' },
   { title: 'CyberSecurity', text: 'Breaking things to understand them; the cat-and-mouse of staying a step ahead.', emoji: '🛡️' },
   { title: 'Music', text: 'This gold AP got em fascinated. Aint no fabrication, im on medication.', emoji: '🎧' },
-  { title: 'Travel', text: 'New places, new perspectives, new ways of seeing the world.', emoji: '🌍' },
-  { title: 'Sports', text: 'Competition, teamwork, and the thrill of the game — on the field and the screen.', emoji: '⚽' },
-  { title: 'Films', text: 'Framing, lighting, and pacing — storytelling I steal from constantly.', emoji: '🎬' },
+  { title: 'Gym & Fitness', text: 'Staying active, planning my days, and daily workouts keep me consistent, motivated, and determined in all aspects.', emoji: '💪' },
+  { title: 'Sports', text: 'Playing and watching sports sharpens strategy, fuels competitive spirit, and builds confidence through discipline and hard work.', emoji: '⚾' },
+  { title: 'Movies, Podcasts & Books', text: 'Engaging with diverse media enhances observation skills, curiosity, and continuous learning through varied perspectives.', emoji: '🎬' },
 ]
 
 /* ------------------------------- SKILLS --------------------------------- */
@@ -84,67 +92,58 @@ export const skills = {
   intro: 'Different stacks, different problems — the same obsession with craft.',
   // 12 cards = 4 across × 3 down
   cards: [
-    { name: 'JavaScript', icon: 'javascript/javascript-original' },
-    { name: 'TypeScript', icon: 'typescript/typescript-original' },
-    { name: 'React', icon: 'react/react-original' },
-    { name: 'HTML5', icon: 'html5/html5-original' },
-    { name: 'CSS3', icon: 'css3/css3-original' },
-    { name: 'C++', icon: 'cplusplus/cplusplus-original' },
     { name: 'Java', icon: 'java/java-original' },
     { name: 'Python', icon: 'python/python-original' },
-    { name: 'Node.js', icon: 'nodejs/nodejs-original' },
-    { name: 'Figma', icon: 'figma/figma-original' },
+    { name: 'JavaScript', icon: 'javascript/javascript-original' },
+    { name: 'HTML5', icon: 'html5/html5-original' },
+    { name: 'CSS3', icon: 'css3/css3-original' },
     { name: 'Git', icon: 'git/git-original' },
-    { name: 'Tailwind', icon: 'tailwindcss/tailwindcss-original' },
+    { name: 'GitHub', icon: 'github/github-original' },
+    { name: 'VS Code', icon: 'vscode/vscode-original' },
+    { name: 'Blender', icon: 'blender/blender-original' },
+    { name: 'After Effects', icon: 'aftereffects/aftereffects-original' },
+    { name: 'Photoshop', icon: 'photoshop/photoshop-original' },
+    { name: 'macOS', icon: 'apple/apple-original' },
   ],
 }
 
 /* ------------------------------ PROJECTS -------------------------------- */
 // media: drop files in /public/assets and reference "/assets/name.jpg" (or .mp4/.webm).
-// Leave media empty ('') to show a stylised gradient placeholder.
+//        Leave media empty ('') to show a stylised gradient placeholder.
+// url:   the project link — put your GitHub repo URL here (shows a "View on GitHub" button).
 export const projects = [
   {
-    title: 'Project One',
+    title: 'Personal Portfolio',
     year: '2025',
     category: 'UX/UI · Web',
-    blurb: 'A short, punchy one-liner about what this project is and why it mattered.',
+    blurb: 'A fully responsive personal portfolio with a clean, modern interface and interactive components.',
     description:
-      'Replace this with a real case-study summary: the problem, your role, what you designed/built, and the outcome. Keep it skimmable.',
-    tags: ['Figma', 'Prototyping', 'Design System'],
-    media: '', // e.g. '/assets/project-one.jpg' or '/assets/project-one.mp4'
-    url: '', // live link or case study (optional)
+      'A fully responsive website built with HTML, CSS, and JavaScript, featuring a clean, modern user interface with unique layouts and simple navigation. It includes well-structured content, interactive components, and GitHub integration — all designed to explore my projects, experience, and ongoing growth.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
+    media: asset('Portfolio.png'),
+    url: 'https://github.com/ethan-goldstein/ethan-goldstein.github.io',
   },
   {
-    title: 'Project Two',
-    year: '2024',
-    category: 'Brand · Motion',
-    blurb: 'Another standout piece — the headline of the work.',
+    title: 'Coach AI',
+    year: '2025',
+    category: 'AI · Web',
+    blurb: 'A virtual personal trainer with a sleek, futuristic interface. The future is here.',
     description:
-      'Swap in real details. What was the challenge, what did you make, and what changed because of it?',
-    tags: ['Branding', 'After Effects', 'Art Direction'],
-    media: '',
-    url: '',
+      'Coach AI is a virtual personal trainer built with HTML, CSS, and JavaScript, featuring a unique, modern interface with interactive 3D elements built in Spline for a polished, immersive experience.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
+    media: asset('CoachAI.png'),
+    url: 'https://github.com/ethan-goldstein/CoachAI',
   },
   {
-    title: 'Project Three',
-    year: '2024',
-    category: '3D · Experiment',
-    blurb: 'A passion project / experiment that shows your range.',
+    title: 'Audi',
+    year: '2025',
+    category: 'E-commerce · 3D',
+    blurb: 'A creatively remade shopping platform inspired by Audi’s design language.',
     description:
-      'Use this slot for the fun, exploratory work — 3D scenes, generative art, interactive toys.',
-    tags: ['Blender', 'Three.js', 'WebGL'],
-    media: '',
-    url: '',
-  },
-  {
-    title: 'Project Four',
-    year: '2023',
-    category: 'Product · App',
-    blurb: 'A product or app you are proud of.',
-    description: 'Replace with the real story. Numbers and outcomes are great here.',
-    tags: ['Mobile', 'Design System', 'User Research'],
-    media: '',
-    url: '',
+      'Audi is a creatively remade shopping platform built with HTML, CSS, and JavaScript, featuring a unique, modern interface inspired by Audi’s design language. It integrates an interactive shopping cart that dynamically updates total prices as cars are added or removed, complemented by a custom 3D-animated commercial fully created and edited in Blender.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Blender', 'Spline'],
+    media: asset('Audi.png'),
+    url: 'https://github.com/ethan-goldstein/Audi',
   },
 ]
 
@@ -152,44 +151,51 @@ export const projects = [
 export const experience = {
   work: [
     {
-      role: 'Your Role / Title',
-      org: 'Company Name',
-      period: '2024 — Present',
-      location: 'City',
+      role: 'Data Entry Operator',
+      org: 'Oxford Government Consulting',
+      period: '2025 — Present',
+      location: 'Tysons Corner, VA',
       points: [
-        'What you do / did here — lead with impact.',
-        'Another responsibility or achievement.',
-        'Tools, teams, or wins worth highlighting.',
+        'Obtained USAccess Credential for Public Trust, U.S. Department of the Treasury — IRS (Active).',
+        'Supported a federal modernization project in partnership with GovCIO, processing 2 million IRS images per day.',
+        'Analyzed internal processing software, found inefficiencies, and recommended upgrades to improve service performance.',
+        'Contributed to IRS digitization through scanning, processing, and data entry of confidential taxpayer info.',
       ],
     },
     {
-      role: 'Previous Role',
-      org: 'Previous Company',
-      period: '2022 — 2024',
-      location: 'City',
+      role: 'Manager',
+      org: 'The Baseball Zone',
+      period: '2021 — 2024',
+      location: 'Gaithersburg, MD',
       points: [
-        'Replace with real bullet points.',
-        'Keep them action-oriented and specific.',
+        'In-house operator of HitTrax, a fast-tracking system for baseball development.',
+        'Enhanced the company website to be user-friendly and reliable.',
+        'Oversaw front desk operations — computing assistance, employee and client schedules, and customer relationships.',
+        'Managed customer payments, daily purchases, and finances for the owner.',
       ],
     },
   ],
   school: [
     {
-      degree: 'Your Degree / Program',
-      org: 'University / School Name',
-      period: '2019 — 2023',
-      location: 'City',
+      degree: 'B.S. Computer Information Systems, Minor in Business Information Management',
+      org: 'University of South Carolina',
+      period: '2023 — Present',
+      location: 'Columbia, SC',
       points: [
-        'Major / focus area, honors, or relevant coursework.',
-        'Clubs, leadership, or notable projects.',
+        'Coursework: Algorithmic Design II, Introduction to Computer Security, Business Calculus, CIS in Business, Introduction to Economics, Principles of Marketing.',
+        'Theta Chi Fraternity Executive Board Historian.',
+        'Pursuing Azure (AZ-104, AZ-900), CompTIA Security+ and Network+ certifications.',
       ],
     },
     {
-      degree: 'Certification / Bootcamp (optional)',
-      org: 'Institution',
-      period: '2023',
-      location: 'Remote',
-      points: ['What you learned or earned.'],
+      degree: 'High School Diploma',
+      org: 'Thomas S. Wootton High School',
+      period: '2019 — 2023',
+      location: 'Rockville, MD',
+      points: [
+        'National Honors Society — Academic Excellence.',
+        'Varsity Baseball Captain.',
+      ],
     },
   ],
 }

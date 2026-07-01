@@ -24,7 +24,7 @@ function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
     window.scrollTo(0, 0)
-    const noScroll = pathname === '/' || pathname === '/skills' || pathname === '/interests'
+    const noScroll = ['/', '/skills', '/interests', '/projects', '/background', '/contact'].includes(pathname)
     document.body.classList.toggle('home-lock', noScroll)
     return () => document.body.classList.remove('home-lock')
   }, [pathname])
@@ -50,7 +50,8 @@ function PageTransition({ children }) {
 /* Single no-scroll viewports (home + skills) get no footer. */
 function ConditionalFooter() {
   const { pathname } = useLocation()
-  if (pathname === '/' || pathname === '/skills' || pathname === '/interests') return null
+  if (['/', '/skills', '/interests', '/projects', '/background', '/contact', '/experience'].includes(pathname))
+    return null
   return <Footer />
 }
 

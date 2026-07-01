@@ -8,7 +8,7 @@ export default function Interests() {
   return (
     <section className="interests-stage">
       <div className="crt">
-        <img className="crt-img" src="/tv2.png" alt="Retro computer" draggable="false" />
+        <img className="crt-img" src={import.meta.env.BASE_URL + 'tv2.png'} alt="Retro computer" draggable="false" />
 
         {/* the interactive screen sits over the computer's display */}
         <div className="crt-screen" onMouseLeave={() => setActive(null)}>

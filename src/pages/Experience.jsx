@@ -1,72 +1,68 @@
-import { experience, profile } from '../content/data'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { experience } from '../content/data'
 import Reveal from '../components/Reveal'
 import FluidText from '../components/FluidText'
-import Magnetic from '../components/Magnetic'
-import Pager from '../components/Pager'
 
-function Timeline({ items, kind }) {
+/* Combine work + education into one chronological-feeling track. */
+const items = [
+  ...experience.work.map((w) => ({ ...w, kind: 'Work', title: w.role })),
+  ...experience.school.map((s) => ({ ...s, kind: 'Education', title: s.degree })),
+]
+
+function FlipCard({ item, index, isLast }) {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+
+  // flip the card in 3D as it travels through the viewport.
+  // the last card flips in and then *stays flat* (nothing follows it), so the
+  // page comes to rest on it.
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], isLast ? [72, 0, 0] : [72, 0, -72])
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.22, 0.78, 1],
+    isLast ? [0.15, 1, 1, 1] : [0.15, 1, 1, 0.15]
+  )
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], isLast ? [0.88, 1, 1] : [0.88, 1, 0.88])
+  const z = useTransform(scrollYProgress, [0, 0.5, 1], isLast ? [-160, 0, 0] : [-160, 0, -160])
+
   return (
-    <div className="timeline">
-      {items.map((it, i) => (
-        <Reveal key={i} delay={i * 0.08} className="tl-item">
-          <div className="tl-period">{it.period} · {it.location}</div>
-          <h3 className="tl-role">{kind === 'work' ? it.role : it.degree}</h3>
-          <div className="tl-org">{it.org}</div>
-          <ul className="tl-points">
-            {it.points.map((p, j) => (
-              <li key={j}>{p}</li>
-            ))}
-          </ul>
-        </Reveal>
-      ))}
+    <div className="flip-slot" ref={ref}>
+      <motion.article
+        className="flip-card"
+        style={{ rotateX, scale, opacity, z, transformPerspective: 1300 }}
+      >
+        <div className="flip-top">
+          <span className="flip-kind">{item.kind}</span>
+          <span className="flip-period">{item.period} · {item.location}</span>
+        </div>
+        <h2 className="flip-role">{item.title}</h2>
+        <p className="flip-org">{item.org}</p>
+        <ul className="flip-points">
+          {item.points.map((p, i) => <li key={i}>{p}</li>)}
+        </ul>
+        <span className="flip-num">{String(index + 1).padStart(2, '0')}</span>
+      </motion.article>
     </div>
   )
 }
 
 export default function Experience() {
   return (
-    <>
-      <div className="page container">
-        <header className="page-header">
-          <Reveal>
-            <p className="page-index">05 — Experience</p>
-            <h1 className="display"><FluidText text="Where" /><br /><FluidText className="l2" text="I've Been" /></h1>
-            <p className="lead mt-2">The work and the education that shaped how I think and create.</p>
-          </Reveal>
-        </header>
+    <div className="xp">
+      <header className="xp-head container">
+        <Reveal>
+          <p className="page-index">05 — Experience</p>
+          <h1 className="display"><FluidText text="Where" /><br /><FluidText className="l2" text="I've Been" /></h1>
+          <p className="lead mt-2">Scroll to flip through the timeline.</p>
+        </Reveal>
+      </header>
 
-        <section className="section" style={{ paddingTop: 0 }}>
-          <div className="split">
-            <div>
-              <Reveal>
-                <p className="page-index">Work</p>
-                <h2 className="section-title" style={{ fontSize: 'clamp(1.6rem, 4vw, 3rem)' }}>Experience</h2>
-              </Reveal>
-              <Timeline items={experience.work} kind="work" />
-            </div>
-            <div>
-              <Reveal>
-                <p className="page-index">Education</p>
-                <h2 className="section-title" style={{ fontSize: 'clamp(1.6rem, 4vw, 3rem)' }}>School</h2>
-              </Reveal>
-              <Timeline items={experience.school} kind="school" />
-            </div>
-          </div>
-        </section>
-
-        {profile.resumeUrl && (
-          <section className="section" style={{ paddingTop: 0 }}>
-            <Reveal>
-              <Magnetic strength={0.2}>
-                <a className="btn primary" href={profile.resumeUrl} target="_blank" rel="noreferrer">
-                  Download Résumé <span className="arrow">↗</span>
-                </a>
-              </Magnetic>
-            </Reveal>
-          </section>
-        )}
+      <div className="xp-track">
+        {items.map((it, i) => (
+          <FlipCard key={i} item={it} index={i} isLast={i === items.length - 1} />
+        ))}
       </div>
-      <Pager current="/experience" />
-    </>
+    </div>
   )
 }

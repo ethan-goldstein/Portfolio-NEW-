@@ -3,7 +3,8 @@ import { NavLink, Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { nav, profile } from '../content/data'
 import Magnetic from './Magnetic'
-import MetallicPaint from './MetallicPaint'
+
+const splitAt = 3 // first 3 links left of the logo, the rest right
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -19,53 +20,34 @@ export default function Navbar() {
 
   useEffect(() => setOpen(false), [location.pathname])
 
+  const left = nav.slice(0, splitAt)
+  const right = nav.slice(splitAt)
+
+  const renderLink = (item) => (
+    <NavLink
+      key={item.path}
+      to={item.path}
+      end={item.path === '/'}
+      className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+    >
+      <span className="num">{item.id}</span>
+      {item.label}
+    </NavLink>
+  )
+
   return (
     <>
       <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-        <Magnetic>
-          <Link to="/" className="logo" aria-label="Home">
-            <span className="logo-metal" aria-hidden="true">
-              <MetallicPaint
-                imageSrc="/eg-mark.svg"
-                seed={42}
-                scale={4}
-                patternSharpness={1}
-                noiseScale={0.5}
-                speed={0.3}
-                liquid={0.75}
-                mouseAnimation={false}
-                brightness={2}
-                contrast={0.5}
-                refraction={0.01}
-                blur={0.015}
-                chromaticSpread={2}
-                fresnel={1}
-                angle={0}
-                waveAmplitude={1}
-                distortion={1}
-                contour={0.2}
-                lightColor="#ffffff"
-                darkColor="#000000"
-                tintColor="#ffffff"
-              />
-            </span>
-            <span className="sr-only">{profile.initials}</span>
+        <nav className="nav-side left">{left.map(renderLink)}</nav>
+
+        <Magnetic strength={0.3}>
+          <Link to="/" className="logo-cursive" aria-label="Home">
+            EG
+            <span className="sr-only">{profile.initials} — Home</span>
           </Link>
         </Magnetic>
 
-        <nav className="nav-links">
-          {nav.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              end={item.path === '/'}
-              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-            >
-              <span className="num">{item.id}</span>
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
+        <nav className="nav-side right">{right.map(renderLink)}</nav>
 
         <button
           className="nav-toggle"
