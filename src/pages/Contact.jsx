@@ -50,6 +50,12 @@ export default function Contact() {
         <a className="me-email" href={`mailto:${profile.email}`} data-cursor="hover">
           {profile.email}
         </a>
+
+        {profile.resumeUrl && (
+          <a className="me-resume" href={profile.resumeUrl} target="_blank" rel="noreferrer" data-cursor="hover">
+            ↓ Download Resume
+          </a>
+        )}
       </motion.div>
     </section>
   )
