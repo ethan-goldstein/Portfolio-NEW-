@@ -47,15 +47,7 @@ export default function Navbar() {
           </Link>
         </Magnetic>
 
-        <nav className="nav-side right">
-          {right.map(renderLink)}
-          {profile.resumeUrl && (
-            <a className="nav-link nav-resume" href={profile.resumeUrl} target="_blank" rel="noreferrer">
-              <span className="num">↓</span>
-              Resume
-            </a>
-          )}
-        </nav>
+        <nav className="nav-side right">{right.map(renderLink)}</nav>
 
         <button
           className="nav-toggle"
@@ -78,13 +70,6 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {profile.resumeUrl && (
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                <a className="nav-link" href={profile.resumeUrl} target="_blank" rel="noreferrer">
-                  <span className="num">↓</span> Resume
-                </a>
-              </motion.div>
-            )}
             {nav.map((item, i) => (
               <motion.div
                 key={item.path}

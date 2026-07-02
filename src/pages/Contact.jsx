@@ -26,7 +26,7 @@ export default function Contact() {
           )}
         </div>
 
-        <p className="page-index">06 — Contact</p>
+        <p className="page-index">07 — Contact</p>
         <h1 className="me-name">{profile.name}</h1>
         <p className="me-role">{profile.role} · {profile.location}</p>
 

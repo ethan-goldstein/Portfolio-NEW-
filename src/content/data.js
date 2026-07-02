@@ -35,7 +35,8 @@ export const nav = [
   { id: '03', label: 'Skills', path: '/skills' },
   { id: '04', label: 'Projects', path: '/projects' },
   { id: '05', label: 'Experience', path: '/experience' },
-  { id: '06', label: 'Contact', path: '/contact' },
+  { id: '06', label: 'Resume', path: '/resume' },
+  { id: '07', label: 'Contact', path: '/contact' },
 ]
 
 // `icon` is a simpleicons.org slug — rendered as a white icon on the Contact page.

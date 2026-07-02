@@ -16,6 +16,7 @@ import Interests from './pages/Interests'
 import Skills from './pages/Skills'
 import Projects from './pages/Projects'
 import Experience from './pages/Experience'
+import Resume from './pages/Resume'
 import Contact from './pages/Contact'
 
 /* Reset scroll on every route change, and lock scrolling on the home screen
@@ -24,7 +25,7 @@ function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
     window.scrollTo(0, 0)
-    const noScroll = ['/', '/skills', '/interests', '/projects', '/background', '/contact'].includes(pathname)
+    const noScroll = ['/', '/skills', '/interests', '/projects', '/background', '/contact', '/resume'].includes(pathname)
     document.body.classList.toggle('home-lock', noScroll)
     return () => document.body.classList.remove('home-lock')
   }, [pathname])
@@ -50,7 +51,7 @@ function PageTransition({ children }) {
 /* Single no-scroll viewports (home + skills) get no footer. */
 function ConditionalFooter() {
   const { pathname } = useLocation()
-  if (['/', '/skills', '/interests', '/projects', '/background', '/contact', '/experience'].includes(pathname))
+  if (['/', '/skills', '/interests', '/projects', '/background', '/contact', '/experience', '/resume'].includes(pathname))
     return null
   return <Footer />
 }
@@ -66,6 +67,7 @@ function AnimatedRoutes() {
         <Route path="/skills" element={<PageTransition><Skills /></PageTransition>} />
         <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
         <Route path="/experience" element={<PageTransition><Experience /></PageTransition>} />
+        <Route path="/resume" element={<PageTransition><Resume /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         <Route path="*" element={<PageTransition><Home /></PageTransition>} />
       </Routes>
