@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { nav, profile } from '../content/data'
 import Magnetic from './Magnetic'
 
-const splitAt = 3 // first 3 links left of the logo, the rest right
+const splitAt = 4 // 4 links left of the logo, 3 + Resume on the right = even 4/4
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
