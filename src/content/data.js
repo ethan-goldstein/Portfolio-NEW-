@@ -114,36 +114,47 @@ export const skills = {
 // url:   the project link — put your GitHub repo URL here (shows a "View on GitHub" button).
 export const projects = [
   {
-    title: 'AI Agent Command Center',
+    title: 'Mission Control — 9-Agent AI Platform',
     year: '2026',
     category: 'AI · Full-Stack',
-    blurb: 'A self-hosted mission control running a fleet of 7 autonomous AI agents, 24/7.',
+    blurb: 'Nine autonomous AI agents. One self-hosted command center. Running 24/7 on hardware I own.',
     description:
-      'A local-first automation platform built with Node/Express and React/TypeScript that orchestrates seven persona-driven agents — email triage, lead prospecting, outreach, e-commerce, dropship trend scouting, finance analytics, and a daily AI briefing. Features a real-time dashboard with live SSE updates, an on-device LLM (Ollama) that learns facts across conversations, voice control via the Web Speech API, cron scheduling, SQLite persistence, and 24/7 operation as a background service — fully private, no paid APIs.',
-    tags: ['Node.js', 'React', 'TypeScript', 'Ollama', 'SQLite'],
-    media: '',
+      'A platform I designed and built end to end: a Node.js/Express orchestrator drives nine persona-driven agents on cron schedules, server-sent events stream every heartbeat into a React + TypeScript dashboard, and SQLite persists every run. The intelligence is a locally hosted LLM (Llama 3.2 via Ollama) — zero API cost, zero data leaving the machine — with a shared long-term memory every agent reads and writes, plus hands-free voice control through the Web Speech API. Ships as a macOS background service, survives reboots, and is reachable from my phone over Tailscale. The agents run email triage, lead generation, cold outreach, e-commerce, content production, finance analytics, and a daily mastermind briefing.',
+    tags: ['Node.js', 'React', 'TypeScript', 'Ollama · Llama 3.2', 'SQLite', 'SSE'],
+    media: asset('mission-control.jpg'),
     url: '',
   },
   {
     title: 'Automated Outreach Engine',
     year: '2026',
     category: 'AI · Automation',
-    blurb: 'An end-to-end cold-email pipeline: prospecting, CRM, sending, and reply tracking — on autopilot.',
+    blurb: 'Found 125 prospects and sent 97 personalized emails — while I was in class.',
     description:
-      'A complete outreach system for a web-design business. It discovers local businesses through OpenStreetMap, crawls their websites to scrape contact emails and detect outdated-site signals, deduplicates prospects into a built-in CRM, and sends personalized, template-driven cold emails on a throttled daily schedule with automated IMAP reply tracking. Gathered 120+ qualified prospects and runs hands-free on a daily cron.',
-    tags: ['Node.js', 'SMTP/IMAP', 'Web Scraping', 'Cron', 'SQLite'],
-    media: '',
+      'A cold-outreach pipeline that runs a real web-design business hands-free. The agent geocodes a target city with OpenStreetMap, sweeps its businesses through the Overpass API, crawls each website to scrape a contact address and detect outdated-site signals, and dedupes everything into a built-in SQLite CRM. Personalized, hook-matched emails go out over Gmail SMTP on a throttled daily schedule, and replies are matched back automatically over IMAP. Current pipeline: 125 prospects, 97 sends, replies tracked — zero manual work after "go."',
+    tags: ['Web Scraping', 'OpenStreetMap', 'SMTP/IMAP', 'node-cron', 'SQLite'],
+    media: asset('outreach-agent.jpg'),
     url: '',
   },
   {
     title: 'AI Storefront Automation',
     year: '2026',
     category: 'AI · E-commerce',
-    blurb: 'An agent that writes product copy, prices for profit, and manages a live Shopify store.',
+    blurb: 'A live Shopify store where the AI writes the copy, sets the prices, and protects the margin.',
     description:
-      'A Shopify automation agent integrated through the Admin API with OAuth client-credentials auth. It sweeps store listings, rewrites product copy with a local LLM, and applies a tiered profit-pricing engine that guarantees margin after payment fees. Also automates collections, trust pages, and a custom-built animated Liquid theme section for a live dropshipping storefront.',
-    tags: ['Shopify API', 'Node.js', 'LLM', 'Liquid', 'OAuth'],
-    media: '',
+      'Goldie connects to the Shopify Admin API through an OAuth client-credentials flow, imports supplier catalogs from raw CSVs, rewrites every product description with the local LLM, and prices each item through a fee-aware engine that charm-rounds while guaranteeing a net-profit floor after payment processing. It manages collections and theme code too — the storefront\'s animated homepage is a hand-built Liquid section deployed through the same API. Every product card gets a one-click handoff to the TikTok agent for promo content.',
+    tags: ['Shopify Admin API', 'OAuth', 'LLM Copywriting', 'Liquid', 'Pricing Engine'],
+    media: asset('store-agent.jpg'),
+    url: '',
+  },
+  {
+    title: 'TikTok Content Engine',
+    year: '2026',
+    category: 'AI · Video',
+    blurb: 'Product page → finished vertical promo in about 60 seconds, rendered locally with ffmpeg.',
+    description:
+      'Scorsese pulls a product\'s images, cover-crops them to 1080×1920, and cuts a TikTok-spec promo through a programmatic ffmpeg filter graph — alternating slow zooms, slide transitions, a bold title card, and a price CTA end card. The local LLM writes a hook-style caption with hashtags, and one click stages the video + caption and opens TikTok\'s upload page ready to post. Every video renders on-device in under a minute, and the agent reports daily on which products still need filming.',
+    tags: ['ffmpeg', 'Video Pipeline', 'LLM Captions', 'Node.js', 'Automation'],
+    media: asset('tiktok-agent.jpg'),
     url: '',
   },
   {
