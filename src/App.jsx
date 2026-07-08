@@ -25,7 +25,7 @@ function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
     window.scrollTo(0, 0)
-    const noScroll = ['/', '/skills', '/interests', '/projects', '/background', '/contact', '/resume'].includes(pathname)
+    const noScroll = ['/', '/interests', '/projects', '/background', '/contact', '/resume'].includes(pathname)
     document.body.classList.toggle('home-lock', noScroll)
     return () => document.body.classList.remove('home-lock')
   }, [pathname])

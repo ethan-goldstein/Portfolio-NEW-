@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { experience } from '../content/data'
 import Reveal from '../components/Reveal'
@@ -9,6 +9,8 @@ const items = [
   ...experience.work.map((w) => ({ ...w, kind: 'Work', title: w.role })),
   ...experience.school.map((s) => ({ ...s, kind: 'Education', title: s.degree })),
 ]
+
+const TABS = ['All', 'Work', 'Education']
 
 function FlipCard({ item, index, isLast }) {
   const ref = useRef(null)
@@ -48,6 +50,12 @@ function FlipCard({ item, index, isLast }) {
 }
 
 export default function Experience() {
+  const [filter, setFilter] = useState('All')
+  const visible = useMemo(
+    () => (filter === 'All' ? items : items.filter((it) => it.kind === filter)),
+    [filter]
+  )
+
   return (
     <div className="xp">
       <header className="xp-head container">
@@ -58,9 +66,28 @@ export default function Experience() {
         </Reveal>
       </header>
 
+      <motion.div
+        className="xp-tabs"
+        initial={{ opacity: 0, y: -16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.6 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {TABS.map((tab) => (
+          <button
+            key={tab}
+            className={`xp-tab${filter === tab ? ' active' : ''}`}
+            data-cursor="hover"
+            onClick={() => setFilter(tab)}
+          >
+            {tab}
+          </button>
+        ))}
+      </motion.div>
+
       <div className="xp-track">
-        {items.map((it, i) => (
-          <FlipCard key={i} item={it} index={i} isLast={i === items.length - 1} />
+        {visible.map((it, i) => (
+          <FlipCard key={`${filter}-${i}`} item={it} index={i} isLast={i === visible.length - 1} />
         ))}
       </div>
     </div>

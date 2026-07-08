@@ -42,11 +42,10 @@ export const nav = [
 // `icon` is a simpleicons.org slug — rendered as a white icon on the Contact page.
 export const socials = [
   { label: 'GitHub', handle: '@ethan-goldstein', url: 'https://github.com/ethan-goldstein', icon: 'github' },
-  { label: 'Instagram', handle: '@ethangoldsteinn', url: 'https://instagram.com/ethangoldsteinn', icon: 'instagram' },
   { label: 'Twitter / X', handle: '@egolddev', url: 'https://x.com/egolddev', icon: 'x' },
   { label: 'LinkedIn', handle: '/in/ethangoldstein', url: 'https://linkedin.com/in/ethangoldstein', icon: 'linkedin' },
-  { label: 'Fiverr', handle: '@egold_dev', url: 'https://www.fiverr.com/egold_dev', icon: 'fiverr' },
-  { label: 'Email', handle: 'ethancgoldstein@gmail.com', url: 'mailto:ethancgoldstein@gmail.com', icon: 'gmail' },
+  { label: 'Gmail', handle: 'ethancgoldstein@gmail.com', url: 'mailto:ethancgoldstein@gmail.com', icon: 'gmail' },
+  { label: 'TikTok', handle: '@ai.dev.work', url: 'https://tiktok.com/@ai.dev.work', icon: 'tiktok' },
 ]
 
 /* ----------------------------- BACKGROUND ------------------------------- */
@@ -76,12 +75,12 @@ export const background = {
 
 /* ----------------------------- INTERESTS -------------------------------- */
 export const interests = [
-  { title: 'Editing & VFX', text: 'Experience with visual arts excels my creativity and technical skills to create stunning visual effects and edits.', emoji: '✨' },
-  { title: 'CyberSecurity', text: 'Breaking things to understand them; the cat-and-mouse of staying a step ahead.', emoji: '🛡️' },
-  { title: 'Music', text: 'This gold AP got em fascinated. Aint no fabrication, im on medication.', emoji: '🎧' },
+  { title: 'Multi-Agent Orchestration', text: 'I designed a 9-agent command center where every agent shares long-term memory, runs on cron, and streams live via SSE into a React dashboard — all on a local LLM with zero API cost.', emoji: '🧠' },
+  { title: 'MCP & Tool Protocols', text: 'Deep in the Model Context Protocol ecosystem — wiring agents into dozens of tool integrations so a single conversation can touch email, CRMs, game engines, and deployment pipelines.', emoji: '🔌' },
+  { title: 'Autonomous Business Agents', text: "I don't just prototype automation — I ship it. A cold-outreach agent found 125 prospects and sent 97 emails unattended; a Shopify agent writes copy, prices products, and protects margin on its own.", emoji: '⚙️' },
+  { title: 'Realtime Multiplayer Systems', text: 'Built two browser games on Cloudflare Durable Objects for authoritative, low-latency multiplayer state — no traditional backend, just edge compute.', emoji: '🎮' },
+  { title: 'Full-Stack Breadth', text: 'Comfortable moving between vanilla JS/Three.js game clients, React/Vite sites, Node/Express orchestrators, and Shopify Liquid storefronts in the same week.', emoji: '🧩' },
   { title: 'Gym & Fitness', text: 'Staying active, planning my days, and daily workouts keep me consistent, motivated, and determined in all aspects.', emoji: '💪' },
-  { title: 'Sports', text: 'Playing and watching sports sharpens strategy, fuels competitive spirit, and builds confidence through discipline and hard work.', emoji: '⚾' },
-  { title: 'Movies, Podcasts & Books', text: 'Engaging with diverse media enhances observation skills, curiosity, and continuous learning through varied perspectives.', emoji: '🎬' },
 ]
 
 /* ------------------------------- SKILLS --------------------------------- */
@@ -91,20 +90,33 @@ export const interests = [
 export const skills = {
   // Top line shown above the grid
   intro: 'Different stacks, different problems — the same obsession with craft.',
-  // 12 cards = 4 across × 3 down
+  // 20 cards = 4 across × 5 down
   cards: [
     { name: 'Java', icon: 'java/java-original' },
     { name: 'Python', icon: 'python/python-original' },
     { name: 'JavaScript', icon: 'javascript/javascript-original' },
+    { name: 'TypeScript', icon: 'typescript/typescript-original' },
+    { name: 'C++', icon: 'cplusplus/cplusplus-original' },
     { name: 'HTML5', icon: 'html5/html5-original' },
     { name: 'CSS3', icon: 'css3/css3-original' },
+    { name: 'SQL', icon: 'sqlite/sqlite-original' },
     { name: 'Git', icon: 'git/git-original' },
+    { name: 'GitHub', icon: 'github/github-original' },
     { name: 'Node.js', icon: 'nodejs/nodejs-original' },
+    { name: 'Express', icon: 'express/express-original' },
     { name: 'React', icon: 'react/react-original' },
+    { name: 'Vite', icon: 'vitejs/vitejs-original' },
+    { name: 'Three.js', icon: 'threejs/threejs-original' },
+    { name: 'Cloudflare Workers', icon: 'cloudflareworkers/cloudflareworkers-original' },
     { name: 'Blender', icon: 'blender/blender-original' },
     { name: 'After Effects', icon: 'aftereffects/aftereffects-original' },
     { name: 'Photoshop', icon: 'photoshop/photoshop-original' },
     { name: 'VS Code', icon: 'vscode/vscode-original' },
+  ],
+  // Leadership / platform badges — shown separately from the technical icon grid
+  badges: [
+    { label: 'CAIO', sub: 'Chief AI Officer' },
+    { label: 'SaaS', sub: 'Product & Platform' },
   ],
 }
 
@@ -178,6 +190,50 @@ export const projects = [
     tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
     media: asset('CoachAI.png'),
     url: 'https://github.com/ethan-goldstein/CoachAI',
+  },
+  {
+    title: 'Golden Spikes',
+    year: '2026',
+    category: 'Game · WebGL',
+    blurb: 'An 8-mode baseball game playable with a keyboard, touch, a PS4 controller, or your bare hands.',
+    description:
+      'A full browser-based baseball game — My Career, Home Run Derby, Dynasty card packs, Batting Practice, Fielding, a strength/drills mode called The Forge, and quick mini-games, plus real-time multiplayer rooms. Built in vanilla JS and Three.js with a Cloudflare Durable Object powering the multiplayer backend, and MediaPipe pose tracking for fully hands-free play.',
+    tags: ['Three.js', 'Cloudflare Durable Objects', 'MediaPipe', 'WebGL'],
+    media: asset('golden-spikes.jpg'),
+    url: 'https://github.com/ethan-goldstein/golden-spikes',
+  },
+  {
+    title: 'Turbo Rumble GP',
+    year: '2026',
+    category: 'Game · WebGL',
+    blurb: 'An 8-player kart racer with real-time multiplayer rooms and four ways to play.',
+    description:
+      'A Mario-Kart-style browser racer — 8 racers, 4 karts, a 4-track Grand Prix, and 7 items to fight for position. Realtime multiplayer runs on a Cloudflare Durable Object with AI fill and a solo fallback, and it supports keyboard, gamepad, touch, and hands-free MediaPipe hand tracking.',
+    tags: ['Three.js', 'Cloudflare Durable Objects', 'MediaPipe', 'WebGL'],
+    media: asset('turbo-rumble-gp.jpg'),
+    url: 'https://github.com/ethan-goldstein/AI-Racer',
+  },
+  {
+    title: 'The Fenway Faithful',
+    year: '2026',
+    category: 'UX/UI · 3D',
+    blurb: '125 years of Red Sox history, told from inside a scroll-animated 3D clubhouse.',
+    description:
+      'A scroll-driven 3D museum experience walking through Red Sox history — from the Green Monster to retired numbers to championship years — built with React, Three.js, and GSAP-driven scroll choreography for a cinematic, walk-through feel.',
+    tags: ['React', 'Three.js', 'GSAP', 'Lenis'],
+    media: asset('redsox.jpg'),
+    url: 'https://github.com/ethan-goldstein/REDSOX',
+  },
+  {
+    title: 'ABROAD — A Semester in Motion',
+    year: '2026',
+    category: 'UX/UI · 3D',
+    blurb: 'A photoreal 3D globe trip tracker mapping 18 weekends across a semester in Florence.',
+    description:
+      'An interactive photoreal globe tracking a full study-abroad semester — 109 days, 8 countries, 20+ cities, 18 weekend trips — each pinned to the map with its own story. Built with React, Three.js, and GSAP/Lenis for smooth scroll-driven travel between stops.',
+    tags: ['React', 'Three.js', 'GSAP', 'Vite'],
+    media: asset('abroad.jpg'),
+    url: 'https://github.com/ethan-goldstein/abroad',
   },
   {
     title: 'Audi',

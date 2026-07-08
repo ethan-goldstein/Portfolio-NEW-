@@ -3,6 +3,24 @@ import { profile, socials } from '../content/data'
 
 const ICON_BASE = 'https://cdn.simpleicons.org'
 
+// simpleicons.org delisted LinkedIn's logo — fall back to devicon's version
+// for that one icon, forced to plain white to match the rest of the row.
+const ICON_OVERRIDES = {
+  linkedin: {
+    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/linkedin/linkedin-original.svg',
+    style: { filter: 'brightness(0) invert(1)' },
+  },
+}
+
+// Per-platform brand color, used to tint the hover/click glow on each icon.
+const BRAND_COLORS = {
+  github: '#ffffff',
+  x: '#1DA1F2',
+  linkedin: '#0A66C2',
+  gmail: '#EA4335',
+  tiktok: '#25F4EE',
+}
+
 export default function Contact() {
   return (
     <section className="me">
@@ -31,20 +49,24 @@ export default function Contact() {
         <p className="me-role">{profile.role} · {profile.location}</p>
 
         <div className="me-socials">
-          {socials.map((s) => (
-            <a
-              key={s.label}
-              href={s.url}
-              target="_blank"
-              rel="noreferrer"
-              className="me-social"
-              aria-label={s.label}
-              title={s.label}
-              data-cursor="hover"
-            >
-              <img src={`${ICON_BASE}/${s.icon}/ffffff`} alt="" />
-            </a>
-          ))}
+          {socials.map((s) => {
+            const override = ICON_OVERRIDES[s.icon]
+            return (
+              <a
+                key={s.label}
+                href={s.url}
+                target="_blank"
+                rel="noreferrer"
+                className="me-social"
+                aria-label={s.label}
+                title={s.label}
+                data-cursor="hover"
+                style={{ '--brand-color': BRAND_COLORS[s.icon] }}
+              >
+                <img src={override?.src ?? `${ICON_BASE}/${s.icon}/ffffff`} alt="" style={override?.style} />
+              </a>
+            )
+          })}
         </div>
 
         <a className="me-email" href={`mailto:${profile.email}`} data-cursor="hover">

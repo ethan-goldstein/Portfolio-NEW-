@@ -41,6 +41,17 @@ export default function Skills() {
           </motion.div>
         ))}
       </div>
+
+      {skills.badges?.length > 0 && (
+        <div className="skills-badges">
+          {skills.badges.map((b) => (
+            <div className="skills-badge" key={b.label}>
+              <span className="skills-badge-label">{b.label}</span>
+              <span className="skills-badge-sub">{b.sub}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   )
 }
