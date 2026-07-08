@@ -1,20 +1,10 @@
 import { motion } from 'framer-motion'
 import { profile, socials } from '../content/data'
+import { SOCIAL_ICONS } from '../components/SocialIcons'
 
-const ICON_BASE = 'https://cdn.simpleicons.org'
-
-// simpleicons.org delisted LinkedIn's logo — fall back to devicon's version
-// for that one icon, forced to plain white to match the rest of the row.
-const ICON_OVERRIDES = {
-  linkedin: {
-    src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/linkedin/linkedin-original.svg',
-    style: { filter: 'brightness(0) invert(1)' },
-  },
-}
-
-// Per-platform brand color, used to tint the hover/click glow on each icon.
+// Per-platform brand color, drives each icon's glossy glow.
 const BRAND_COLORS = {
-  github: '#ffffff',
+  github: '#A78BFA',
   x: '#1DA1F2',
   linkedin: '#0A66C2',
   gmail: '#EA4335',
@@ -50,7 +40,7 @@ export default function Contact() {
 
         <div className="me-socials">
           {socials.map((s) => {
-            const override = ICON_OVERRIDES[s.icon]
+            const Icon = SOCIAL_ICONS[s.icon]
             return (
               <a
                 key={s.label}
@@ -61,9 +51,12 @@ export default function Contact() {
                 aria-label={s.label}
                 title={s.label}
                 data-cursor="hover"
-                style={{ '--brand-color': BRAND_COLORS[s.icon] }}
+                style={{
+                  '--brand-color': BRAND_COLORS[s.icon],
+                  ...(s.icon === 'tiktok' ? { '--brand-color-2': '#FE2C55' } : {}),
+                }}
               >
-                <img src={override?.src ?? `${ICON_BASE}/${s.icon}/ffffff`} alt="" style={override?.style} />
+                {Icon ? <Icon /> : null}
               </a>
             )
           })}

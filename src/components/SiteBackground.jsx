@@ -1,13 +1,19 @@
+import { motion } from 'framer-motion'
 import LiquidEther from './LiquidEther'
 
 /* The LiquidEther fluid background is used across the whole site. It lives
    outside the routed pages so it persists (and keeps flowing) during
-   navigation instead of restarting on every page. */
+   navigation instead of restarting on every page. (On /background it's
+   swapped for MonolithBackdrop; the motion wrapper gives the crossfade.) */
 export default function SiteBackground() {
   return (
-    <div
+    <motion.div
       className="bg-canvas"
       style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: 'easeInOut' }}
     >
       <LiquidEther
         colors={['#5227FF', '#FF9FFC', '#B497CF']}
@@ -23,6 +29,6 @@ export default function SiteBackground() {
         autoRampDuration={0.6}
         style={{ width: '100%', height: '100%' }}
       />
-    </div>
+    </motion.div>
   )
 }

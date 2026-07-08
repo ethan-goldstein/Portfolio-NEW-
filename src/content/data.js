@@ -137,39 +137,6 @@ export const projects = [
     url: '',
   },
   {
-    title: 'Automated Outreach Engine',
-    year: '2026',
-    category: 'AI · Automation',
-    blurb: 'Found 125 prospects and sent 97 personalized emails — while I was in class.',
-    description:
-      'A cold-outreach pipeline that runs a real web-design business hands-free. The agent geocodes a target city with OpenStreetMap, sweeps its businesses through the Overpass API, crawls each website to scrape a contact address and detect outdated-site signals, and dedupes everything into a built-in SQLite CRM. Personalized, hook-matched emails go out over Gmail SMTP on a throttled daily schedule, and replies are matched back automatically over IMAP. Current pipeline: 125 prospects, 97 sends, replies tracked — zero manual work after "go."',
-    tags: ['Web Scraping', 'OpenStreetMap', 'SMTP/IMAP', 'node-cron', 'SQLite'],
-    media: asset('outreach-agent.jpg'),
-    url: '',
-  },
-  {
-    title: 'AI Storefront Automation',
-    year: '2026',
-    category: 'AI · E-commerce',
-    blurb: 'A live Shopify store where the AI writes the copy, sets the prices, and protects the margin.',
-    description:
-      'Goldie connects to the Shopify Admin API through an OAuth client-credentials flow, imports supplier catalogs from raw CSVs, rewrites every product description with the local LLM, and prices each item through a fee-aware engine that charm-rounds while guaranteeing a net-profit floor after payment processing. It manages collections and theme code too — the storefront\'s animated homepage is a hand-built Liquid section deployed through the same API. Every product card gets a one-click handoff to the TikTok agent for promo content.',
-    tags: ['Shopify Admin API', 'OAuth', 'LLM Copywriting', 'Liquid', 'Pricing Engine'],
-    media: asset('store-agent.jpg'),
-    url: '',
-  },
-  {
-    title: 'TikTok Content Engine',
-    year: '2026',
-    category: 'AI · Video',
-    blurb: 'Product page → finished vertical promo in about 60 seconds, rendered locally with ffmpeg.',
-    description:
-      'Scorsese pulls a product\'s images, cover-crops them to 1080×1920, and cuts a TikTok-spec promo through a programmatic ffmpeg filter graph — alternating slow zooms, slide transitions, a bold title card, and a price CTA end card. The local LLM writes a hook-style caption with hashtags, and one click stages the video + caption and opens TikTok\'s upload page ready to post. Every video renders on-device in under a minute, and the agent reports daily on which products still need filming.',
-    tags: ['ffmpeg', 'Video Pipeline', 'LLM Captions', 'Node.js', 'Automation'],
-    media: asset('tiktok-agent.jpg'),
-    url: '',
-  },
-  {
     title: 'Personal Portfolio',
     year: '2025',
     category: 'UX/UI · Web',

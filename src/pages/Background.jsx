@@ -1,86 +1,183 @@
-import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { background, profile } from '../content/data'
+import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useInView, animate } from 'framer-motion'
+import { profile, background } from '../content/data'
+import Reveal from '../components/Reveal'
 import FluidText from '../components/FluidText'
+import { lenisRef } from '../lib/lenis'
 
-const tabs = [
+const SECTIONS = [
   { id: 'mission', label: 'Mission' },
   { id: 'story', label: 'Story' },
   { id: 'values', label: 'Values' },
+  { id: 'stats', label: 'Stats' },
 ]
 
-export default function Background() {
-  const [tab, setTab] = useState('mission')
+/* Count-up stat: leading number animates 0→n on first view, the rest of the
+   value ("M+", "%", …) renders as a suffix. Non-numeric values just fade in. */
+function StatCount({ value, label }) {
+  const ref = useRef(null)
+  const numRef = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.6 })
+  const match = /^(\d+)(.*)$/.exec(value)
+
+  useEffect(() => {
+    if (!inView || !match || !numRef.current) return
+    const target = parseInt(match[1], 10)
+    const controls = animate(0, target, {
+      duration: 1.4,
+      ease: 'circOut',
+      onUpdate: (v) => {
+        if (numRef.current) numRef.current.textContent = Math.round(v)
+      },
+    })
+    return () => controls.stop()
+  }, [inView]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <section className="about">
-      <div className="about-panel">
-        <div className="about-left">
-          <p className="page-index">01 — Background</p>
-          <h1 className="about-title">
-            <FluidText text="WHO" /><br />
-            <FluidText className="l2" text="I AM" />
-          </h1>
-          <p className="about-loc">
-            {profile.name} · {profile.location}<br />
-            <span className="about-avail">{profile.availability}</span>
-          </p>
+    <div className="bgd-stat" ref={ref}>
+      <span className="num gradient-text">
+        {match ? (
+          <>
+            <span ref={numRef}>0</span>
+            {match[2]}
+          </>
+        ) : (
+          value
+        )}
+      </span>
+      <span className="lbl">{label}</span>
+    </div>
+  )
+}
 
-          <div className="about-facts">
-            {background.facts.map((f) => (
-              <div className="about-fact" key={f.label}>
-                <span className="num gradient-text">{f.value}</span>
-                <span className="lbl">{f.label}</span>
+export default function Background() {
+  const [active, setActive] = useState('mission')
+  const [tabsOn, setTabsOn] = useState(false)
+
+  // Track the section crossing mid-viewport.
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id)
+        })
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    )
+    SECTIONS.forEach((s) => {
+      const el = document.getElementById(s.id)
+      if (el) io.observe(el)
+    })
+    return () => io.disconnect()
+  }, [])
+
+  // Reveal the tab nav once the hero is mostly scrolled past.
+  useEffect(() => {
+    const onScroll = () => setTabsOn(window.scrollY > window.innerHeight * 0.6)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const jump = (id) => {
+    const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 84
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(`#${id}`, { offset: -(navH + 24) })
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  return (
+    <section className="bgd">
+      <div className="bgd-hero">
+        <p className="page-index">01 — Background</p>
+        <h1 className="bgd-hero-title">
+          <FluidText text="WHO" />
+          <br />
+          <FluidText className="l2" text="I AM" />
+        </h1>
+        <p className="bgd-hero-loc">
+          {profile.name} · {profile.location} / {profile.availability}
+        </p>
+        <div className="bgd-scroll-cue" aria-hidden="true">
+          SCROLL
+          <span />
+        </div>
+      </div>
+
+      <nav className={`bgd-tabs${tabsOn ? ' on' : ''}`} role="tablist" aria-label="Background sections">
+        {SECTIONS.map((s) => (
+          <button
+            key={s.id}
+            className={`xp-tab${active === s.id ? ' active' : ''}`}
+            data-cursor="hover"
+            onClick={() => jump(s.id)}
+          >
+            {s.label}
+          </button>
+        ))}
+      </nav>
+
+      <div className="bgd-section" id="mission">
+        <Reveal>
+          <p className="bgd-kicker">01 · Mission</p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="bgd-mission-lead">{background.mission}</p>
+        </Reveal>
+      </div>
+
+      <div className="bgd-section" id="story">
+        <Reveal>
+          <p className="bgd-kicker">02 · Story</p>
+        </Reveal>
+        {background.story.map((p, i) => (
+          <Reveal delay={0.08 * (i + 1)} key={i}>
+            <p className="bgd-story-p">{p}</p>
+          </Reveal>
+        ))}
+      </div>
+
+      <div className="bgd-section" id="values">
+        <Reveal>
+          <p className="bgd-kicker">03 · Values</p>
+        </Reveal>
+        <div className="bgd-values">
+          {background.values.map((v, i) => (
+            <Reveal delay={0.1 * (i + 1)} key={v.title}>
+              <div className="bgd-value" data-cursor="hover">
+                <h3>{v.title}</h3>
+                <p>{v.text}</p>
               </div>
-            ))}
-          </div>
+            </Reveal>
+          ))}
         </div>
+      </div>
 
-        <div className="about-right">
-          <div className="about-tabs" role="tablist">
-            {tabs.map((t) => (
-              <button
-                key={t.id}
-                className={`about-tab ${tab === t.id ? 'on' : ''}`}
-                onClick={() => setTab(t.id)}
-                data-cursor="hover"
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="about-content">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={tab}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {tab === 'mission' && <p className="about-lead">{background.mission}</p>}
-
-                {tab === 'story' && (
-                  <div className="about-story">
-                    {background.story.map((para, i) => <p key={i}>{para}</p>)}
-                  </div>
-                )}
-
-                {tab === 'values' && (
-                  <div className="about-values">
-                    {background.values.map((v) => (
-                      <div className="about-value" key={v.title} data-cursor="hover">
-                        <h3>{v.title}</h3>
-                        <p>{v.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
-          </div>
+      <div className="bgd-section" id="stats">
+        <Reveal>
+          <p className="bgd-kicker">04 · By the numbers</p>
+        </Reveal>
+        <div className="bgd-stats">
+          {background.facts.map((f) => (
+            <StatCount key={f.label} value={f.value} label={f.label} />
+          ))}
         </div>
+      </div>
+
+      <div className="bgd-end">
+        <Reveal>
+          <span className="bgd-end-mark" aria-hidden="true">
+            {profile.initials}
+          </span>
+        </Reveal>
+        <Reveal delay={0.12}>
+          <Link className="bgd-next" to="/interests" data-cursor="hover">
+            Next — Interests →
+          </Link>
+        </Reveal>
       </div>
     </section>
   )

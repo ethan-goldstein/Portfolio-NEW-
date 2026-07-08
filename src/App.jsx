@@ -4,6 +4,8 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Lenis from 'lenis'
 
 import SiteBackground from './components/SiteBackground'
+import MonolithBackdrop from './components/MonolithBackdrop'
+import { lenisRef } from './lib/lenis'
 import Cursor from './components/Cursor'
 import ScrollProgress from './components/ScrollProgress'
 import Navbar from './components/Navbar'
@@ -25,7 +27,7 @@ function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
     window.scrollTo(0, 0)
-    const noScroll = ['/', '/interests', '/projects', '/background', '/contact', '/resume'].includes(pathname)
+    const noScroll = ['/', '/interests', '/projects', '/contact'].includes(pathname)
     document.body.classList.toggle('home-lock', noScroll)
     return () => document.body.classList.remove('home-lock')
   }, [pathname])
@@ -78,10 +80,12 @@ function AnimatedRoutes() {
 export default function App() {
   const [loading, setLoading] = useState(true)
   const scrollRef = useRef(0)
+  const { pathname } = useLocation()
 
   // Lenis smooth scrolling, wired to drive the 3D background parallax.
   useEffect(() => {
     const lenis = new Lenis({ duration: 1.1, smoothWheel: true })
+    lenisRef.current = lenis
     lenis.on('scroll', (e) => {
       scrollRef.current = e.scroll
     })
@@ -93,6 +97,7 @@ export default function App() {
     raf = requestAnimationFrame(loop)
     return () => {
       cancelAnimationFrame(raf)
+      lenisRef.current = null
       lenis.destroy()
     }
   }, [])
@@ -101,7 +106,13 @@ export default function App() {
     <>
       <AnimatePresence>{loading && <Loader onDone={() => setLoading(false)} />}</AnimatePresence>
 
-      <SiteBackground />
+      <AnimatePresence mode="wait">
+        {pathname === '/background' ? (
+          <MonolithBackdrop key="monolith" scrollRef={scrollRef} />
+        ) : (
+          <SiteBackground key="ether" />
+        )}
+      </AnimatePresence>
       <div className="bg-vignette" />
       <Cursor />
       <ScrollProgress />

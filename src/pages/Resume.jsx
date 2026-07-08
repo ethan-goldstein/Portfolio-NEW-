@@ -18,15 +18,7 @@ export default function Resume() {
         </div>
 
         <div className="resume-frame">
-          <object data={profile.resumeUrl} type="application/pdf" aria-label={`${profile.name} resume`}>
-            {/* Fallback for browsers without inline PDF support (most mobile) */}
-            <div className="resume-fallback">
-              <p>Your browser can't display the PDF inline.</p>
-              <a className="me-resume" href={profile.resumeUrl} download data-cursor="hover">
-                ↓ Download Resume
-              </a>
-            </div>
-          </object>
+          <iframe src={`${profile.resumeUrl}#view=FitH`} title={`${profile.name} resume`} />
         </div>
       </motion.div>
     </section>

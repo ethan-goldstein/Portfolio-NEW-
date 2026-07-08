@@ -21,6 +21,11 @@ export default function Skills() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.08 + i * 0.035 }}
+            style={{
+              '--glow-dur': `${3.2 + ((i * 53) % 17) / 10}s`,
+              '--glow-delay': `${-(((i * 91) % 40) / 10)}s`,
+              '--float-dur': `${4.4 + ((i * 29) % 22) / 10}s`,
+            }}
           >
             <div className="skill-card-tilt">
               <TiltedCard
