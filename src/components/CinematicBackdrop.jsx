@@ -48,7 +48,9 @@ export default function CinematicBackdrop({
 
   const scrub = mode === 'scrub' && !degraded
   const isLoop = mode === 'loop' || degraded
-  const showVideo = !reduce && !coarse
+  // Video (and scroll scrubbing) runs on touch devices too: the all-intra
+  // encode seeks fast enough, and slow devices degrade to an ambient loop.
+  const showVideo = !reduce
 
   // Pointer position → normalized coords (consumed by the rAF loop below).
   useEffect(() => {
@@ -61,9 +63,11 @@ export default function CinematicBackdrop({
     return () => window.removeEventListener('pointermove', onMove)
   }, [reduce, coarse])
 
-  // One rAF loop: pointer-parallax lerp + light vars + (scrub mode) frame-quantized seeking.
+  // One rAF loop: pointer-parallax lerp + light vars + (scrub mode) frame-quantized
+  // seeking. Runs on touch devices too (parallax is inert there: the pointermove
+  // listener stays gated, so nx/ny never leave center).
   useEffect(() => {
-    if (reduce || coarse) return
+    if (reduce) return
     const s = m.current
     const computeMax = () => {
       s.maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
