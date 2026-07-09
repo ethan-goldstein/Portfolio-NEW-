@@ -47,7 +47,7 @@ export default function Background() {
   return (
     <section className="bgd">
       <div className="bgd-hero">
-        <p className="page-index">01 — Background</p>
+        <p className="page-index">01 · Background</p>
         <h1 className="bgd-hero-title">
           <FluidText text="WHO" />
           <br />
@@ -117,7 +117,7 @@ export default function Background() {
         </Reveal>
         <Reveal delay={0.12}>
           <Link className="bgd-next" to="/interests" data-cursor="hover">
-            Next — Interests →
+            Next: Interests →
           </Link>
         </Reveal>
       </div>

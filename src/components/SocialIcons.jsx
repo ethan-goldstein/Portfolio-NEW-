@@ -1,5 +1,5 @@
 /* Inline, self-contained brand icons for the Contact page.
-   Full-color official marks (no CDN dependency) — multicolor Gmail,
+   Full-color official marks (no CDN dependency) - multicolor Gmail,
    duotone TikTok, LinkedIn blue; GitHub/X are white marks by design
    (their brand logos are monochrome) and get colored glows via CSS. */
 

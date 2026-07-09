@@ -21,7 +21,7 @@ export default function Home() {
     <section className="home">
       <motion.div variants={fade} custom={0} initial="hidden" animate="show" className="home-eyebrow">
         <span className="dot" />
-        <span className="eyebrow">{profile.role} — {profile.availability}</span>
+        <span className="eyebrow">{profile.role} - {profile.availability}</span>
       </motion.div>
 
       <motion.h1 variants={fade} custom={1} initial="hidden" animate="show" className="home-title">

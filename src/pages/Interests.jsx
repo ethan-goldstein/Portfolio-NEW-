@@ -58,7 +58,7 @@ export default function Interests() {
       </div>
 
       <p className="interests-hint">
-        <span className="page-index">02 — Interests</span>
+        <span className="page-index">02 · Interests</span>
         Hover an icon on the screen to open it
       </p>
     </section>

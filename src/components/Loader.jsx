@@ -5,7 +5,7 @@ import Strands from './Strands'
 const DURATION = 2600 // ms to reach 100%
 
 /* Intro: a loading bar above, glowing Strands in the middle, and
-   "Ethan Goldstein — Development" below. Time-based with a hard fallback so it
+   "Ethan Goldstein - Development" below. Time-based with a hard fallback so it
    can never hang even if requestAnimationFrame is throttled. Press / tap to skip. */
 export default function Loader({ onDone }) {
   const [pct, setPct] = useState(0)

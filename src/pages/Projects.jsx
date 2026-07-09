@@ -60,7 +60,7 @@ const Chevron = ({ dir }) => (
   </svg>
 )
 
-/* one coverflow card — all motion derives from the shared `pos` spring */
+/* one coverflow card - all motion derives from the shared `pos` spring */
 function FlowItem({ p, i, N, w, h, spacing, pos, active, onSelect }) {
   const transform = useTransform(pos, (pv) => {
     const d = ringOffset(i, pv, N)
@@ -109,7 +109,7 @@ export default function Projects() {
   const go = useCallback((d) => setIndex((i) => i + d), [])
   const goTo = (i) => { let d = ((i - active + N) % N); if (d > N / 2) d -= N; setIndex((c) => c + d) }
 
-  // one spring drives the whole flow — cards derive their transforms from it
+  // one spring drives the whole flow - cards derive their transforms from it
   const idxMv = useMotionValue(0)
   const pos = useSpring(idxMv, reduce ? { stiffness: 1200, damping: 120 } : { stiffness: 210, damping: 28, mass: 1 })
   useEffect(() => { idxMv.set(index) }, [index, idxMv])
@@ -144,7 +144,7 @@ export default function Projects() {
 
   return (
     <section className="folio">
-      <p className="folio-eyebrow">Selected Work — {pad(N)}</p>
+      <p className="folio-eyebrow">Selected Work · {pad(N)}</p>
 
       <div className="folio-stage" onPointerMove={onMove} onPointerLeave={onLeave}>
         <div className="folio-persp" style={{ height: h }}>
@@ -164,7 +164,7 @@ export default function Projects() {
       </div>
 
       <div className="folio-controls">
-        {/* meta row (keyed CSS animation — remounts on change) */}
+        {/* meta row (keyed CSS animation - remounts on change) */}
         <div className="folio-meta" key={active}>
           <span className="idx">{pad(active + 1)}</span>
           <span className="sep">/ {pad(N)}</span>
@@ -174,7 +174,7 @@ export default function Projects() {
           <span>{cur.year}</span>
         </div>
 
-        {/* modern minimal controls — the only way to change projects */}
+        {/* modern minimal controls - the only way to change projects */}
         <div className="folio-nav">
           <button className="navc" onClick={() => go(-1)} aria-label="Previous project"><Chevron dir="left" /></button>
           <div className="navc-dots" role="tablist">

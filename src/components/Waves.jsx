@@ -1,7 +1,7 @@
 /* Interactive perlin-noise wave lines (from reactbits.dev/backgrounds/waves).
-   Canvas 2D — lines sway on their own and spring away from the cursor.
+   Canvas 2D - lines sway on their own and spring away from the cursor.
    Mouse tracking listens on window, so it works inside pointer-events:none
-   backdrop layers. The cursor-dot ::before from the original is omitted —
+   backdrop layers. The cursor-dot ::before from the original is omitted -
    the site has its own custom cursor. */
 import { useRef, useEffect } from 'react'
 import './Waves.css'

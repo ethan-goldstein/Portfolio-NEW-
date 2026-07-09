@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 
 /* Cursor-reactive heading. Each letter lifts, scales and brightens based on
-   how close the cursor is — a smooth fluid "wave" that follows the pointer.
+   how close the cursor is - a smooth fluid "wave" that follows the pointer.
    Words are kept intact so they never break mid-word. */
 export default function FluidText({
   text,

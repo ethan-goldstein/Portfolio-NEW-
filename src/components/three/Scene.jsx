@@ -7,7 +7,7 @@ import * as THREE from 'three'
    A field of points laid out in normalized [-1, 1] space (then scaled to fill
    the viewport). The GPU vertex shader pushes points away from the cursor and
    brightens/enlarges the ones nearby, giving a smooth, fluid "wake" that
-   follows the mouse. Pure white on black — minimal.
+   follows the mouse. Pure white on black - minimal.
    ------------------------------------------------------------------------- */
 
 const vertex = /* glsl */ `

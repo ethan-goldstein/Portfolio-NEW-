@@ -7,7 +7,7 @@ import Galaxy from './Galaxy'
    position:fixed isn't re-anchored by PageTransition transforms).
 
    modes:
-   - 'scrub': video.currentTime follows page scroll (Apple-style journey) —
+   - 'scrub': video.currentTime follows page scroll (Apple-style journey) -
      frame-quantized seeks, lerped for feel, with automatic degrade-to-loop
      if seeks are slow on this machine.
    - 'loop': ambient autoplay loop.

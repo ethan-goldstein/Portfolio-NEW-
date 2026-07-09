@@ -43,7 +43,7 @@ export default function Navbar() {
         <Magnetic strength={0.3}>
           <Link to="/" className="logo-cursive" aria-label="Home">
             EG
-            <span className="sr-only">{profile.initials} — Home</span>
+            <span className="sr-only">{profile.initials} · Home</span>
           </Link>
         </Magnetic>
 

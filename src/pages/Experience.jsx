@@ -25,11 +25,11 @@ export default function Experience() {
   return (
     <section className="bgd bgd--xp">
       <div className="bgd-hero">
-        <p className="page-index">05 — Experience</p>
+        <p className="page-index">05 · Experience</p>
         <h1 className="bgd-hero-title bgd-hero-title--sm">
           <FluidText text="The Journey" />
         </h1>
-        <p className="bgd-hero-loc">Work &amp; education — scroll through the timeline.</p>
+        <p className="bgd-hero-loc">Work &amp; education, scroll through the timeline.</p>
         <div className="bgd-scroll-cue" aria-hidden="true">
           SCROLL
           <span />
@@ -42,7 +42,7 @@ export default function Experience() {
             {pair.map((e, ci) => (
               <Reveal key={e.org} delay={ci * 0.18} y={46} className="bgd-pair-slot">
                 <article className="bgd-card">
-                  <p className="bgd-kicker">{e.kind} — {e.period}</p>
+                  <p className="bgd-kicker">{e.kind} · {e.period}</p>
                   <h2 className="bgd-xp-role">{e.title}</h2>
                   <p className="bgd-xp-org">{e.org} · {e.location}</p>
                   <ul className="bgd-points">
@@ -67,7 +67,7 @@ export default function Experience() {
         </Reveal>
         <Reveal delay={0.12}>
           <Link className="bgd-next" to="/resume" data-cursor="hover">
-            Next — Resume →
+            Next: Resume →
           </Link>
         </Reveal>
       </div>

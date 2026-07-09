@@ -9,7 +9,7 @@ export default function Skills() {
   return (
     <section className="skills-page">
       <header className="skills-head">
-        <p className="page-index">03 — Skills</p>
+        <p className="page-index">03 · Skills</p>
         <h1 className="skills-title"><FluidText text="The Toolkit" /></h1>
       </header>
 

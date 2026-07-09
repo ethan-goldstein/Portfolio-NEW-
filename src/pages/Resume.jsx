@@ -11,7 +11,7 @@ export default function Resume() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="resume-head">
-          <p className="page-index">06 — Resume</p>
+          <p className="page-index">06 · Resume</p>
           <a className="me-resume" href={profile.resumeUrl} download data-cursor="hover">
             ↓ Download PDF
           </a>

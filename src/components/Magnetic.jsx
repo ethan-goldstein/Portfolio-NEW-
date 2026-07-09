@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
-/* Magnetic wrapper — the child drifts toward the pointer when hovered. */
+/* Magnetic wrapper - the child drifts toward the pointer when hovered. */
 export default function Magnetic({ children, strength = 0.35, className = '' }) {
   const ref = useRef(null)
   const x = useMotionValue(0)

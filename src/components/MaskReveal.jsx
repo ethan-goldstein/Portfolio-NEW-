@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 
 /* Editorial line-mask reveal: text rises out of a clipped box with a slight
-   settling rotation — no blur/gloss. Honors prefers-reduced-motion. */
+   settling rotation - no blur/gloss. Honors prefers-reduced-motion. */
 export default function MaskReveal({ children, delay = 0, as = 'div', className = '', ...rest }) {
   const reduce = useReducedMotion()
   const Tag = as
