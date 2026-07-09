@@ -1001,10 +1001,10 @@ body.home-lock { overflow: hidden; height: 100vh; }
 /* zoomed-out floating subject: the video ships with a real alpha channel
    (luma-keyed HEVC/VP9), so the subject composites straight onto the galaxy */
 .bgd-video--float {
-  left: 17%;
-  top: 15%;
-  width: 66%;
-  height: 66%;
+  left: 8%;
+  top: 8%;
+  width: 84%;
+  height: 84%;
   inset: auto;
   object-fit: contain;
 }
