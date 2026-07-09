@@ -22,7 +22,7 @@ const BACKDROPS = {
     galaxy: true,
     videoFloat: true,
   },
-  '/experience': { src: ASSET + 'datastream.mp4', poster: ASSET + 'datastream-poster.jpg', mode: 'loop', lightColor: 'rgba(120, 220, 255, 0.10)' },
+  '/experience': { src: ASSET + 'datastream-scrub.mp4', poster: ASSET + 'datastream-poster.jpg', mode: 'scrub', lightColor: 'rgba(120, 220, 255, 0.10)' },
 }
 import Cursor from './components/Cursor'
 import ScrollProgress from './components/ScrollProgress'
