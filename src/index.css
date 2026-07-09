@@ -453,11 +453,15 @@ body.home-lock { overflow: hidden; height: 100vh; }
 @media (max-width: 720px) {
   .skills-grid {
     aspect-ratio: auto;
-    max-height: 62vh;
+    max-height: 66vh;
     overflow-y: auto;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: none;
+    /* explicit row height: without the desktop aspect-ratio the 1fr rows
+       collapse to zero and the tiles vanish */
+    grid-auto-rows: minmax(96px, auto);
   }
+  .skills-grid .skill-card-tilt { flex: 0 0 auto; height: 64px; width: 100%; }
 }
 .skill-card {
   min-width: 0;
@@ -1018,15 +1022,6 @@ img.bgd-video.kenburns { animation: bgdKenburns 30s ease-in-out infinite alterna
   mix-blend-mode: screen;
   background: radial-gradient(620px circle at var(--mx, 50%) var(--my, 40%), var(--bgd-light-color, rgba(180, 150, 255, 0.1)), transparent 60%);
 }
-.bgd-letterbox {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 5.5vh;
-  background: #000;
-}
-.bgd-letterbox.top { top: 0; transform-origin: top; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06); }
-.bgd-letterbox.bottom { bottom: 0; transform-origin: bottom; box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.06); }
 .bgd-grain {
   position: absolute;
   inset: -100%;

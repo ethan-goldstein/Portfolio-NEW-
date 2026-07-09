@@ -17,7 +17,7 @@ const BACKDROPS = {
       { src: ASSET + 'astro-alpha.mov', type: 'video/quicktime' },
       { src: ASSET + 'astro-alpha.webm', type: 'video/webm' },
     ],
-    poster: ASSET + 'astro-poster.jpg',
+    poster: ASSET + 'astro-cutout.png',
     mode: 'scrub',
     lightColor: 'rgba(180, 150, 255, 0.10)',
     galaxy: true,

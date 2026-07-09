@@ -45,7 +45,6 @@ export default function CinematicBackdrop({
   const { scrollY } = useScroll()
   const scale = useTransform(scrollY, [0, 1200], [1.02, 1.08])
   const dim = useTransform(scrollY, [0, 1600], [1, 0.68])
-  const barScale = useTransform(scrollY, [0, 600], [1, 0.35])
 
   const scrub = mode === 'scrub' && !degraded
   const isLoop = mode === 'loop' || degraded
@@ -145,7 +144,7 @@ export default function CinematicBackdrop({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: 'easeInOut' }}
     >
-      {showVideo && galaxy && (
+      {galaxy && !reduce && (
         <div className="bgd-galaxy">
           <Galaxy
             mouseRepulsion
@@ -188,7 +187,7 @@ export default function CinematicBackdrop({
         </div>
       ) : (
         <motion.img
-          className={`bgd-video${reduce ? '' : ' kenburns'}`}
+          className={`bgd-video${videoFloat ? ' bgd-video--float' : ''}${reduce ? '' : ' kenburns'}`}
           src={poster}
           alt=""
           style={reduce ? undefined : { opacity: dim }}
@@ -203,18 +202,7 @@ export default function CinematicBackdrop({
 
       <div className="bgd-light" />
 
-      {!reduce ? (
-        <>
-          <motion.div className="bgd-letterbox top" style={{ scaleY: barScale }} />
-          <motion.div className="bgd-letterbox bottom" style={{ scaleY: barScale }} />
-          <div className="bgd-grain" />
-        </>
-      ) : (
-        <>
-          <div className="bgd-letterbox top" />
-          <div className="bgd-letterbox bottom" />
-        </>
-      )}
+      {!reduce && <div className="bgd-grain" />}
     </motion.div>
   )
 }
