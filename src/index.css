@@ -1346,16 +1346,24 @@ img.bgd-video.kenburns { animation: bgdKenburns 30s ease-in-out infinite alterna
 /* ========== experience (cinematic scroll — shares .bgd classes) ========= */
 /* smaller single-line hero title variant */
 .bgd-hero-title--sm { font-size: clamp(2.4rem, 6vw, 4.4rem); }
-/* light-paper theme: dark text over the Waves backdrop */
-.bgd--xp .page-index { color: #55555e; }
-.bgd--xp .bgd-hero-title { color: #101014; text-shadow: none; }
-.bgd--xp .bgd-hero-loc { color: #4a4a52; }
-.bgd--xp .bgd-scroll-cue { color: #55555e; }
-.bgd--xp .bgd-scroll-cue span { background: linear-gradient(to bottom, rgba(16, 16, 20, 0.7), transparent); }
-.bgd--xp .bgd-kicker { color: #33333a; }
-.bgd--xp .bgd-end-mark { filter: drop-shadow(0 0 30px rgba(82, 39, 255, 0.25)); }
-.bgd--xp .bgd-next { color: #4a4a52; }
-.bgd--xp .bgd-next:hover { color: #101014; border-color: #101014; }
+/* over the busy wave lines: light text, a soft scrim behind the hero,
+   and frosted glass panels around each chapter (see .bgd-card) */
+.bgd--xp .bgd-hero {
+  background: radial-gradient(58% 52% at 50% 44%, rgba(3, 2, 8, 0.88), rgba(3, 2, 8, 0.45) 60%, transparent 100%);
+}
+.bgd--xp .bgd-end {
+  background: radial-gradient(50% 60% at 50% 50%, rgba(3, 2, 8, 0.8), transparent 100%);
+}
+.bgd-card {
+  background: linear-gradient(150deg, rgba(10, 9, 16, 0.78), rgba(5, 5, 10, 0.72));
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 24px;
+  padding: clamp(1.8rem, 4vw, 3rem);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.bgd--xp .bgd-kicker { color: #7de3ff; }
 .bgd-xp-role {
   font-family: var(--font-display);
   font-weight: 700;
@@ -1363,24 +1371,24 @@ img.bgd-video.kenburns { animation: bgdKenburns 30s ease-in-out infinite alterna
   letter-spacing: -0.02em;
   line-height: 1;
   font-size: clamp(1.9rem, 5vw, 3.4rem);
-  color: #101014;
+  color: #fff;
 }
 .bgd-xp-org {
   font-family: var(--font-mono);
-  color: #4a4a52;
+  color: var(--fg-dim);
   margin: 0.7rem 0 1.6rem;
   letter-spacing: 0.08em;
   font-size: clamp(0.9rem, 1.6vw, 1.1rem);
 }
 .bgd-points { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
 .bgd-points li {
-  color: #2c2c33;
+  color: var(--fg);
   line-height: 1.65;
   font-size: clamp(0.98rem, 1.5vw, 1.15rem);
 }
 /* arrow lives on the MaskReveal inner div so it rises with the text */
 .bgd-points li > div { position: relative; padding-left: 1.6rem; }
-.bgd-points li > div::before { content: '→'; position: absolute; left: 0; color: #55555e; }
+.bgd-points li > div::before { content: '→'; position: absolute; left: 0; color: #7de3ff; }
 
 
 /* jump/section pill (shared by Background + Experience sticky navs) */

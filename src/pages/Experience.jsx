@@ -28,24 +28,26 @@ export default function Experience() {
 
       {entries.map((e, i) => (
         <div className="bgd-section" id={`xp-${i}`} key={`${e.org}-${i}`}>
-          <MaskReveal>
-            <p className="bgd-kicker">
-              {String(i + 1).padStart(2, '0')} · {e.kind} — {e.period} · {e.location}
-            </p>
-          </MaskReveal>
-          <MaskReveal delay={0.08}>
-            <h2 className="bgd-xp-role">{e.title}</h2>
-          </MaskReveal>
-          <MaskReveal delay={0.14}>
-            <p className="bgd-xp-org">{e.org}</p>
-          </MaskReveal>
-          <ul className="bgd-points">
-            {e.points.map((p, j) => (
-              <MaskReveal as="li" delay={0.18 + j * 0.06} key={j}>
-                {p}
-              </MaskReveal>
-            ))}
-          </ul>
+          <div className="bgd-card">
+            <MaskReveal>
+              <p className="bgd-kicker">
+                {String(i + 1).padStart(2, '0')} · {e.kind} — {e.period} · {e.location}
+              </p>
+            </MaskReveal>
+            <MaskReveal delay={0.08}>
+              <h2 className="bgd-xp-role">{e.title}</h2>
+            </MaskReveal>
+            <MaskReveal delay={0.14}>
+              <p className="bgd-xp-org">{e.org}</p>
+            </MaskReveal>
+            <ul className="bgd-points">
+              {e.points.map((p, j) => (
+                <MaskReveal as="li" delay={0.18 + j * 0.06} key={j}>
+                  {p}
+                </MaskReveal>
+              ))}
+            </ul>
+          </div>
         </div>
       ))}
 
