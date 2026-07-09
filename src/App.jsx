@@ -10,7 +10,7 @@ import { lenisRef } from './lib/lenis'
 const ASSET = import.meta.env.BASE_URL + 'assets/'
 /* Route-specific cinematic backdrops; everything else gets the fluid sim. */
 const BACKDROPS = {
-  '/background': { src: ASSET + 'astro-scrub.mp4', poster: ASSET + 'astro-poster.jpg', mode: 'scrub', lightColor: 'rgba(180, 150, 255, 0.10)' },
+  '/background': { src: ASSET + 'astro-scrub.mp4', poster: ASSET + 'astro-poster.jpg', mode: 'scrub', lightColor: 'rgba(180, 150, 255, 0.10)', galaxy: true, videoFloat: true },
   '/experience': { src: ASSET + 'datastream.mp4', poster: ASSET + 'datastream-poster.jpg', mode: 'loop', lightColor: 'rgba(120, 220, 255, 0.10)' },
 }
 import Cursor from './components/Cursor'

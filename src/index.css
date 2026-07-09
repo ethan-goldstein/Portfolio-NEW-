@@ -996,6 +996,24 @@ body.home-lock { overflow: hidden; height: 100vh; }
   object-fit: cover;
   will-change: transform, opacity;
 }
+/* zoomed-out floating subject: smaller, screen-blended so its black void
+   disappears and the subject composites straight onto the galaxy */
+.bgd-video--float {
+  left: 17%;
+  top: 15%;
+  width: 66%;
+  height: 66%;
+  inset: auto;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  /* feather the edges so the video's near-black frame never shows as a seam */
+  -webkit-mask-image: radial-gradient(72% 72% at 50% 50%, #000 55%, transparent 98%);
+  mask-image: radial-gradient(72% 72% at 50% 50%, #000 55%, transparent 98%);
+}
+/* interactive starfield layer */
+.bgd-galaxy { position: absolute; inset: 0; }
+.galaxy-container { width: 100%; height: 100%; position: relative; }
+.galaxy-container canvas { display: block; width: 100%; height: 100%; }
 video.bgd-video { opacity: 0; transition: opacity 1s ease; }
 video.bgd-video[data-ready='true'] { opacity: 1; }
 img.bgd-video.kenburns { animation: bgdKenburns 30s ease-in-out infinite alternate; }

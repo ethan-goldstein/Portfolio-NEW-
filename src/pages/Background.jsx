@@ -121,32 +121,32 @@ export default function Background() {
       </nav>
 
       <div className="bgd-section" id="mission">
-        <Reveal>
+        <Reveal blur>
           <p className="bgd-kicker">01 · Mission</p>
         </Reveal>
-        <Reveal delay={0.1}>
+        <Reveal blur delay={0.1}>
           <p className="bgd-mission-lead">{background.mission}</p>
         </Reveal>
       </div>
 
       <div className="bgd-section" id="story">
-        <Reveal>
+        <Reveal blur>
           <p className="bgd-kicker">02 · Story</p>
         </Reveal>
         {background.story.map((p, i) => (
-          <Reveal delay={0.08 * (i + 1)} key={i}>
+          <Reveal blur delay={0.08 * (i + 1)} key={i}>
             <p className="bgd-story-p">{p}</p>
           </Reveal>
         ))}
       </div>
 
       <div className="bgd-section" id="values">
-        <Reveal>
+        <Reveal blur>
           <p className="bgd-kicker">03 · Values</p>
         </Reveal>
         <div className="bgd-values">
           {background.values.map((v, i) => (
-            <Reveal delay={0.1 * (i + 1)} key={v.title}>
+            <Reveal blur delay={0.1 * (i + 1)} key={v.title}>
               <div className="bgd-value" data-cursor="hover">
                 <h3>{v.title}</h3>
                 <p>{v.text}</p>
@@ -157,7 +157,7 @@ export default function Background() {
       </div>
 
       <div className="bgd-section" id="stats">
-        <Reveal>
+        <Reveal blur>
           <p className="bgd-kicker">04 · By the numbers</p>
         </Reveal>
         <div className="bgd-stats">

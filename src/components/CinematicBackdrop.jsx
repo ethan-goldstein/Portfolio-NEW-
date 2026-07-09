@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import Scene from './three/Scene'
+import Galaxy from './Galaxy'
 
 /* Cinematic page backdrop, mounted by App (outside the routed tree so
    position:fixed isn't re-anchored by PageTransition transforms).
@@ -14,7 +15,15 @@ import Scene from './three/Scene'
    Both modes get lerped pointer parallax on a wrapper layer (the
    continuous.vc "scene sways toward the cursor" feel), a cursor radial
    light, particle field, film grain, and letterbox bars. */
-export default function CinematicBackdrop({ src, poster, mode = 'loop', lightColor = 'rgba(180, 150, 255, 0.10)', scrollRef }) {
+export default function CinematicBackdrop({
+  src,
+  poster,
+  mode = 'loop',
+  lightColor = 'rgba(180, 150, 255, 0.10)',
+  scrollRef,
+  galaxy = false,     // interactive starfield instead of the particle Scene
+  videoFloat = false, // zoomed-out screen-blended video (subject floats over the stars)
+}) {
   const reduce = useReducedMotion()
   const [videoReady, setVideoReady] = useState(false)
   const [degraded, setDegraded] = useState(false)
@@ -135,11 +144,29 @@ export default function CinematicBackdrop({ src, poster, mode = 'loop', lightCol
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: 'easeInOut' }}
     >
+      {showVideo && galaxy && (
+        <div className="bgd-galaxy">
+          <Galaxy
+            mouseRepulsion
+            mouseInteraction
+            density={1}
+            glowIntensity={0.3}
+            saturation={0.15}
+            hueShift={250}
+            twinkleIntensity={0.3}
+            rotationSpeed={0.05}
+            repulsionStrength={2}
+            starSpeed={0.5}
+            speed={1}
+          />
+        </div>
+      )}
+
       {showVideo ? (
         <div className="bgd-video-wrap" ref={videoWrapRef}>
           <motion.video
             ref={videoRef}
-            className="bgd-video"
+            className={`bgd-video${videoFloat ? ' bgd-video--float' : ''}`}
             src={src}
             poster={poster}
             muted
@@ -150,7 +177,7 @@ export default function CinematicBackdrop({ src, poster, mode = 'loop', lightCol
             onLoadedMetadata={onLoadedMetadata}
             onCanPlay={() => setVideoReady(true)}
             onSeeked={mode === 'scrub' ? onSeeked : undefined}
-            style={{ scale, opacity: dim }}
+            style={videoFloat ? { opacity: dim } : { scale, opacity: dim }}
             data-ready={videoReady ? 'true' : 'false'}
           />
         </div>
@@ -163,7 +190,7 @@ export default function CinematicBackdrop({ src, poster, mode = 'loop', lightCol
         />
       )}
 
-      {showVideo && (
+      {showVideo && !galaxy && (
         <div className="bgd-particles">
           <Scene scrollRef={scrollRef} />
         </div>
