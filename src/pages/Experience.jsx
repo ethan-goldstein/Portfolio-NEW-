@@ -1,15 +1,25 @@
 import { Link } from 'react-router-dom'
 import { experience } from '../content/data'
 import Reveal from '../components/Reveal'
-import MaskReveal from '../components/MaskReveal'
 import FluidText from '../components/FluidText'
 import GradualBlur from '../components/GradualBlur'
 
-/* Work + education merged into one cinematic scroll journey. */
+/* Work + education merged, newest first (ongoing entries sort to the top),
+   then shown as side-by-side pairs down the timeline. */
 const entries = [
   ...experience.work.map((w) => ({ ...w, kind: 'Work', title: w.role })),
   ...experience.school.map((s) => ({ ...s, kind: 'Education', title: s.degree })),
 ]
+
+const endYear = (e) => {
+  if (/present/i.test(e.period)) return 9999
+  const m = /(\d{4})\s*$/.exec(e.period)
+  return m ? Number(m[1]) : 0
+}
+
+const sorted = [...entries].sort((a, b) => endYear(b) - endYear(a))
+const pairs = []
+for (let i = 0; i < sorted.length; i += 2) pairs.push(sorted.slice(i, i + 2))
 
 export default function Experience() {
   return (
@@ -26,27 +36,25 @@ export default function Experience() {
         </div>
       </div>
 
-      {entries.map((e, i) => (
-        <div className="bgd-section" id={`xp-${i}`} key={`${e.org}-${i}`}>
-          <div className="bgd-card">
-            <MaskReveal>
-              <p className="bgd-kicker">
-                {String(i + 1).padStart(2, '0')} · {e.kind} — {e.period} · {e.location}
-              </p>
-            </MaskReveal>
-            <MaskReveal delay={0.08}>
-              <h2 className="bgd-xp-role">{e.title}</h2>
-            </MaskReveal>
-            <MaskReveal delay={0.14}>
-              <p className="bgd-xp-org">{e.org}</p>
-            </MaskReveal>
-            <ul className="bgd-points">
-              {e.points.map((p, j) => (
-                <MaskReveal as="li" delay={0.18 + j * 0.06} key={j}>
-                  {p}
-                </MaskReveal>
-              ))}
-            </ul>
+      {pairs.map((pair, pi) => (
+        <div className="bgd-section bgd-section--duo" id={`xp-${pi}`} key={pi}>
+          <div className="bgd-pair">
+            {pair.map((e, ci) => (
+              <Reveal key={e.org} delay={ci * 0.18} y={46} className="bgd-pair-slot">
+                <article className="bgd-card">
+                  <p className="bgd-kicker">{e.kind} — {e.period}</p>
+                  <h2 className="bgd-xp-role">{e.title}</h2>
+                  <p className="bgd-xp-org">{e.org} · {e.location}</p>
+                  <ul className="bgd-points">
+                    {e.points.map((p, j) => (
+                      <li key={j}>
+                        <div>{p}</div>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       ))}
