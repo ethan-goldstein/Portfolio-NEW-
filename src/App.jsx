@@ -99,6 +99,13 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const scrollRef = useRef(0)
   const { pathname } = useLocation()
+  const lightPage = pathname === '/experience'
+
+  // Light-themed routes flip the navbar/cursor palette via a body class.
+  useEffect(() => {
+    document.body.classList.toggle('light-page', lightPage)
+    return () => document.body.classList.remove('light-page')
+  }, [lightPage])
 
   // Lenis smooth scrolling, wired to drive the 3D background parallax.
   useEffect(() => {
@@ -133,7 +140,7 @@ export default function App() {
           <SiteBackground key="ether" />
         )}
       </AnimatePresence>
-      <div className="bg-vignette" />
+      {!lightPage && <div className="bg-vignette" />}
       <Cursor />
       <ScrollProgress />
 

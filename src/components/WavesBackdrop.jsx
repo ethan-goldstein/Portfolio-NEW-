@@ -15,6 +15,8 @@ export default function WavesBackdrop() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: 'easeInOut' }}
     >
+      {/* light paper base so the page reads with dark text */}
+      <div style={{ position: 'absolute', inset: 0, background: '#efede8' }} />
       <Waves
         lineColor="#ffffff"
         backgroundColor="rgba(255, 255, 255, 0.2)"
