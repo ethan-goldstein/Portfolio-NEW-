@@ -19,7 +19,7 @@ export const profile = {
     'Computer Information Systems major at the University of South Carolina building scalable, AI-driven applications — from autonomous agent systems to workflow automation that runs real businesses.',
   location: 'Washington, DC',
   availability: 'GovCIO', // e.g. "Available for freelance"
-  email: 'ethancgoldstein@gmail.com',
+  email: 'ethan.goldstein.dev@gmail.com',
   // Your photo for the Contact page: drop one in /public/assets and point here.
   // Leave '' to show a styled placeholder.
   photo: asset('ProfilePicture.png'),
@@ -44,7 +44,7 @@ export const socials = [
   { label: 'GitHub', handle: '@ethan-goldstein', url: 'https://github.com/ethan-goldstein', icon: 'github' },
   { label: 'Twitter / X', handle: '@egolddev', url: 'https://x.com/egolddev', icon: 'x' },
   { label: 'LinkedIn', handle: '/in/ethangoldstein', url: 'https://linkedin.com/in/ethangoldstein', icon: 'linkedin' },
-  { label: 'Gmail', handle: 'ethancgoldstein@gmail.com', url: 'mailto:ethancgoldstein@gmail.com', icon: 'gmail' },
+  { label: 'Gmail', handle: 'ethan.goldstein.dev@gmail.com', url: 'mailto:ethan.goldstein.dev@gmail.com', icon: 'gmail' },
   { label: 'TikTok', handle: '@ai.dev.work', url: 'https://tiktok.com/@ai.dev.work', icon: 'tiktok' },
 ]
 
@@ -273,5 +273,5 @@ export const contact = {
   headline: "Let's build something unforgettable.",
   subtext:
     'Have a project, a role, or just want to say hi? My inbox is always open.',
-  email: 'ethancgoldstein@gmail.com',
+  email: 'ethan.goldstein.dev@gmail.com',
 }

@@ -1,95 +1,129 @@
-import { useMemo, useRef, useState } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { experience } from '../content/data'
 import Reveal from '../components/Reveal'
 import FluidText from '../components/FluidText'
+import { lenisRef } from '../lib/lenis'
 
-/* Combine work + education into one chronological-feeling track. */
-const items = [
+/* Work + education merged into one cinematic scroll journey. */
+const entries = [
   ...experience.work.map((w) => ({ ...w, kind: 'Work', title: w.role })),
   ...experience.school.map((s) => ({ ...s, kind: 'Education', title: s.degree })),
 ]
 
-const TABS = ['All', 'Work', 'Education']
-
-function FlipCard({ item, index, isLast }) {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-
-  // flip the card in 3D as it travels through the viewport.
-  // the last card flips in and then *stays flat* (nothing follows it), so the
-  // page comes to rest on it.
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], isLast ? [72, 0, 0] : [72, 0, -72])
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.22, 0.78, 1],
-    isLast ? [0.15, 1, 1, 1] : [0.15, 1, 1, 0.15]
-  )
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], isLast ? [0.88, 1, 1] : [0.88, 1, 0.88])
-  const z = useTransform(scrollYProgress, [0, 0.5, 1], isLast ? [-160, 0, 0] : [-160, 0, -160])
-
-  return (
-    <div className="flip-slot" ref={ref}>
-      <motion.article
-        className="flip-card"
-        style={{ rotateX, scale, opacity, z, transformPerspective: 1300 }}
-      >
-        <div className="flip-top">
-          <span className="flip-kind">{item.kind}</span>
-          <span className="flip-period">{item.period} · {item.location}</span>
-        </div>
-        <h2 className="flip-role">{item.title}</h2>
-        <p className="flip-org">{item.org}</p>
-        <ul className="flip-points">
-          {item.points.map((p, i) => <li key={i}>{p}</li>)}
-        </ul>
-        <span className="flip-num">{String(index + 1).padStart(2, '0')}</span>
-      </motion.article>
-    </div>
-  )
+/* Short pill labels for the sticky jump nav. */
+const PILL_LABELS = {
+  'Oxford Government Consulting': 'GovCIO',
+  'The Baseball Zone': 'Baseball Zone',
+  'University of South Carolina': 'USC',
+  'Thomas S. Wootton High School': 'Wootton',
 }
 
+const SECTIONS = entries.map((e, i) => ({
+  id: `xp-${i}`,
+  label: PILL_LABELS[e.org] ?? e.org.split(' ')[0],
+}))
+
 export default function Experience() {
-  const [filter, setFilter] = useState('All')
-  const visible = useMemo(
-    () => (filter === 'All' ? items : items.filter((it) => it.kind === filter)),
-    [filter]
-  )
+  const [active, setActive] = useState(SECTIONS[0].id)
+  const [tabsOn, setTabsOn] = useState(false)
+
+  // Track the section crossing mid-viewport.
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (obs) => {
+        obs.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id)
+        })
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    )
+    SECTIONS.forEach((s) => {
+      const el = document.getElementById(s.id)
+      if (el) io.observe(el)
+    })
+    return () => io.disconnect()
+  }, [])
+
+  // Reveal the jump nav once the hero is mostly scrolled past.
+  useEffect(() => {
+    const onScroll = () => setTabsOn(window.scrollY > window.innerHeight * 0.6)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const jump = (id) => {
+    const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 84
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(`#${id}`, { offset: -(navH + 24) })
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
-    <div className="xp">
-      <header className="xp-head container">
-        <Reveal>
-          <p className="page-index">05 — Experience</p>
-          <h1 className="display"><FluidText text="Where" /><br /><FluidText className="l2" text="I've Been" /></h1>
-          <p className="lead mt-2">Scroll to flip through the timeline.</p>
-        </Reveal>
-      </header>
+    <section className="bgd bgd--xp">
+      <div className="bgd-hero">
+        <p className="page-index">05 — Experience</p>
+        <h1 className="bgd-hero-title bgd-hero-title--sm">
+          <FluidText text="The Journey" />
+        </h1>
+        <p className="bgd-hero-loc">Work &amp; education — scroll through the timeline.</p>
+        <div className="bgd-scroll-cue" aria-hidden="true">
+          SCROLL
+          <span />
+        </div>
+      </div>
 
-      <motion.div
-        className="xp-tabs"
-        initial={{ opacity: 0, y: -16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      >
-        {TABS.map((tab) => (
+      <nav className={`bgd-tabs${tabsOn ? ' on' : ''}`} aria-label="Experience entries">
+        {SECTIONS.map((s) => (
           <button
-            key={tab}
-            className={`xp-tab${filter === tab ? ' active' : ''}`}
+            key={s.id}
+            className={`xp-tab${active === s.id ? ' active' : ''}`}
             data-cursor="hover"
-            onClick={() => setFilter(tab)}
+            onClick={() => jump(s.id)}
           >
-            {tab}
+            {s.label}
           </button>
         ))}
-      </motion.div>
+      </nav>
 
-      <div className="xp-track">
-        {visible.map((it, i) => (
-          <FlipCard key={`${filter}-${i}`} item={it} index={i} isLast={i === visible.length - 1} />
-        ))}
+      {entries.map((e, i) => (
+        <div className="bgd-section" id={`xp-${i}`} key={`${e.org}-${i}`}>
+          <Reveal>
+            <p className="bgd-kicker">
+              {String(i + 1).padStart(2, '0')} · {e.kind} — {e.period} · {e.location}
+            </p>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <h2 className="bgd-xp-role">{e.title}</h2>
+          </Reveal>
+          <Reveal delay={0.14}>
+            <p className="bgd-xp-org">{e.org}</p>
+          </Reveal>
+          <ul className="bgd-points">
+            {e.points.map((p, j) => (
+              <Reveal as="li" delay={0.18 + j * 0.06} key={j}>
+                {p}
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      ))}
+
+      <div className="bgd-end">
+        <Reveal>
+          <span className="bgd-end-mark" aria-hidden="true">
+            EG
+          </span>
+        </Reveal>
+        <Reveal delay={0.12}>
+          <Link className="bgd-next" to="/resume" data-cursor="hover">
+            Next — Resume →
+          </Link>
+        </Reveal>
       </div>
-    </div>
+    </section>
   )
 }

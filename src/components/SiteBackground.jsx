@@ -4,7 +4,7 @@ import LiquidEther from './LiquidEther'
 /* The LiquidEther fluid background is used across the whole site. It lives
    outside the routed pages so it persists (and keeps flowing) during
    navigation instead of restarting on every page. (On /background it's
-   swapped for MonolithBackdrop; the motion wrapper gives the crossfade.) */
+   swapped for CinematicBackdrop; the motion wrapper gives the crossfade.) */
 export default function SiteBackground() {
   return (
     <motion.div

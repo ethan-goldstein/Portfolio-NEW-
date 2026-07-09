@@ -4,8 +4,15 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Lenis from 'lenis'
 
 import SiteBackground from './components/SiteBackground'
-import MonolithBackdrop from './components/MonolithBackdrop'
+import CinematicBackdrop from './components/CinematicBackdrop'
 import { lenisRef } from './lib/lenis'
+
+const ASSET = import.meta.env.BASE_URL + 'assets/'
+/* Route-specific cinematic backdrops; everything else gets the fluid sim. */
+const BACKDROPS = {
+  '/background': { src: ASSET + 'skyline-scrub.mp4', poster: ASSET + 'skyline-poster.jpg', mode: 'scrub', lightColor: 'rgba(180, 150, 255, 0.10)' },
+  '/experience': { src: ASSET + 'datastream.mp4', poster: ASSET + 'datastream-poster.jpg', mode: 'loop', lightColor: 'rgba(120, 220, 255, 0.10)' },
+}
 import Cursor from './components/Cursor'
 import ScrollProgress from './components/ScrollProgress'
 import Navbar from './components/Navbar'
@@ -107,8 +114,8 @@ export default function App() {
       <AnimatePresence>{loading && <Loader onDone={() => setLoading(false)} />}</AnimatePresence>
 
       <AnimatePresence mode="wait">
-        {pathname === '/background' ? (
-          <MonolithBackdrop key="monolith" scrollRef={scrollRef} />
+        {BACKDROPS[pathname] ? (
+          <CinematicBackdrop key={pathname} {...BACKDROPS[pathname]} scrollRef={scrollRef} />
         ) : (
           <SiteBackground key="ether" />
         )}
