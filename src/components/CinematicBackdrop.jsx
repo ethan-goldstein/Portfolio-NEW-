@@ -163,7 +163,7 @@ export default function CinematicBackdrop({
       )}
 
       {showVideo ? (
-        <div className="bgd-video-wrap" ref={videoWrapRef}>
+        <div className={`bgd-video-wrap${videoFloat ? ' bgd-video-wrap--blend' : ''}`} ref={videoWrapRef}>
           <motion.video
             ref={videoRef}
             className={`bgd-video${videoFloat ? ' bgd-video--float' : ''}`}
