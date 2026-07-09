@@ -1382,16 +1382,6 @@ img.bgd-video.kenburns { animation: bgdKenburns 30s ease-in-out infinite alterna
 .bgd-points li > div { position: relative; padding-left: 1.6rem; }
 .bgd-points li > div::before { content: '→'; position: absolute; left: 0; color: #55555e; }
 
-/* light-page chrome: dark navbar + cursor on light-themed routes */
-body.light-page .navbar { background: transparent; }
-body.light-page .navbar.scrolled { background: rgba(239, 237, 232, 0.7); border-bottom-color: rgba(16, 16, 20, 0.08); }
-body.light-page .nav-link { color: #4a4a52; }
-body.light-page .nav-link .num { color: #8b8b94; }
-body.light-page .nav-link:hover,
-body.light-page .nav-link.active { color: #101014; }
-body.light-page .logo-cursive { color: #101014; text-shadow: none; }
-body.light-page .nav-toggle span { background: #101014; }
-/* (custom cursor uses mix-blend-mode: difference — it self-inverts on light) */
 
 /* jump/section pill (shared by Background + Experience sticky navs) */
 .xp-tab {
