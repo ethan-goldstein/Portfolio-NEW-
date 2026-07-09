@@ -17,12 +17,13 @@ import Galaxy from './Galaxy'
    light, particle field, film grain, and letterbox bars. */
 export default function CinematicBackdrop({
   src,
+  sources,            // [{ src, type }] for alpha-channel video (HEVC .mov + VP9 .webm)
   poster,
   mode = 'loop',
   lightColor = 'rgba(180, 150, 255, 0.10)',
   scrollRef,
   galaxy = false,     // interactive starfield instead of the particle Scene
-  videoFloat = false, // zoomed-out screen-blended video (subject floats over the stars)
+  videoFloat = false, // zoomed-out transparent video (subject floats over the stars)
 }) {
   const reduce = useReducedMotion()
   const [videoReady, setVideoReady] = useState(false)
@@ -163,11 +164,11 @@ export default function CinematicBackdrop({
       )}
 
       {showVideo ? (
-        <div className={`bgd-video-wrap${videoFloat ? ' bgd-video-wrap--blend' : ''}`} ref={videoWrapRef}>
+        <div className="bgd-video-wrap" ref={videoWrapRef}>
           <motion.video
             ref={videoRef}
             className={`bgd-video${videoFloat ? ' bgd-video--float' : ''}`}
-            src={src}
+            src={sources ? undefined : src}
             poster={poster}
             muted
             playsInline
@@ -179,7 +180,11 @@ export default function CinematicBackdrop({
             onSeeked={mode === 'scrub' ? onSeeked : undefined}
             style={videoFloat ? { opacity: dim } : { scale, opacity: dim }}
             data-ready={videoReady ? 'true' : 'false'}
-          />
+          >
+            {sources?.map((s) => (
+              <source key={s.src} src={s.src} type={s.type} />
+            ))}
+          </motion.video>
         </div>
       ) : (
         <motion.img

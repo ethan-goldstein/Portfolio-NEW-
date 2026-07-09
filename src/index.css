@@ -998,10 +998,8 @@ body.home-lock { overflow: hidden; height: 100vh; }
 }
 /* zoomed-out floating subject: smaller, screen-blended so its black void
    disappears and the subject composites straight onto the galaxy */
-/* the wrap is its own stacking context (transform), so the blend must live
-   HERE to composite against the galaxy behind it — on the inner video it
-   would only blend within the isolated wrap and paint black over the stars */
-.bgd-video-wrap--blend { mix-blend-mode: screen; }
+/* zoomed-out floating subject: the video ships with a real alpha channel
+   (luma-keyed HEVC/VP9), so the subject composites straight onto the galaxy */
 .bgd-video--float {
   left: 17%;
   top: 15%;
@@ -1009,11 +1007,6 @@ body.home-lock { overflow: hidden; height: 100vh; }
   height: 66%;
   inset: auto;
   object-fit: contain;
-  /* crush near-black compression noise so stars shine through cleanly */
-  filter: brightness(1.02) contrast(1.08);
-  /* feather the edges so the video's near-black frame never shows as a seam */
-  -webkit-mask-image: radial-gradient(72% 72% at 50% 50%, #000 55%, transparent 98%);
-  mask-image: radial-gradient(72% 72% at 50% 50%, #000 55%, transparent 98%);
 }
 /* interactive starfield layer */
 .bgd-galaxy { position: absolute; inset: 0; }
