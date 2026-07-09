@@ -1,17 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useInView, animate } from 'framer-motion'
 import { profile, background } from '../content/data'
 import Reveal from '../components/Reveal'
 import FluidText from '../components/FluidText'
-import { lenisRef } from '../lib/lenis'
-
-const SECTIONS = [
-  { id: 'mission', label: 'Mission' },
-  { id: 'story', label: 'Story' },
-  { id: 'values', label: 'Values' },
-  { id: 'stats', label: 'Stats' },
-]
 
 /* Count-up stat: leading number animates 0→n on first view, the rest of the
    value ("M+", "%", …) renders as a suffix. Non-numeric values just fade in. */
@@ -52,43 +44,6 @@ function StatCount({ value, label }) {
 }
 
 export default function Background() {
-  const [active, setActive] = useState('mission')
-  const [tabsOn, setTabsOn] = useState(false)
-
-  // Track the section crossing mid-viewport.
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id)
-        })
-      },
-      { rootMargin: '-45% 0px -50% 0px' }
-    )
-    SECTIONS.forEach((s) => {
-      const el = document.getElementById(s.id)
-      if (el) io.observe(el)
-    })
-    return () => io.disconnect()
-  }, [])
-
-  // Reveal the tab nav once the hero is mostly scrolled past.
-  useEffect(() => {
-    const onScroll = () => setTabsOn(window.scrollY > window.innerHeight * 0.6)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  const jump = (id) => {
-    const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 84
-    if (lenisRef.current) {
-      lenisRef.current.scrollTo(`#${id}`, { offset: -(navH + 24) })
-    } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <section className="bgd">
       <div className="bgd-hero">
@@ -106,19 +61,6 @@ export default function Background() {
           <span />
         </div>
       </div>
-
-      <nav className={`bgd-tabs${tabsOn ? ' on' : ''}`} role="tablist" aria-label="Background sections">
-        {SECTIONS.map((s) => (
-          <button
-            key={s.id}
-            className={`xp-tab${active === s.id ? ' active' : ''}`}
-            data-cursor="hover"
-            onClick={() => jump(s.id)}
-          >
-            {s.label}
-          </button>
-        ))}
-      </nav>
 
       <div className="bgd-section" id="mission">
         <Reveal blur>
