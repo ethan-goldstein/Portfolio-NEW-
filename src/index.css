@@ -441,34 +441,24 @@ body.home-lock { overflow: hidden; height: 100vh; }
 
 /* clean, panel-free grid - sized to fit one screen on both axes */
 .skills-grid {
-  width: min(980px, 96vw);
-  max-height: 64vh;
-  aspect-ratio: 5 / 4.2;
+  width: min(1020px, 96vw);
+  max-height: 68vh;
+  aspect-ratio: 5 / 4.6;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  gap: clamp(0.5rem, 1.4vw, 1.2rem);
+  grid-template-rows: repeat(5, 1fr);
+  gap: clamp(0.4rem, 1.1vw, 0.9rem);
 }
 @media (max-width: 720px) {
   .skills-grid {
     aspect-ratio: auto;
-    max-height: 58vh;
+    max-height: 62vh;
     overflow-y: auto;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: none;
   }
 }
-
-/* leadership / platform badges, shown below the technical grid */
-.skills-badges { display: flex; justify-content: center; gap: 0.7rem; margin-top: 0.4rem; flex-wrap: wrap; }
-.skills-badge {
-  display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
-  padding: 0.5rem 1.2rem; border-radius: 999px;
-  background: var(--grad); color: #0a0a0c;
-}
-.skills-badge-label { font-family: var(--font-mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.78rem; }
-.skills-badge-sub { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; opacity: 0.75; }
 .skill-card {
   min-width: 0;
   min-height: 0;
@@ -522,7 +512,9 @@ body.home-lock { overflow: hidden; height: 100vh; }
    invert them so they're visible against the dark card background */
 .skills-grid .tilted-card-img[alt="Express"],
 .skills-grid .tilted-card-img[alt="GitHub"],
-.skills-grid .tilted-card-img[alt="Three.js"] {
+.skills-grid .tilted-card-img[alt="Three.js"],
+.skills-grid .tilted-card-img[alt="Framer Motion"],
+.skills-grid .tilted-card-img[alt="Bash"] {
   filter: invert(1) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.4));
 }
 .skills-grid .tilted-card-img {

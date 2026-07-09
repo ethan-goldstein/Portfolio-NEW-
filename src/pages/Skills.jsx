@@ -29,7 +29,7 @@ export default function Skills() {
           >
             <div className="skill-card-tilt">
               <TiltedCard
-                imageSrc={`${DEVICON_BASE}/${c.icon}.svg`}
+                imageSrc={c.iconUrl ?? `${DEVICON_BASE}/${c.icon}.svg`}
                 altText={c.name}
                 containerHeight="100%"
                 containerWidth="100%"
@@ -46,17 +46,6 @@ export default function Skills() {
           </motion.div>
         ))}
       </div>
-
-      {skills.badges?.length > 0 && (
-        <div className="skills-badges">
-          {skills.badges.map((b) => (
-            <div className="skills-badge" key={b.label}>
-              <span className="skills-badge-label">{b.label}</span>
-              <span className="skills-badge-sub">{b.sub}</span>
-            </div>
-          ))}
-        </div>
-      )}
     </section>
   )
 }

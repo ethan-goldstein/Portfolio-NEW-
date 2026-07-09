@@ -90,7 +90,7 @@ export const interests = [
 export const skills = {
   // Top line shown above the grid
   intro: 'Different stacks, different problems, the same obsession with craft.',
-  // 20 cards = 4 across × 5 down
+  // 25 cards = 5 across × 5 down, sized to fit one screen
   cards: [
     { name: 'Java', icon: 'java/java-original' },
     { name: 'Python', icon: 'python/python-original' },
@@ -112,11 +112,11 @@ export const skills = {
     { name: 'After Effects', icon: 'aftereffects/aftereffects-original' },
     { name: 'Photoshop', icon: 'photoshop/photoshop-original' },
     { name: 'VS Code', icon: 'vscode/vscode-original' },
-  ],
-  // Leadership / platform badges - shown separately from the technical icon grid
-  badges: [
-    { label: 'CAIO', sub: 'Chief AI Officer' },
-    { label: 'SaaS', sub: 'Product & Platform' },
+    { name: 'Framer Motion', icon: 'framermotion/framermotion-original' },
+    { name: 'npm', icon: 'npm/npm-original-wordmark' },
+    { name: 'Bash', icon: 'bash/bash-original' },
+    { name: 'CAIO', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='78' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='36' letter-spacing='1' fill='white'%3ECAIO%3C/text%3E%3C/svg%3E" },
+    { name: 'SaaS', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='78' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='38' letter-spacing='1' fill='white'%3ESaaS%3C/text%3E%3C/svg%3E" },
   ],
 }
 
