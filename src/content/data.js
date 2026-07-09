@@ -52,16 +52,16 @@ export const socials = [
 export const background = {
   // "About me" lead: who I am right now, in one confident paragraph
   about:
-    "I'm Ethan Goldstein, a software engineer from Washington, DC. Right now I do data processing at GovCIO, supporting the Department of Veterans Affairs modernization program on a pipeline that moves 2 million IRS document images a day, under an active Public Trust clearance. Outside the federal work I build AI systems: a fleet of autonomous agents runs 24/7 on hardware I own, handling outreach, e-commerce, and analytics on a locally hosted LLM, wired into dozens of tools through the Model Context Protocol. My toolkit spans React, Node, Three.js, Python, SQL, and C++, and I'm finishing my Computer Information Systems degree at the University of South Carolina.",
+    "I'm Ethan Goldstein, a software engineer from Washington, DC. Right now I do data processing at GovCIO, supporting the Department of Veterans Affairs modernization program on a pipeline that moves 2 million IRS document images a day, under an active Public Trust clearance. Outside the federal work I ship for the browser: cinematic 3D experiences in Three.js, multiplayer games running on Cloudflare's edge, computer-vision interfaces you play with your bare hands, and clean React sites like this one. My toolkit spans React, Node, Three.js, Python, SQL, and C++, and I'm finishing my Computer Information Systems degree at the University of South Carolina.",
   // The story - a few short paragraphs about who you are and how you got here
   story: [
-    "I'm originally from Washington, DC. At Oxford Government Consulting in Tysons Corner, VA, I supported a federal modernization project with GovCIO: analyzing internal processing software, finding inefficiencies, and helping process 2 million IRS images per day.",
-    'Outside of class I design and build AI agent systems: a self-hosted command center that runs a fleet of autonomous agents handling email triage, lead prospecting, cold outreach, e-commerce, and finance analytics, powered by a local LLM and running 24/7.',
+    "I'm originally from Washington, DC. Today I work at GovCIO on the Department of Veterans Affairs modernization program: processing and validating IRS documents on a digitization pipeline that moves 2 million images a day, under an active Public Trust credential with the U.S. Department of the Treasury.",
+    "Outside the federal work I build across the whole spectrum of the web. I've shipped scroll-driven 3D worlds — a walk-through Red Sox clubhouse museum and a photoreal globe that flies between 18 pinned cities from my semester in Florence — plus two multiplayer browser games with real-time rooms and hands-free computer-vision controls, and demo redesigns for local businesses, from a coastal restaurant to a medical group.",
     'I stay sharp through fitness, sports, visual effects and editing, and engaging with movies, podcasts, and books that keep me curious and always learning.',
   ],
   // Things people should know about how you work
   values: [
-    { title: 'Automate everything', text: 'If a workflow runs more than twice, I build an agent for it, and let it learn.' },
+    { title: 'Ship it live', text: 'Nothing stays on localhost. Everything I build ends up deployed on a real URL — GitHub Pages, edge compute, live multiplayer rooms.' },
     { title: 'Details matter', text: 'Detail-oriented and consistent: the 1% of polish is what makes work feel premium.' },
     { title: 'Always learning', text: 'Pursuing Azure (AZ-104, AZ-900), CompTIA Security+ and Network+ certifications.' },
   ],
@@ -69,11 +69,11 @@ export const background = {
 
 /* ----------------------------- INTERESTS -------------------------------- */
 export const interests = [
-  { title: 'Multi-Agent Orchestration', text: 'I designed a 9-agent command center where every agent shares long-term memory, runs on cron, and streams live via SSE into a React dashboard, all on a local LLM with zero API cost.', emoji: '🧠' },
-  { title: 'MCP & Tool Protocols', text: 'Deep in the Model Context Protocol ecosystem: wiring agents into dozens of tool integrations so a single conversation can touch email, CRMs, game engines, and deployment pipelines.', emoji: '🔌' },
-  { title: 'Autonomous Business Agents', text: "I don't just prototype automation, I ship it. A cold-outreach agent found 125 prospects and sent 97 emails unattended; a Shopify agent writes copy, prices products, and protects margin on its own.", emoji: '⚙️' },
+  { title: 'Cinematic 3D on the Web', text: 'Scroll-driven Three.js worlds: a walk-through Red Sox clubhouse museum with 20+ GSAP-choreographed camera stops, and a photoreal globe that flies low over the terrain between 18 pinned weekend trips.', emoji: '🧊' },
   { title: 'Realtime Multiplayer Systems', text: 'Built two browser games on Cloudflare Durable Objects for authoritative, low-latency multiplayer state. No traditional backend, just edge compute.', emoji: '🎮' },
-  { title: 'Full-Stack Breadth', text: 'Comfortable moving between vanilla JS/Three.js game clients, React/Vite sites, Node/Express orchestrators, and Shopify Liquid storefronts in the same week.', emoji: '🧩' },
+  { title: 'Computer Vision Interfaces', text: 'Both of my games are playable with bare hands through MediaPipe tracking: swing a bat by crossing your wrist over midline, steer a kart with your hands, or have the camera count your workout reps.', emoji: '🖐️' },
+  { title: 'Creative Media Pipelines', text: 'ffmpeg audio surgery, Blender-rendered 3D commercials, AI-generated asset packs locked to a single style formula, and video textures playing inside live 3D scenes — code and content in one workflow.', emoji: '🎬' },
+  { title: 'Full-Stack Breadth', text: 'Comfortable moving between vanilla JS/Three.js game clients, React/Vite sites, Node/Express backends, and pixel-perfect static sites for local businesses in the same week.', emoji: '🧩' },
   { title: 'Gym & Fitness', text: 'Staying active, planning my days, and daily workouts keep me consistent, motivated, and determined in all aspects.', emoji: '💪' },
 ]
 
@@ -172,7 +172,7 @@ export const projects = [
       'A Mario-Kart-style browser racer: 8 racers, 4 karts, a 4-track Grand Prix, and 7 items to fight for position. Realtime multiplayer runs on a Cloudflare Durable Object with AI fill and a solo fallback, and it supports keyboard, gamepad, touch, and hands-free MediaPipe hand tracking.',
     tags: ['Three.js', 'Cloudflare Durable Objects', 'MediaPipe', 'WebGL'],
     media: asset('turbo-rumble-gp.jpg'),
-    url: 'https://github.com/ethan-goldstein/AI-Racer',
+    url: 'https://github.com/ethan-goldstein/turbo-rumble-gp',
   },
   {
     title: 'The Fenway Faithful',
