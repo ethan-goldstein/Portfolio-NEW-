@@ -5,6 +5,7 @@ import Lenis from 'lenis'
 
 import SiteBackground from './components/SiteBackground'
 import CinematicBackdrop from './components/CinematicBackdrop'
+import WavesBackdrop from './components/WavesBackdrop'
 import { lenisRef } from './lib/lenis'
 
 const ASSET = import.meta.env.BASE_URL + 'assets/'
@@ -22,7 +23,6 @@ const BACKDROPS = {
     galaxy: true,
     videoFloat: true,
   },
-  '/experience': { src: ASSET + 'datastream-scrub.mp4', poster: ASSET + 'datastream-poster.jpg', mode: 'scrub', lightColor: 'rgba(120, 220, 255, 0.10)' },
 }
 import Cursor from './components/Cursor'
 import ScrollProgress from './components/ScrollProgress'
@@ -131,6 +131,8 @@ export default function App() {
           <SiteBackground key="ether" />
         )}
       </AnimatePresence>
+      {/* Experience: interactive wave lines over the ether fluid */}
+      <AnimatePresence>{pathname === '/experience' && <WavesBackdrop key="waves" />}</AnimatePresence>
       <div className="bg-vignette" />
       <Cursor />
       <ScrollProgress />

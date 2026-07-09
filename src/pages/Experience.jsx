@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { experience } from '../content/data'
 import Reveal from '../components/Reveal'
 import FluidText from '../components/FluidText'
+import GradualBlur from '../components/GradualBlur'
 
 /* Work + education merged into one cinematic scroll journey. */
 const entries = [
@@ -59,6 +60,19 @@ export default function Experience() {
           </Link>
         </Reveal>
       </div>
+
+      {/* content melts into blur at the bottom edge of the viewport */}
+      <GradualBlur
+        target="page"
+        position="bottom"
+        height="7rem"
+        strength={2}
+        divCount={5}
+        curve="bezier"
+        exponential
+        opacity={1}
+        zIndex={40}
+      />
     </section>
   )
 }
