@@ -1,47 +1,7 @@
-import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { useInView, animate } from 'framer-motion'
 import { profile, background } from '../content/data'
 import Reveal from '../components/Reveal'
 import FluidText from '../components/FluidText'
-
-/* Count-up stat: leading number animates 0→n on first view, the rest of the
-   value ("M+", "%", …) renders as a suffix. Non-numeric values just fade in. */
-function StatCount({ value, label }) {
-  const ref = useRef(null)
-  const numRef = useRef(null)
-  const inView = useInView(ref, { once: true, amount: 0.6 })
-  const match = /^(\d+)(.*)$/.exec(value)
-
-  useEffect(() => {
-    if (!inView || !match || !numRef.current) return
-    const target = parseInt(match[1], 10)
-    const controls = animate(0, target, {
-      duration: 1.4,
-      ease: 'circOut',
-      onUpdate: (v) => {
-        if (numRef.current) numRef.current.textContent = Math.round(v)
-      },
-    })
-    return () => controls.stop()
-  }, [inView]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  return (
-    <div className="bgd-stat" ref={ref}>
-      <span className="num gradient-text">
-        {match ? (
-          <>
-            <span ref={numRef}>0</span>
-            {match[2]}
-          </>
-        ) : (
-          value
-        )}
-      </span>
-      <span className="lbl">{label}</span>
-    </div>
-  )
-}
 
 export default function Background() {
   return (
@@ -62,12 +22,12 @@ export default function Background() {
         </div>
       </div>
 
-      <div className="bgd-section" id="mission">
+      <div className="bgd-section" id="about">
         <Reveal blur>
-          <p className="bgd-kicker">01 · Mission</p>
+          <p className="bgd-kicker">01 · About Me</p>
         </Reveal>
         <Reveal blur delay={0.1}>
-          <p className="bgd-mission-lead">{background.mission}</p>
+          <p className="bgd-mission-lead">{background.about}</p>
         </Reveal>
       </div>
 
@@ -94,17 +54,6 @@ export default function Background() {
                 <p>{v.text}</p>
               </div>
             </Reveal>
-          ))}
-        </div>
-      </div>
-
-      <div className="bgd-section" id="stats">
-        <Reveal blur>
-          <p className="bgd-kicker">04 · By the numbers</p>
-        </Reveal>
-        <div className="bgd-stats">
-          {background.facts.map((f) => (
-            <StatCount key={f.label} value={f.value} label={f.label} />
           ))}
         </div>
       </div>

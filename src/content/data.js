@@ -50,20 +50,14 @@ export const socials = [
 
 /* ----------------------------- BACKGROUND ------------------------------- */
 export const background = {
-  // Your "mission statement" - keep it personal and confident
-  mission:
-    'Ethan Goldstein is a Computer Information Systems major with a minor in Business Information Management at the University of South Carolina. The mission: build scalable, efficient applications and apply AI-driven solutions to real-world problems, from federal data operations to autonomous agent systems that run real businesses.',
+  // "About me" lead: who I am right now, in one confident paragraph
+  about:
+    "I'm Ethan Goldstein, a software engineer from Washington, DC. Right now I do data processing at GovCIO, supporting the Department of Veterans Affairs modernization program on a pipeline that moves 2 million IRS document images a day, under an active Public Trust clearance. Outside the federal work I build AI systems: a fleet of autonomous agents runs 24/7 on hardware I own, handling outreach, e-commerce, and analytics on a locally hosted LLM, wired into dozens of tools through the Model Context Protocol. My toolkit spans React, Node, Three.js, Python, SQL, and C++, and I'm finishing my Computer Information Systems degree at the University of South Carolina.",
   // The story - a few short paragraphs about who you are and how you got here
   story: [
     "I'm originally from Washington, DC. At Oxford Government Consulting in Tysons Corner, VA, I supported a federal modernization project with GovCIO: analyzing internal processing software, finding inefficiencies, and helping process 2 million IRS images per day.",
     'Outside of class I design and build AI agent systems: a self-hosted command center that runs a fleet of autonomous agents handling email triage, lead prospecting, cold outreach, e-commerce, and finance analytics, powered by a local LLM and running 24/7.',
     'I stay sharp through fitness, sports, visual effects and editing, and engaging with movies, podcasts, and books that keep me curious and always learning.',
-  ],
-  // Quick stats / facts shown as a strip
-  facts: [
-    { value: '7', label: 'AI agents running 24/7' },
-    { value: '2M+', label: 'IRS images processed daily' },
-    { value: 'Active', label: 'Public Trust clearance' },
   ],
   // Things people should know about how you work
   values: [
