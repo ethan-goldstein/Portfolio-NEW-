@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { experience } from '../content/data'
 import Reveal from '../components/Reveal'
+import MaskReveal from '../components/MaskReveal'
 import FluidText from '../components/FluidText'
 import GradualBlur from '../components/GradualBlur'
 
@@ -27,22 +28,22 @@ export default function Experience() {
 
       {entries.map((e, i) => (
         <div className="bgd-section" id={`xp-${i}`} key={`${e.org}-${i}`}>
-          <Reveal blur>
+          <MaskReveal>
             <p className="bgd-kicker">
               {String(i + 1).padStart(2, '0')} · {e.kind} — {e.period} · {e.location}
             </p>
-          </Reveal>
-          <Reveal blur delay={0.08}>
+          </MaskReveal>
+          <MaskReveal delay={0.08}>
             <h2 className="bgd-xp-role">{e.title}</h2>
-          </Reveal>
-          <Reveal blur delay={0.14}>
+          </MaskReveal>
+          <MaskReveal delay={0.14}>
             <p className="bgd-xp-org">{e.org}</p>
-          </Reveal>
+          </MaskReveal>
           <ul className="bgd-points">
             {e.points.map((p, j) => (
-              <Reveal blur as="li" delay={0.18 + j * 0.06} key={j}>
+              <MaskReveal as="li" delay={0.18 + j * 0.06} key={j}>
                 {p}
-              </Reveal>
+              </MaskReveal>
             ))}
           </ul>
         </div>

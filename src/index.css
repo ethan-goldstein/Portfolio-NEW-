@@ -1368,14 +1368,14 @@ img.bgd-video.kenburns { animation: bgdKenburns 30s ease-in-out infinite alterna
 }
 .bgd-points { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
 .bgd-points li {
-  position: relative;
-  padding-left: 1.6rem;
   color: var(--fg);
   line-height: 1.65;
   font-size: clamp(0.98rem, 1.5vw, 1.15rem);
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
 }
-.bgd-points li::before { content: '→'; position: absolute; left: 0; color: #7de3ff; }
+/* arrow lives on the MaskReveal inner div so it rises with the text */
+.bgd-points li > div { position: relative; padding-left: 1.6rem; }
+.bgd-points li > div::before { content: '→'; position: absolute; left: 0; color: #7de3ff; }
 
 /* jump/section pill (shared by Background + Experience sticky navs) */
 .xp-tab {

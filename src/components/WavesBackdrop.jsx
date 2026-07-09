@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
 import Waves from './Waves'
 
-/* Experience-page backdrop layer: interactive perlin wave lines rendered
-   OVER the site-wide LiquidEther fluid (which stays mounted underneath).
-   Fixed at the global backdrop z-level, mounted by App outside the routed
-   tree so PageTransition transforms can't re-anchor it. */
+/* Experience-page backdrop: the interactive perlin wave lines, standalone
+   (replaces the LiquidEther fluid on this route). Fixed at the global
+   backdrop z-level, mounted by App outside the routed tree so
+   PageTransition transforms can't re-anchor it. Props per the reactbits
+   usage example. */
 export default function WavesBackdrop() {
   return (
     <motion.div
@@ -15,17 +16,17 @@ export default function WavesBackdrop() {
       transition={{ duration: 0.6, ease: 'easeInOut' }}
     >
       <Waves
-        lineColor="rgba(167, 139, 250, 0.22)"
-        backgroundColor="transparent"
+        lineColor="#ffffff"
+        backgroundColor="rgba(255, 255, 255, 0.2)"
         waveSpeedX={0.0125}
-        waveSpeedY={0.008}
-        waveAmpX={36}
-        waveAmpY={18}
-        friction={0.925}
-        tension={0.008}
+        waveSpeedY={0.01}
+        waveAmpX={40}
+        waveAmpY={20}
+        friction={0.9}
+        tension={0.01}
         maxCursorMove={120}
-        xGap={14}
-        yGap={40}
+        xGap={12}
+        yGap={36}
       />
     </motion.div>
   )

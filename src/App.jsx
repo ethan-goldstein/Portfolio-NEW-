@@ -125,14 +125,14 @@ export default function App() {
       <AnimatePresence>{loading && <Loader onDone={() => setLoading(false)} />}</AnimatePresence>
 
       <AnimatePresence mode="wait">
-        {BACKDROPS[pathname] ? (
+        {pathname === '/experience' ? (
+          <WavesBackdrop key="waves" />
+        ) : BACKDROPS[pathname] ? (
           <CinematicBackdrop key={pathname} {...BACKDROPS[pathname]} scrollRef={scrollRef} />
         ) : (
           <SiteBackground key="ether" />
         )}
       </AnimatePresence>
-      {/* Experience: interactive wave lines over the ether fluid */}
-      <AnimatePresence>{pathname === '/experience' && <WavesBackdrop key="waves" />}</AnimatePresence>
       <div className="bg-vignette" />
       <Cursor />
       <ScrollProgress />
