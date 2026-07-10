@@ -117,7 +117,7 @@ export const skills = {
 /* ------------------------------ PROJECTS -------------------------------- */
 // media: drop files in /public/assets and reference "/assets/name.jpg" (or .mp4/.webm).
 //        Leave media empty ('') to show a stylised gradient placeholder.
-// url:   the project link - put your GitHub repo URL here (shows a "View on GitHub" button).
+// url:   the LIVE project link (shows a "View live project" button in the modal).
 export const projects = [
   {
     title: 'Mission Control: 9-Agent AI Platform',
@@ -133,13 +133,13 @@ export const projects = [
   {
     title: 'Personal Portfolio',
     year: '2025',
-    category: 'UX/UI · Web',
-    blurb: 'A fully responsive personal portfolio with a clean, modern interface and interactive components.',
+    category: 'My First Project',
+    blurb: 'Where it all started: my first ever project, a fully responsive portfolio with a clean, modern interface.',
     description:
-      'A fully responsive website built with HTML, CSS, and JavaScript, featuring a clean, modern user interface with unique layouts and simple navigation. It includes well-structured content, interactive components, and GitHub integration, all designed to explore my projects, experience, and ongoing growth.',
+      'The first project I ever built and shipped: a fully responsive website in HTML, CSS, and JavaScript, featuring a clean, modern user interface with unique layouts and simple navigation. It includes well-structured content, interactive components, and GitHub integration — the site that started everything.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
     media: asset('Portfolio.png'),
-    url: 'https://github.com/ethan-goldstein/ethan-goldstein.github.io',
+    url: 'https://ethan-goldstein.github.io/Protfolio-Old/',
   },
   {
     title: 'Coach AI',
@@ -150,7 +150,7 @@ export const projects = [
       'Coach AI is a virtual personal trainer built with HTML, CSS, and JavaScript, featuring a unique, modern interface with interactive 3D elements built in Spline for a polished, immersive experience.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
     media: asset('CoachAI.png'),
-    url: 'https://github.com/ethan-goldstein/CoachAI',
+    url: 'https://ethan-goldstein.github.io/CoachAI/',
   },
   {
     title: 'Golden Spikes',
@@ -161,7 +161,7 @@ export const projects = [
       'A full browser-based baseball game: My Career, Home Run Derby, Dynasty card packs, Batting Practice, Fielding, a strength/drills mode called The Forge, and quick mini-games, plus real-time multiplayer rooms. Built in vanilla JS and Three.js with a Cloudflare Durable Object powering the multiplayer backend, and MediaPipe pose tracking for fully hands-free play.',
     tags: ['Three.js', 'Cloudflare Durable Objects', 'MediaPipe', 'WebGL'],
     media: asset('golden-spikes.jpg'),
-    url: 'https://github.com/ethan-goldstein/golden-spikes',
+    url: 'https://ethan-goldstein.github.io/golden-spikes/',
   },
   {
     title: 'Turbo Rumble GP',
@@ -172,7 +172,7 @@ export const projects = [
       'A Mario-Kart-style browser racer: 8 racers, 4 karts, a 4-track Grand Prix, and 7 items to fight for position. Realtime multiplayer runs on a Cloudflare Durable Object with AI fill and a solo fallback, and it supports keyboard, gamepad, touch, and hands-free MediaPipe hand tracking.',
     tags: ['Three.js', 'Cloudflare Durable Objects', 'MediaPipe', 'WebGL'],
     media: asset('turbo-rumble-gp.jpg'),
-    url: 'https://github.com/ethan-goldstein/turbo-rumble-gp',
+    url: 'https://ethan-goldstein.github.io/turbo-rumble-gp/',
   },
   {
     title: 'The Fenway Faithful',
@@ -182,8 +182,8 @@ export const projects = [
     description:
       'A scroll-driven 3D museum experience walking through Red Sox history, from the Green Monster to retired numbers to championship years, built with React, Three.js, and GSAP-driven scroll choreography for a cinematic, walk-through feel.',
     tags: ['React', 'Three.js', 'GSAP', 'Lenis'],
-    media: asset('redsox.jpg'),
-    url: 'https://github.com/ethan-goldstein/REDSOX',
+    media: asset('fenway.jpg'),
+    url: 'https://ethan-goldstein.github.io/REDSOX/',
   },
   {
     title: 'ABROAD: A Semester in Motion',
@@ -193,8 +193,8 @@ export const projects = [
     description:
       'An interactive photoreal globe tracking a full study-abroad semester: 109 days, 8 countries, 20+ cities, 18 weekend trips, each pinned to the map with its own story. Built with React, Three.js, and GSAP/Lenis for smooth scroll-driven travel between stops.',
     tags: ['React', 'Three.js', 'GSAP', 'Vite'],
-    media: asset('abroad.jpg'),
-    url: 'https://github.com/ethan-goldstein/abroad',
+    media: asset('abroad-globe.jpg'),
+    url: 'https://ethan-goldstein.github.io/abroad/',
   },
   {
     title: 'Audi',
@@ -205,7 +205,7 @@ export const projects = [
       'Audi is a creatively remade shopping platform built with HTML, CSS, and JavaScript, featuring a unique, modern interface inspired by Audi’s design language. It integrates an interactive shopping cart that dynamically updates total prices as cars are added or removed, complemented by a custom 3D-animated commercial fully created and edited in Blender.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Blender', 'Spline'],
     media: asset('Audi.png'),
-    url: 'https://github.com/ethan-goldstein/Audi',
+    url: 'https://ethan-goldstein.github.io/Audi/',
   },
 ]
 

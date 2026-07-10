@@ -229,7 +229,7 @@ export default function Projects() {
                 {cur.url && (
                   <Magnetic strength={0.2}>
                     <a className="btn primary mt-2" href={cur.url} target="_blank" rel="noreferrer">
-                      View on GitHub <span className="arrow">↗</span>
+                      View live project <span className="arrow">↗</span>
                     </a>
                   </Magnetic>
                 )}
