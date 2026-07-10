@@ -131,28 +131,6 @@ export const projects = [
     url: '',
   },
   {
-    title: 'Personal Portfolio',
-    year: '2025',
-    category: 'My First Project',
-    blurb: 'Where it all started: my first ever project, a fully responsive portfolio with a clean, modern interface.',
-    description:
-      'The first project I ever built and shipped: a fully responsive website in HTML, CSS, and JavaScript, featuring a clean, modern user interface with unique layouts and simple navigation. It includes well-structured content, interactive components, and GitHub integration — the site that started everything.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
-    media: asset('Portfolio.png'),
-    url: 'https://ethan-goldstein.github.io/Protfolio-Old/',
-  },
-  {
-    title: 'Coach AI',
-    year: '2025',
-    category: 'AI · Web',
-    blurb: 'A virtual personal trainer with a sleek, futuristic interface. The future is here.',
-    description:
-      'Coach AI is a virtual personal trainer built with HTML, CSS, and JavaScript, featuring a unique, modern interface with interactive 3D elements built in Spline for a polished, immersive experience.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
-    media: asset('CoachAI.png'),
-    url: 'https://ethan-goldstein.github.io/CoachAI/',
-  },
-  {
     title: 'Golden Spikes',
     year: '2026',
     category: 'Game · WebGL',
@@ -175,15 +153,15 @@ export const projects = [
     url: 'https://ethan-goldstein.github.io/turbo-rumble-gp/',
   },
   {
-    title: 'The Fenway Faithful',
+    title: 'AM — Apple Music Concept',
     year: '2026',
-    category: 'UX/UI · 3D',
-    blurb: '125 years of Red Sox history, told from inside a scroll-animated 3D clubhouse.',
+    category: 'UX/UI · Audio',
+    blurb: 'A glassy, Apple-style music home built from my real playlists — every preview synthesized in-browser.',
     description:
-      'A scroll-driven 3D museum experience walking through Red Sox history, from the Green Monster to retired numbers to championship years, built with React, Three.js, and GSAP-driven scroll choreography for a cinematic, walk-through feel.',
-    tags: ['React', 'Three.js', 'GSAP', 'Lenis'],
-    media: asset('fenway.jpg'),
-    url: 'https://ethan-goldstein.github.io/REDSOX/',
+      'An unofficial Apple Music fan concept that opens on an AI-generated cinematic reveal (Higgsfield) and lands in a glassmorphic personal music home: four station mixes built from my real synced playlists (house, classy, country, and a rap library), a Listen Now player whose color tint follows the track across the whole page, a searchable library of 480+ real track listings, tilt-and-gloss album tiles, a Higgsfield-generated 3D studio room, and a floating mini-player dock. Every preview is procedurally synthesized with the Web Audio API — no recordings, nothing for sale.',
+    tags: ['Web Audio API', 'JavaScript', 'Higgsfield AI', 'model-viewer 3D'],
+    media: asset('apple-music.webm'),
+    url: 'https://ethan-goldstein.github.io/AppleMusic/',
   },
   {
     title: 'ABROAD: A Semester in Motion',
@@ -197,15 +175,15 @@ export const projects = [
     url: 'https://ethan-goldstein.github.io/abroad/',
   },
   {
-    title: 'AM — Apple Music Concept',
+    title: 'The Fenway Faithful',
     year: '2026',
-    category: 'UX/UI · Audio',
-    blurb: 'A glassy, Apple-style music home built from my real playlists — every preview synthesized in-browser.',
+    category: 'UX/UI · 3D',
+    blurb: '125 years of Red Sox history, told from inside a scroll-animated 3D clubhouse.',
     description:
-      'An unofficial Apple Music fan concept that opens on an AI-generated cinematic reveal (Higgsfield) and lands in a glassmorphic personal music home: four station mixes built from my real synced playlists (house, classy, country, and a rap library), a Listen Now player whose color tint follows the track across the whole page, a searchable library of 480+ real track listings, tilt-and-gloss album tiles, a Higgsfield-generated 3D studio room, and a floating mini-player dock. Every preview is procedurally synthesized with the Web Audio API — no recordings, nothing for sale.',
-    tags: ['Web Audio API', 'JavaScript', 'Higgsfield AI', 'model-viewer 3D'],
-    media: asset('apple-music.webm'),
-    url: 'https://ethan-goldstein.github.io/AppleMusic/',
+      'A scroll-driven 3D museum experience walking through Red Sox history, from the Green Monster to retired numbers to championship years, built with React, Three.js, and GSAP-driven scroll choreography for a cinematic, walk-through feel.',
+    tags: ['React', 'Three.js', 'GSAP', 'Lenis'],
+    media: asset('fenway.jpg'),
+    url: 'https://ethan-goldstein.github.io/REDSOX/',
   },
   {
     title: 'Audi Concept Showroom',
@@ -219,6 +197,17 @@ export const projects = [
     url: 'https://ethan-goldstein.github.io/Audi/',
   },
   {
+    title: 'Oakridge Medical Group',
+    year: '2026',
+    category: 'Web Design · Client Demo',
+    blurb: 'A modern medical-practice site demo — appointments, providers, patient portal, the full small-business treatment.',
+    description:
+      'A polished healthcare website for a fictional family practice in Alexandria, VA, built as a client-style demo: appointment booking, provider profiles, services, patient portal and prescription-refill entry points, insurance verification, FAQ, and an emergency banner — everything a real practice needs, presented with a calm, trustworthy design.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Client Demo'],
+    media: asset('oakridge-medical.png'),
+    url: 'https://ethan-goldstein.github.io/Oakridge-Medical/',
+  },
+  {
     title: 'The Drift House',
     year: '2026',
     category: 'Web Design · Client Demo',
@@ -230,15 +219,26 @@ export const projects = [
     url: 'https://ethan-goldstein.github.io/Drift-House/',
   },
   {
-    title: 'Oakridge Medical Group',
-    year: '2026',
-    category: 'Web Design · Client Demo',
-    blurb: 'A modern medical-practice site demo — appointments, providers, patient portal, the full small-business treatment.',
+    title: 'Coach AI',
+    year: '2025',
+    category: 'AI · Web',
+    blurb: 'A virtual personal trainer with a sleek, futuristic interface. The future is here.',
     description:
-      'A polished healthcare website for a fictional family practice in Alexandria, VA, built as a client-style demo: appointment booking, provider profiles, services, patient portal and prescription-refill entry points, insurance verification, FAQ, and an emergency banner — everything a real practice needs, presented with a calm, trustworthy design.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Client Demo'],
-    media: asset('oakridge-medical.png'),
-    url: 'https://ethan-goldstein.github.io/Oakridge-Medical/',
+      'Coach AI is a virtual personal trainer built with HTML, CSS, and JavaScript, featuring a unique, modern interface with interactive 3D elements built in Spline for a polished, immersive experience.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
+    media: asset('CoachAI.png'),
+    url: 'https://ethan-goldstein.github.io/CoachAI/',
+  },
+  {
+    title: 'Personal Portfolio',
+    year: '2025',
+    category: 'My First Project',
+    blurb: 'Where it all started: my first ever project, a fully responsive portfolio with a clean, modern interface.',
+    description:
+      'The first project I ever built and shipped: a fully responsive website in HTML, CSS, and JavaScript, featuring a clean, modern user interface with unique layouts and simple navigation. It includes well-structured content, interactive components, and GitHub integration — the site that started everything.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
+    media: asset('Portfolio.png'),
+    url: 'https://ethan-goldstein.github.io/Protfolio-Old/',
   },
 ]
 
