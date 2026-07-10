@@ -218,6 +218,28 @@ export const projects = [
     media: asset('audi-showroom.png'),
     url: 'https://ethan-goldstein.github.io/Audi/',
   },
+  {
+    title: 'The Drift House',
+    year: '2026',
+    category: 'Web Design · Client Demo',
+    blurb: 'A coastal-kitchen restaurant site built as a client-style demo — sunset vibes, oyster bar, full booking flow.',
+    description:
+      'A complete restaurant website for a fictional coastal kitchen in Seabrook, SC, built as a client-style demo for my web-design business: cinematic hero, full menu and cocktail list, private events and catering sections, a reservation flow, and gift cards. Designed to show a small business exactly what their site could feel like — warm, editorial, and conversion-focused.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Client Demo'],
+    media: asset('drift-house.png'),
+    url: 'https://ethan-goldstein.github.io/Drift-House/',
+  },
+  {
+    title: 'Oakridge Medical Group',
+    year: '2026',
+    category: 'Web Design · Client Demo',
+    blurb: 'A modern medical-practice site demo — appointments, providers, patient portal, the full small-business treatment.',
+    description:
+      'A polished healthcare website for a fictional family practice in Alexandria, VA, built as a client-style demo: appointment booking, provider profiles, services, patient portal and prescription-refill entry points, insurance verification, FAQ, and an emergency banner — everything a real practice needs, presented with a calm, trustworthy design.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Client Demo'],
+    media: asset('oakridge-medical.png'),
+    url: 'https://ethan-goldstein.github.io/Oakridge-Medical/',
+  },
 ]
 
 /* ----------------------- EXPERIENCE: SCHOOL + WORK ---------------------- */
