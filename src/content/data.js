@@ -117,7 +117,8 @@ export const skills = {
 /* ------------------------------ PROJECTS -------------------------------- */
 // media: drop files in /public/assets and reference "/assets/name.jpg" (or .mp4/.webm).
 //        Leave media empty ('') to show a stylised gradient placeholder.
-// url:   the LIVE project link (shows a "View live project" button in the modal).
+// url:     the LIVE project link (shows a "View live project" button in the modal).
+// private: true = runs on a private server; the modal shows a PRIVATE badge instead of a link.
 export const projects = [
   {
     title: 'Mission Control: 9-Agent AI Platform',
@@ -129,6 +130,18 @@ export const projects = [
     tags: ['Node.js', 'React', 'TypeScript', 'Ollama · Llama 3.2', 'SQLite', 'SSE'],
     media: asset('mission-control.jpg'),
     url: '',
+    private: true,
+  },
+  {
+    title: 'HAYMAKER: Rise Through the Ranks',
+    year: '2026',
+    category: 'Game · WebGL',
+    blurb: 'A first-person boxing game you can literally punch your way through - webcam, controller, keyboard, or touch.',
+    description:
+      'A first-person 3D boxing sim in the browser: a career mode where you create a boxer and climb from rank #20 to a Vegas title fight (with purses, training camps, and title defenses), plus a freeplay mode with an 8-fighter roster, 5 arenas, and selectable 1/3/5/8/12-round bouts. Real boxing systems - breakable guard, slips, ducks, counters, stamina, knockdowns with a 10-count mash, and three judges scoring to a decision. All four input methods are first-class, including fully in-browser MediaPipe hand tracking so you throw real punches at the camera. Every portrait, arena, and sound was generated with Higgsfield under one locked art direction.',
+    tags: ['Three.js', 'MediaPipe', 'WebGL', 'Higgsfield AI'],
+    media: asset('haymaker.jpg'),
+    url: 'https://ethan-goldstein.github.io/haymaker-boxing/',
   },
   {
     title: 'Golden Spikes',

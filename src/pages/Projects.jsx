@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion'
 import { projects } from '../content/data'
 import Magnetic from '../components/Magnetic'
+import { lenisRef } from '../lib/lenis'
 
 const isVideo = (s) => /\.(mp4|webm)$/i.test(s)
 const PH = [
@@ -133,6 +134,16 @@ export default function Projects() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
+  // Lenis swallows wheel events page-wide, so pause it while the modal is
+  // open — otherwise the wheel scrolls the page behind the overlay and the
+  // card body never scrolls.
+  useEffect(() => {
+    const lenis = lenisRef.current
+    if (open) lenis?.stop()
+    else lenis?.start()
+    return () => lenisRef.current?.start()
+  }, [open])
+
   const onSelect = (i) => {
     if (Math.abs(ringOffset(i, active, N)) > Math.min(3, Math.floor((N - 1) / 2))) return
     if (i === active) setOpen(true)
@@ -215,6 +226,7 @@ export default function Projects() {
               exit={{ y: 20, scale: 0.98, opacity: 0 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
+              data-lenis-prevent
             >
               <button className="folio-close" onClick={() => setOpen(false)} aria-label="Close">✕</button>
               <div className="folio-card-media"><Media p={cur} i={active} /></div>
@@ -226,13 +238,21 @@ export default function Projects() {
                 <div className="folio-card-tags">
                   {cur.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
                 </div>
-                {cur.url && (
+                {cur.private ? (
+                  <span className="folio-private mt-2">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" strokeWidth="1.6" />
+                      <path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" strokeWidth="1.6" />
+                    </svg>
+                    Private · self-hosted server
+                  </span>
+                ) : cur.url ? (
                   <Magnetic strength={0.2}>
                     <a className="btn primary mt-2" href={cur.url} target="_blank" rel="noreferrer">
                       View live project <span className="arrow">↗</span>
                     </a>
                   </Magnetic>
-                )}
+                ) : null}
               </div>
             </motion.div>
           </motion.div>
