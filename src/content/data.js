@@ -197,14 +197,25 @@ export const projects = [
     url: 'https://ethan-goldstein.github.io/abroad/',
   },
   {
-    title: 'Audi',
-    year: '2025',
-    category: 'E-commerce · 3D',
-    blurb: 'A creatively remade shopping platform inspired by Audi’s design language.',
+    title: 'AM — Apple Music Concept',
+    year: '2026',
+    category: 'UX/UI · Audio',
+    blurb: 'A glassy, Apple-style music home built from my real playlists — every preview synthesized in-browser.',
     description:
-      'Audi is a creatively remade shopping platform built with HTML, CSS, and JavaScript, featuring a unique, modern interface inspired by Audi’s design language. It integrates an interactive shopping cart that dynamically updates total prices as cars are added or removed, complemented by a custom 3D-animated commercial fully created and edited in Blender.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Blender', 'Spline'],
-    media: asset('Audi.png'),
+      'An unofficial Apple Music fan concept that opens on an AI-generated cinematic reveal (Higgsfield) and lands in a glassmorphic personal music home: four station mixes built from my real synced playlists (house, classy, country, and a rap library), a Listen Now player whose color tint follows the track across the whole page, a searchable library of 480+ real track listings, tilt-and-gloss album tiles, a Higgsfield-generated 3D studio room, and a floating mini-player dock. Every preview is procedurally synthesized with the Web Audio API — no recordings, nothing for sale.',
+    tags: ['Web Audio API', 'JavaScript', 'Higgsfield AI', 'model-viewer 3D'],
+    media: asset('apple-music.webm'),
+    url: 'https://ethan-goldstein.github.io/AppleMusic/',
+  },
+  {
+    title: 'Audi Concept Showroom',
+    year: '2026',
+    category: 'E-commerce · 3D',
+    blurb: 'A cinematic concept showroom with an interactive 3D R8 and a filterable nine-car lineup.',
+    description:
+      'A fan-concept design study of the Audi universe: the landing hero renders an interactive, Draco-compressed 3D R8 in real time via model-viewer, backed by animated spec counters and smooth-scroll choreography. The showroom is one filterable space — sedans, SUVs, and the e-tron era — feeding a localStorage-driven “garage” that tallies a virtual collection. A pure front-end study in cinematic e-commerce; nothing is for sale.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'model-viewer 3D'],
+    media: asset('audi-showroom.png'),
     url: 'https://ethan-goldstein.github.io/Audi/',
   },
 ]
