@@ -136,9 +136,9 @@ export const projects = [
     title: 'Speech Developmental Services',
     year: '2026',
     category: 'Client Work · Web',
-    blurb: 'A minimal, Apple-polished site for a pediatric speech-language pathologist — opened by a 3D pen handwriting her title.',
+    blurb: 'A monochrome editorial site for a pediatric speech-language pathologist — opened by a 3D pen drawing her logo in ink.',
     description:
-      'A professional single-page site for Speech Developmental Services (Shana Kilcawley, CCC-SLP), a pediatric speech therapy practice in Arlington, VA. The intro is a custom-built handwriting engine: a stroke-font composer draws "Speech Language Pathologist" in ink while a three.js fountain pen tracks the stroke tip in real time. The rest is quiet Apple-style design — frosted glass nav, pill buttons, scroll-driven reveals with Lenis smoothing — with the brand palette sampled directly from her logo and every word and image sourced from her intake document. Built with React + Vite and deployed on GitHub Pages.',
+      'A professional single-page site for Speech Developmental Services (Shana Kilcawley, CCC-SLP), a pediatric speech therapy practice in Arlington, VA. The intro is a custom stroke-drawing engine: her logo is auto-traced into vector contours (marching squares over the PNG) and a three.js fountain pen draws the outline in real time before it crossfades into the periwinkle mark. The design is ink-on-paper editorial — white page, near-black type in four self-hosted Google Fonts, hairline cards — where color only appears on touch: a grayscale portrait blooms to color, icon tiles invert, insurer dots flush their brand colors. Built with React + Vite and deployed on GitHub Pages.',
     tags: ['React', 'Three.js', 'Framer Motion', 'Vite'],
     media: asset('speech-developmental-services.jpg'),
     url: 'https://ethan-goldstein.github.io/speech-developmental-services/',
