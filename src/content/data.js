@@ -136,9 +136,9 @@ export const projects = [
     title: 'Speech Developmental Services',
     year: '2026',
     category: 'Client Work · Web',
-    blurb: 'A monochrome editorial site for a pediatric speech-language pathologist — opened by a 3D pen drawing her logo in ink.',
+    blurb: 'A dimensional, scroll-driven site for a pediatric speech-language pathologist — opened by a 3D pen drawing her logo in ink.',
     description:
-      'A professional single-page site for Speech Developmental Services (Shana Kilcawley, CCC-SLP), a pediatric speech therapy practice in Arlington, VA. The intro is a custom stroke-drawing engine: her logo is auto-traced into vector contours (marching squares over the PNG) and a three.js fountain pen draws the outline in real time before it crossfades into the periwinkle mark. The design is ink-on-paper editorial — white page, near-black type in four self-hosted Google Fonts, hairline cards — where color only appears on touch: a grayscale portrait blooms to color, icon tiles invert, insurer dots flush their brand colors. Built with React + Vite and deployed on GitHub Pages.',
+      'A professional single-page site for Speech Developmental Services (Shana Kilcawley, CCC-SLP), a pediatric speech therapy practice in Arlington, VA. The 3-second intro is a custom stroke-drawing engine: her logo is auto-traced into vector contours (marching squares over the PNG) and a three.js fountain pen draws the outline in real time before it crossfades into the periwinkle mark. Inside, a second three.js scene floats soft glass orbs behind the hero with scroll parallax, and the whole page moves on scroll — a gradient progress bar, 3D card entrances, and a step timeline that fills as you read. Glass chips, aurora-lit dark contact panel, scrollspy nav, and a copy-email button round out the UI. Built with React + Vite and deployed on GitHub Pages.',
     tags: ['React', 'Three.js', 'Framer Motion', 'Vite'],
     media: asset('speech-developmental-services.jpg'),
     url: 'https://ethan-goldstein.github.io/speech-developmental-services/',
