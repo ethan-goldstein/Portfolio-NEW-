@@ -121,6 +121,17 @@ export const skills = {
 // private: true = runs on a private server; the modal shows a PRIVATE badge instead of a link.
 export const projects = [
   {
+    title: 'WALLPR — Wallpaper Storefront',
+    year: '2026',
+    category: 'E-commerce · Web',
+    blurb: 'A minimal one-page hero store selling impasto-painted wallpapers as instant digital downloads.',
+    description:
+      'A single-viewport storefront for AI-assisted oil-painting wallpapers: a non-scrollable hero of four expanding category panels (Sports, Places, Lifestyle, Animals) that open per-category galleries rendered from one product manifest. Checkout is fully outsourced to a merchant-of-record provider — hosted overlay checkout, global sales tax/VAT, and secure expiring download delivery — so the static site holds zero secrets and touches zero payment data. Locked-down CSP, no cookies, no trackers, full-res files never leave the delivery vault. Pure HTML/CSS/JS, no build step, deployed on GitHub Pages.',
+    tags: ['HTML/CSS/JS', 'E-commerce', 'Merchant of Record', 'Higgsfield AI'],
+    media: asset('wallpr.jpg'),
+    url: 'https://ethan-goldstein.github.io/wallpr/',
+  },
+  {
     title: 'Mission Control: 9-Agent AI Platform',
     year: '2026',
     category: 'AI · Full-Stack',
