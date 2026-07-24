@@ -129,7 +129,7 @@ export const projects = [
       'A single-viewport storefront for AI-assisted oil-painting wallpapers: a non-scrollable hero of four expanding category panels (Sports, Places, Lifestyle, Animals) that open per-category galleries rendered from one product manifest. Checkout is fully outsourced to a merchant-of-record provider — hosted overlay checkout, global sales tax/VAT, and secure expiring download delivery — so the static site holds zero secrets and touches zero payment data. Locked-down CSP, no cookies, no trackers, full-res files never leave the delivery vault. Pure HTML/CSS/JS, no build step, deployed on GitHub Pages.',
     tags: ['HTML/CSS/JS', 'E-commerce', 'Merchant of Record', 'Higgsfield AI'],
     media: asset('wallpr.jpg'),
-    url: 'https://ethan-goldstein.github.io/wallpr/',
+    url: 'https://wallpr.us/',
   },
   {
     title: 'Mission Control: 9-Agent AI Platform',
