@@ -121,6 +121,17 @@ export const skills = {
 // private: true = runs on a private server; the modal shows a PRIVATE badge instead of a link.
 export const projects = [
   {
+    title: 'Casa Cavallino — A Private Ferrari Residence',
+    year: '2026',
+    category: 'Cinematic Web · AI Film',
+    blurb: 'A scroll-scrubbed cinematic flythrough of a fictional Ferrari mansion on the Amalfi Coast — the whole site is one continuous generated camera flight.',
+    description:
+      "A luxury-brand-film website where scrolling flies you through an entire estate: fifteen AI-generated flythrough clips chained room to room — coast approach, infinity pool, a pivot door that swings open as you enter, family room, kitchen, primary suite, a Ferrari apparel wardrobe, guest suites, a racing-sim lounge — down to a keypad-locked underground collection (the code is Ferrari's founding year), a vintage 'La Storia' wing with a 250 GT and F40, and a cliff tunnel that bursts out into the night. On desktop, scroll position drives video frames directly through all-keyframe encodes; phones get play-through clips with matched hold frames. Twelve-car spotlight configurator with specs and collector notes, synthesized ocean ambience, full keyboard/reduced-motion accessibility. Every still and film clip generated with Higgsfield (Cinema Studio + Seedance) from one locked art direction. Next.js static export on GitHub Pages.",
+    tags: ['Next.js', 'GSAP + Lenis', 'Scroll-scrubbed video', 'Higgsfield AI'],
+    media: asset('casa-cavallino.jpg'),
+    url: 'https://ethan-goldstein.github.io/casa-cavallino/',
+  },
+  {
     title: 'WALLPR — Wallpaper Storefront',
     year: '2026',
     category: 'E-commerce · Web',
