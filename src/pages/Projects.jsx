@@ -5,6 +5,8 @@ import Magnetic from '../components/Magnetic'
 import { lenisRef } from '../lib/lenis'
 
 const isVideo = (s) => /\.(mp4|webm)$/i.test(s)
+// github.com/<owner>/<repo> is source to read, not a site to visit
+const isRepo = (s) => /^https?:\/\/(www\.)?github\.com\/[^/]+\/[^/]+/i.test(s)
 const PH = [
   'linear-gradient(135deg,#8b5cf6,#22d3ee)',
   'linear-gradient(135deg,#f472b6,#8b5cf6)',
@@ -249,7 +251,8 @@ export default function Projects() {
                 ) : cur.url ? (
                   <Magnetic strength={0.2}>
                     <a className="btn primary mt-2" href={cur.url} target="_blank" rel="noreferrer">
-                      View live project <span className="arrow">↗</span>
+                      {/* a repo link is source, not a deployed site */}
+                      {isRepo(cur.url) ? 'View source' : 'View live project'} <span className="arrow">↗</span>
                     </a>
                   </Magnetic>
                 ) : null}

@@ -53,7 +53,7 @@ export const socials = [
 export const background = {
   // "About me" lead: who I am right now, in one confident paragraph
   about:
-    "I'm Ethan Goldstein, a software engineer in Washington, DC. My day job is federal: I'm at GovCIO on the Department of Veterans Affairs modernization program, processing and validating IRS records under an active Public Trust credential. The rest of my time goes into agent infrastructure. I designed and built Mission Control, an 11-agent orchestration platform, roughly 12,700 lines of Node, TypeScript, and React, that runs around the clock on hardware I own, drives live third-party APIs, and keeps a human approval gate between every agent and every outbound action. The model is the smallest part of that work. The engineering is scheduling, persistence, guardrails, and a defined answer for what happens when the model is wrong. I'm finishing a Computer Information Systems degree at the University of South Carolina.",
+    "I'm Ethan Goldstein, a software engineer in Washington, DC. My day job is federal: I'm at GovCIO on the Department of Veterans Affairs modernization program, processing and validating IRS records under an active Public Trust credential. The rest of my time goes into agent infrastructure. I designed and built Autonomous OS, an 11-agent orchestration platform, roughly 12,700 lines of Node, TypeScript, and React, that runs around the clock on hardware I own, drives live third-party APIs, and keeps a human approval gate between every agent and every outbound action. The model is the smallest part of that work. The engineering is scheduling, persistence, guardrails, and a defined answer for what happens when the model is wrong. I'm finishing a Computer Information Systems degree at the University of South Carolina.",
   // The story: how the judgment got built, told through what broke
   story: [
     'The first thing I ever shipped was a static portfolio in hand-written HTML, CSS, and JavaScript. What stuck was not the code, it was the habit of putting work on a public URL where it either runs or it does not. Browser games came next, and they turned out to be a systems problem in a costume: a simulation loop pinned to a fixed 60Hz step and fully decoupled from rendering, and authoritative state that lives on the server because a client you do not control will always lie to you.',
@@ -68,7 +68,7 @@ export const background = {
     },
     {
       title: 'Fewer moving parts',
-      text: "Storage is Node's built-in SQLite: 12 tables, 7 indexes, no ORM, no native builds, nothing to migrate. The LLM runs with MCP disabled, so its tool surface is exactly the code I wrote and nothing else.",
+      text: "Storage is Node's built-in SQLite: 14 tables, 10 indexes, no ORM, no native builds, nothing to migrate. The LLM runs with MCP disabled, so its tool surface is exactly the code I wrote and nothing else.",
     },
     {
       title: 'Make the next one cheap',
@@ -128,7 +128,7 @@ export const skills = {
     { name: 'Python', icon: 'python/python-original' },
     { name: 'JavaScript', icon: 'javascript/javascript-original' },
     { name: 'TypeScript', icon: 'typescript/typescript-original' },
-    { name: 'C++', icon: 'cplusplus/cplusplus-original' },
+    { name: 'Next.js', icon: 'nextjs/nextjs-original-wordmark' },
     { name: 'HTML5', icon: 'html5/html5-original' },
     { name: 'CSS3', icon: 'css3/css3-original' },
     { name: 'SQL', icon: 'sqlite/sqlite-original' },
@@ -175,13 +175,13 @@ export const projects = [
     category: 'E-commerce · Web',
     blurb: 'A minimal one-page hero store selling impasto-painted wallpapers as instant digital downloads.',
     description:
-      'A single-viewport storefront for AI-assisted oil-painting wallpapers: a non-scrollable hero of four expanding category panels (Sports, Places, Lifestyle, Animals) that open per-category galleries rendered from one product manifest. Checkout is fully outsourced to a merchant-of-record provider, which means hosted overlay checkout, global sales tax and VAT handling, and secure expiring download delivery, so the static site holds zero secrets and touches zero payment data. Per-page Content Security Policy locks script, frame, and connect sources to a known allowlist. No cookies, no trackers, no PII collected, and full-resolution originals never enter source control. Pure HTML, CSS, and JavaScript, no build step, deployed on GitHub Pages. Its catalog is restocked by an agent in Mission Control that paints new pieces and commits them straight into this repo.',
+      'A single-viewport storefront for AI-assisted oil-painting wallpapers: a non-scrollable hero of four expanding category panels (Sports, Places, Lifestyle, Animals) that open per-category galleries rendered from one product manifest. Checkout is fully outsourced to a merchant-of-record provider, which means hosted overlay checkout, global sales tax and VAT handling, and secure expiring download delivery, so the static site holds zero secrets and touches zero payment data. Per-page Content Security Policy locks script, frame, and connect sources to a known allowlist. No cookies, no trackers, no PII collected, and full-resolution originals never enter source control. Pure HTML, CSS, and JavaScript, no build step, deployed on GitHub Pages. Its catalog is restocked by an agent in Autonomous OS that paints new pieces and commits them straight into this repo.',
     tags: ['HTML/CSS/JS', 'E-commerce', 'Merchant of Record', 'Higgsfield AI'],
     media: asset('wallpr.jpg'),
     url: 'https://wallpr.us/',
   },
   {
-    title: 'Mission Control: 11-Agent AI Platform',
+    title: 'Autonomous OS: 11-Agent Platform',
     year: '2026',
     category: 'AI · Full-Stack',
     blurb: 'Eleven autonomous AI agents. One self-hosted command center. Running 24/7 on hardware I own.',
@@ -189,8 +189,7 @@ export const projects = [
       "Eleven named agents that actually do the work of a small business, running unattended on hardware I own. Bruce triages Gmail over IMAP and ranks what matters. Larry finds businesses with no website or an outdated one through OpenStreetMap Overpass and Nominatim. Pure researches Fiverr demand from public signals and hands off on completion to Virtue, who drafts the gig copy, pricing, and thumbnail. Trinity runs three Etsy storefront lanes through Printify and the Etsy Open API. Monet paints oil-style wallpapers and commits them straight into the wallpr.us repo, which wakes Draper to write the social post. Scorsese renders vertical promos with ffmpeg, Mirsky parses bank statements, Parker scouts products, and Mom assembles the whole fleet into one morning brief. Underneath: a Node and Express ESM core, node:sqlite in WAL mode with no ORM, a custom Server-Sent Events hub feeding a React and TypeScript dashboard, and a two-tier LLM dispatcher that runs a headless Claude Code CLI first and fails over to a local Ollama model behind a 10-minute circuit breaker. Nothing reaches the outside world without passing a single approval queue where risky lanes always need a human tap. Zero-dependency HMAC session auth, a sleep-proof cron catch-up sweep, self-distilling long-term memory, hands-free gesture control on a locally vendored model, and an installable PWA reachable from my phone over Tailscale.",
     tags: ['Node.js', 'React', 'TypeScript', 'node:sqlite', 'SSE', 'Claude + Ollama'],
     media: asset('mission-control.mp4'),
-    url: '',
-    private: true,
+    url: 'https://github.com/ethan-goldstein/Autonomous-OS',
   },
   {
     title: 'Speech Developmental Services',
@@ -347,7 +346,7 @@ export const experience = {
       period: '2025 - Present',
       location: 'Remote',
       points: [
-        'Built the orchestration core behind Mission Control, a self-hosted 11-agent platform on a Node and Express ESM server, where agents run on cron schedules and also trigger each other on completion, so a research run hands straight off to the agent that acts on it.',
+        'Built the orchestration core behind Autonomous OS, a self-hosted 11-agent platform on a Node and Express ESM server, where agents run on cron schedules and also trigger each other on completion, so a research run hands straight off to the agent that acts on it.',
         'Built a two-tier LLM dispatcher: a headless Claude Code CLI as the primary, a local Ollama llama3.2:3b as the always-on fallback, and a 10-minute persisted circuit breaker that reroutes on any timeout, rate limit, or missing binary.',
         'Injected prompt-injection guardrails at a single chokepoint into every model call on both providers (fetched web content is data and never instructions, credentials are never echoed, outward-facing actions default to drafts) and routed every outbound action through one egress queue where risky lanes always require a human tap and no toggle can override that.',
         'Made automated outreach defensible by design: per-lane daily caps dripped across staggered windows instead of bursts, randomized send jitter, DNS MX pre-validation that fails open so a flaky lookup never burns a real address, and an IMAP bounce loop that retires dead addresses the same day.',
