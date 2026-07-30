@@ -22,7 +22,7 @@ export const profile = {
   email: 'ethan.goldstein.dev@gmail.com',
   // Your photo for the Contact page: drop one in /public/assets and point here.
   // Leave '' to show a styled placeholder.
-  photo: asset('ProfilePicture.png'),
+  photo: asset('ProfilePicture.jpg'),
   // Resume file: drop a PDF into /public/assets and point here (optional)
   resumeUrl: asset('ethan-goldstein-resume.pdf'),
 }
@@ -39,7 +39,8 @@ export const nav = [
   { id: '07', label: 'Contact', path: '/contact' },
 ]
 
-// `icon` is a simpleicons.org slug - rendered as a white icon on the Contact page.
+// `icon` is a key into SOCIAL_ICONS in components/SocialIcons.jsx (local inline
+// brand marks). Add a matching entry to BRAND_COLORS in pages/Contact.jsx too.
 export const socials = [
   { label: 'GitHub', handle: '@ethan-goldstein', url: 'https://github.com/ethan-goldstein', icon: 'github' },
   { label: 'Twitter / X', handle: '@egolddev', url: 'https://x.com/egolddev', icon: 'x' },
@@ -52,29 +53,66 @@ export const socials = [
 export const background = {
   // "About me" lead: who I am right now, in one confident paragraph
   about:
-    "I'm Ethan Goldstein, a software engineer from Washington, DC. Right now I do data processing at GovCIO, supporting the Department of Veterans Affairs modernization program on a pipeline that moves 2 million IRS document images a day, under an active Public Trust clearance. Outside the federal work I ship for the browser: cinematic 3D experiences in Three.js, multiplayer games running on Cloudflare's edge, computer-vision interfaces you play with your bare hands, and clean React sites like this one. My toolkit spans React, Node, Three.js, Python, SQL, and C++, and I'm finishing my Computer Information Systems degree at the University of South Carolina.",
-  // The story - a few short paragraphs about who you are and how you got here
+    "I'm Ethan Goldstein, a software engineer in Washington, DC. My day job is federal: I'm at GovCIO on the Department of Veterans Affairs modernization program, processing and validating IRS records under an active Public Trust credential. The rest of my time goes into agent infrastructure. I designed and built Mission Control, an 11-agent orchestration platform, roughly 12,700 lines of Node, TypeScript, and React, that runs around the clock on hardware I own, drives live third-party APIs, and keeps a human approval gate between every agent and every outbound action. The model is the smallest part of that work. The engineering is scheduling, persistence, guardrails, and a defined answer for what happens when the model is wrong. I'm finishing a Computer Information Systems degree at the University of South Carolina.",
+  // The story: how the judgment got built, told through what broke
   story: [
-    "I'm originally from Washington, DC. Today I work at GovCIO on the Department of Veterans Affairs modernization program: processing and validating IRS documents on a digitization pipeline that moves 2 million images a day, under an active Public Trust credential with the U.S. Department of the Treasury.",
-    "Outside the federal work I build across the whole spectrum of the web. I've shipped scroll-driven 3D worlds — a walk-through Red Sox clubhouse museum and a photoreal globe that flies between 18 pinned cities from my semester in Florence — plus two multiplayer browser games with real-time rooms and hands-free computer-vision controls, and demo redesigns for local businesses, from a coastal restaurant to a medical group.",
-    'I stay sharp through fitness, sports, visual effects and editing, and engaging with movies, podcasts, and books that keep me curious and always learning.',
+    'The first thing I ever shipped was a static portfolio in hand-written HTML, CSS, and JavaScript. What stuck was not the code, it was the habit of putting work on a public URL where it either runs or it does not. Browser games came next, and they turned out to be a systems problem in a costume: a simulation loop pinned to a fixed 60Hz step and fully decoupled from rendering, and authoritative state that lives on the server because a client you do not control will always lie to you.',
+    'Most of the architecture I am proud of started as something breaking. Unbounded process forking took an 8GB machine down more than once, so model inference now runs behind a FIFO semaphore capped at 2 concurrent processes. Concurrent writes started failing at boot, so the database moved to WAL journaling with a 5-second busy timeout. None of that came from a tutorial. Each one came from a system failing in a specific way and forcing a specific decision.',
+    "The failure modes that interest me now are the ones nobody is awake for. A laptop sleeps through a scheduled run, so a sweep re-parses every agent's cron expression every 10 minutes and replays whatever was missed, with a 45-minute slack window so a recovery never races the live slot and an errored run never sets off a retry storm. That is the direction I am pointed: AI systems and workflow automation, where the hard part is not the prompt, it is everything that has to hold when the prompt is wrong.",
   ],
   // Things people should know about how you work
   values: [
-    { title: 'Ship it live', text: 'Nothing stays on localhost. Everything I build ends up deployed on a real URL — GitHub Pages, edge compute, live multiplayer rooms.' },
-    { title: 'Details matter', text: 'Detail-oriented and consistent: the 1% of polish is what makes work feel premium.' },
-    { title: 'Always learning', text: 'Pursuing Azure (AZ-104, AZ-900), CompTIA Security+ and Network+ certifications.' },
+    {
+      title: 'Security by construction',
+      text: 'The auth gate is mounted before any route is declared, so a new endpoint physically cannot ship unauthenticated. There is deliberately no localhost bypass either, because Tailscale terminates TLS on the same machine and a 127.0.0.1 exemption would have quietly turned auth off across the whole network.',
+    },
+    {
+      title: 'Fewer moving parts',
+      text: "Storage is Node's built-in SQLite: 12 tables, 7 indexes, no ORM, no native builds, nothing to migrate. The LLM runs with MCP disabled, so its tool surface is exactly the code I wrote and nothing else.",
+    },
+    {
+      title: 'Make the next one cheap',
+      text: 'The framework matters more than any single feature. Every agent inherits scheduling, persistence, and live log streaming from a shared base, so adding another one is one file and one line in a registry.',
+    },
   ],
 }
 
 /* ----------------------------- INTERESTS -------------------------------- */
+// EXACTLY 6 items: the CRT screen in pages/Interests.jsx is a hardcoded 3x2 grid.
+// Titles must stay under ~15 characters or the label wraps to two lines, and
+// `text` must stay under ~195 characters: .crt-window-body is overflow:hidden
+// with no scroll, so anything longer gets clipped at both ends.
 export const interests = [
-  { title: 'Cinematic 3D on the Web', text: 'Scroll-driven Three.js worlds: a walk-through Red Sox clubhouse museum with 20+ GSAP-choreographed camera stops, and a photoreal globe that flies low over the terrain between 18 pinned weekend trips.', emoji: '🧊' },
-  { title: 'Realtime Multiplayer Systems', text: 'Built two browser games on Cloudflare Durable Objects for authoritative, low-latency multiplayer state. No traditional backend, just edge compute.', emoji: '🎮' },
-  { title: 'Computer Vision Interfaces', text: 'Both of my games are playable with bare hands through MediaPipe tracking: swing a bat by crossing your wrist over midline, steer a kart with your hands, or have the camera count your workout reps.', emoji: '🖐️' },
-  { title: 'Creative Media Pipelines', text: 'ffmpeg audio surgery, Blender-rendered 3D commercials, AI-generated asset packs locked to a single style formula, and video textures playing inside live 3D scenes — code and content in one workflow.', emoji: '🎬' },
-  { title: 'Full-Stack Breadth', text: 'Comfortable moving between vanilla JS/Three.js game clients, React/Vite sites, Node/Express backends, and pixel-perfect static sites for local businesses in the same week.', emoji: '🧩' },
-  { title: 'Gym & Fitness', text: 'Staying active, planning my days, and daily workouts keep me consistent, motivated, and determined in all aspects.', emoji: '💪' },
+  {
+    title: 'Local-First AI',
+    text: "I like systems that still work with the network unplugged. My dashboard's gesture control ships its own wasm runtime and model, so no camera frame ever leaves the machine.",
+    emoji: '🧠',
+  },
+  {
+    title: 'Live Telemetry',
+    text: 'Refreshing a page to learn what happened is a design failure. My Server-Sent Events hub pushes agent status and logs the instant they exist, with heartbeats so proxies never kill the stream.',
+    emoji: '📡',
+  },
+  {
+    title: 'Agent Memory',
+    text: 'After each run an agent distills what it learned into durable facts in a deduplicated table the whole fleet reads. The hard part is not storage, it is deciding what is worth keeping.',
+    emoji: '🗃️',
+  },
+  {
+    title: 'API Plumbing',
+    text: 'Gmail over IMAP and SMTP, Shopify, Etsy OAuth, Printify, Facebook Graph, OpenStreetMap. Each has its own idea of auth, pagination, and errors, and making them behave like one system is the job.',
+    emoji: '🔌',
+  },
+  {
+    title: 'Fallback Paths',
+    text: 'Every build gets an answer for what happens when the good path is gone. One site runs off a manifest that degrades video to a still image to a CSS gradient, and stays shippable either way.',
+    emoji: '🪜',
+  },
+  {
+    title: 'Accessibility',
+    text: 'One build ships a real accessibility panel: text scaling, high contrast, reduced motion, underlined links. Every gesture input I ship also has a keyboard and touch equivalent from day one.',
+    emoji: '♿',
+  },
 ]
 
 /* ------------------------------- SKILLS --------------------------------- */
@@ -121,36 +159,36 @@ export const skills = {
 // private: true = runs on a private server; the modal shows a PRIVATE badge instead of a link.
 export const projects = [
   {
-    title: 'Casa Cavallino — A Private Ferrari Residence',
+    title: 'Casa Cavallino: A Private Ferrari Residence',
     year: '2026',
     category: 'Cinematic Web · AI Film',
-    blurb: 'A scroll-scrubbed cinematic flythrough of a fictional Ferrari mansion on the Amalfi Coast — the whole site is one continuous generated camera flight.',
+    blurb: 'A scroll-scrubbed cinematic flythrough of a fictional Ferrari mansion on the Amalfi Coast. The whole site is one continuous generated camera flight.',
     description:
-      "A luxury-brand-film website where scrolling flies you through an entire estate: fifteen AI-generated flythrough clips chained room to room — coast approach, infinity pool, a pivot door that swings open as you enter, family room, kitchen, primary suite, a Ferrari apparel wardrobe, guest suites, a racing-sim lounge — down to a keypad-locked underground collection (the code is Ferrari's founding year), a vintage 'La Storia' wing with a 250 GT and F40, and a cliff tunnel that bursts out into the night. On desktop, scroll position drives video frames directly through all-keyframe encodes; phones get play-through clips with matched hold frames. Twelve-car spotlight configurator with specs and collector notes, synthesized ocean ambience, full keyboard/reduced-motion accessibility. Every still and film clip generated with Higgsfield (Cinema Studio + Seedance) from one locked art direction. Next.js static export on GitHub Pages.",
+      "A luxury-brand-film website where scrolling flies you through an entire estate: fifteen AI-generated flythrough clips chained room to room, from the coast approach and infinity pool through a pivot door that swings open as you enter, the family room, kitchen, primary suite, a Ferrari apparel wardrobe, guest suites and a racing-sim lounge, down to a keypad-locked underground collection (the code is Ferrari's founding year), a vintage 'La Storia' wing with a 250 GT and F40, and a cliff tunnel that bursts out into the night. The engineering underneath is a media manifest that degrades every scene from video to a still image to a CSS gradient, so the site stayed navigable and shippable before a single final asset existed. On desktop, scroll position drives video frames directly through all-keyframe encodes; phones get play-through clips with matched hold frames. Twelve-car spotlight configurator with specs and collector notes, synthesized ocean ambience, full keyboard and reduced-motion accessibility. Every still and film clip generated with Higgsfield (Cinema Studio and Seedance) from one locked art direction. Next.js static export on GitHub Pages.",
     tags: ['Next.js', 'GSAP + Lenis', 'Scroll-scrubbed video', 'Higgsfield AI'],
     media: asset('casa-cavallino.jpg'),
     url: 'https://ethan-goldstein.github.io/casa-cavallino/',
   },
   {
-    title: 'WALLPR — Wallpaper Storefront',
+    title: 'WALLPR: Wallpaper Storefront',
     year: '2026',
     category: 'E-commerce · Web',
     blurb: 'A minimal one-page hero store selling impasto-painted wallpapers as instant digital downloads.',
     description:
-      'A single-viewport storefront for AI-assisted oil-painting wallpapers: a non-scrollable hero of four expanding category panels (Sports, Places, Lifestyle, Animals) that open per-category galleries rendered from one product manifest. Checkout is fully outsourced to a merchant-of-record provider — hosted overlay checkout, global sales tax/VAT, and secure expiring download delivery — so the static site holds zero secrets and touches zero payment data. Locked-down CSP, no cookies, no trackers, full-res files never leave the delivery vault. Pure HTML/CSS/JS, no build step, deployed on GitHub Pages.',
+      'A single-viewport storefront for AI-assisted oil-painting wallpapers: a non-scrollable hero of four expanding category panels (Sports, Places, Lifestyle, Animals) that open per-category galleries rendered from one product manifest. Checkout is fully outsourced to a merchant-of-record provider, which means hosted overlay checkout, global sales tax and VAT handling, and secure expiring download delivery, so the static site holds zero secrets and touches zero payment data. Per-page Content Security Policy locks script, frame, and connect sources to a known allowlist. No cookies, no trackers, no PII collected, and full-resolution originals never enter source control. Pure HTML, CSS, and JavaScript, no build step, deployed on GitHub Pages. Its catalog is restocked by an agent in Mission Control that paints new pieces and commits them straight into this repo.',
     tags: ['HTML/CSS/JS', 'E-commerce', 'Merchant of Record', 'Higgsfield AI'],
     media: asset('wallpr.jpg'),
     url: 'https://wallpr.us/',
   },
   {
-    title: 'Mission Control: 9-Agent AI Platform',
+    title: 'Mission Control: 11-Agent AI Platform',
     year: '2026',
     category: 'AI · Full-Stack',
-    blurb: 'Nine autonomous AI agents. One self-hosted command center. Running 24/7 on hardware I own.',
+    blurb: 'Eleven autonomous AI agents. One self-hosted command center. Running 24/7 on hardware I own.',
     description:
-      'A platform I designed and built end to end: a Node.js/Express orchestrator drives nine persona-driven agents on cron schedules, server-sent events stream every heartbeat into a React + TypeScript dashboard, and SQLite persists every run. The intelligence is a locally hosted LLM (Llama 3.2 via Ollama), zero API cost, zero data leaving the machine, with a shared long-term memory every agent reads and writes, plus hands-free voice control through the Web Speech API. Ships as a macOS background service, survives reboots, and is reachable from my phone over Tailscale. The agents run email triage, lead generation, cold outreach, e-commerce, content production, finance analytics, and a daily mastermind briefing.',
-    tags: ['Node.js', 'React', 'TypeScript', 'Ollama · Llama 3.2', 'SQLite', 'SSE'],
-    media: asset('mission-control.jpg'),
+      "Eleven named agents that actually do the work of a small business, running unattended on hardware I own. Bruce triages Gmail over IMAP and ranks what matters. Larry finds businesses with no website or an outdated one through OpenStreetMap Overpass and Nominatim. Pure researches Fiverr demand from public signals and hands off on completion to Virtue, who drafts the gig copy, pricing, and thumbnail. Trinity runs three Etsy storefront lanes through Printify and the Etsy Open API. Monet paints oil-style wallpapers and commits them straight into the wallpr.us repo, which wakes Draper to write the social post. Scorsese renders vertical promos with ffmpeg, Mirsky parses bank statements, Parker scouts products, and Mom assembles the whole fleet into one morning brief. Underneath: a Node and Express ESM core, node:sqlite in WAL mode with no ORM, a custom Server-Sent Events hub feeding a React and TypeScript dashboard, and a two-tier LLM dispatcher that runs a headless Claude Code CLI first and fails over to a local Ollama model behind a 10-minute circuit breaker. Nothing reaches the outside world without passing a single approval queue where risky lanes always need a human tap. Zero-dependency HMAC session auth, a sleep-proof cron catch-up sweep, self-distilling long-term memory, hands-free gesture control on a locally vendored model, and an installable PWA reachable from my phone over Tailscale.",
+    tags: ['Node.js', 'React', 'TypeScript', 'node:sqlite', 'SSE', 'Claude + Ollama'],
+    media: asset('mission-control.mp4'),
     url: '',
     private: true,
   },
@@ -158,9 +196,9 @@ export const projects = [
     title: 'Speech Developmental Services',
     year: '2026',
     category: 'Client Work · Web',
-    blurb: 'A dimensional, scroll-driven site for a pediatric speech-language pathologist — opened by a 3D pen drawing her logo in ink.',
+    blurb: 'A dimensional, scroll-driven site for a pediatric speech-language pathologist, opened by a 3D pen drawing her logo in ink.',
     description:
-      'A professional single-page site for Speech Developmental Services (Shana Kilcawley, CCC-SLP), a pediatric speech therapy practice in Arlington, VA. The 3-second intro is a custom stroke-drawing engine: her logo is auto-traced into vector contours (marching squares over the PNG) and a three.js fountain pen draws the outline in real time before it crossfades into the periwinkle mark. Inside, a second three.js scene floats soft glass orbs behind the hero with scroll parallax, and the whole page moves on scroll — a gradient progress bar, 3D card entrances, and a step timeline that fills as you read. Glass chips, aurora-lit dark contact panel, scrollspy nav, and a copy-email button round out the UI. Built with React + Vite and deployed on GitHub Pages.',
+      'Real client work: the live site for Speech Developmental Services (Shana Kilcawley, CCC-SLP), a pediatric speech therapy practice serving Arlington, VA and telehealth clients across four states. The 3-second intro is a custom stroke-drawing engine: her logo is auto-traced into vector contours with marching squares over the PNG, and a three.js fountain pen draws the outline in real time before it crossfades into the periwinkle mark. It is code-split so it never weighs down the main bundle, skippable, and fully reduced-motion aware. Inside, a second three.js scene floats soft glass orbs behind the hero with scroll parallax, and the whole page moves on scroll: a gradient progress bar, 3D card entrances, and a step timeline that fills as you read. Every line of copy is driven from a single content file so the owner can edit her own site without ever touching a component. React 18 and Vite, deployed through GitHub Actions to Pages.',
     tags: ['React', 'Three.js', 'Framer Motion', 'Vite'],
     media: asset('speech-developmental-services.jpg'),
     url: 'https://ethan-goldstein.github.io/speech-developmental-services/',
@@ -169,9 +207,9 @@ export const projects = [
     title: 'HAYMAKER: Rise Through the Ranks',
     year: '2026',
     category: 'Game · WebGL',
-    blurb: 'A first-person boxing game you can literally punch your way through - webcam, controller, keyboard, or touch.',
+    blurb: 'A first-person boxing sim you can literally punch your way through: webcam, controller, keyboard, or touch.',
     description:
-      'A first-person 3D boxing sim in the browser: a career mode where you create a boxer and climb from rank #20 to a Vegas title fight (with purses, training camps, and title defenses), plus a freeplay mode with an 8-fighter roster, 5 arenas, and selectable 1/3/5/8/12-round bouts. Real boxing systems - breakable guard, slips, ducks, counters, stamina, knockdowns with a 10-count mash, and three judges scoring to a decision. All four input methods are first-class, including fully in-browser MediaPipe hand tracking so you throw real punches at the camera. Every portrait, arena, and sound was generated with Higgsfield under one locked art direction.',
+      'A first-person 3D boxing sim in the browser, and a study in simulation design: the fight loop runs on a fixed 60Hz timestep fully decoupled from rendering, so scoring, stamina drain, and knockdown counts stay deterministic no matter what frame rate the machine can hold. On top of that sit real boxing systems: breakable guard, slips, ducks, counters, stamina, knockdowns with a 10-count mash, and three judges scoring to a decision. Career mode has you create a boxer and climb from rank #20 to a Vegas title fight with purses, training camps, and title defenses; freeplay adds an 8-fighter roster, 5 arenas, and selectable 1, 3, 5, 8, or 12-round bouts. All four input methods are first-class and degrade cleanly into each other, including fully in-browser MediaPipe hand tracking so you throw real punches at the camera and never touch a key. Every portrait, arena, and sound was generated with Higgsfield under one locked art direction.',
     tags: ['Three.js', 'MediaPipe', 'WebGL', 'Higgsfield AI'],
     media: asset('haymaker.jpg'),
     url: 'https://ethan-goldstein.github.io/haymaker-boxing/',
@@ -182,7 +220,7 @@ export const projects = [
     category: 'Game · WebGL',
     blurb: 'An 8-mode baseball game playable with a keyboard, touch, a PS4 controller, or your bare hands.',
     description:
-      'A full browser-based baseball game: My Career, Home Run Derby, Dynasty card packs, Batting Practice, Fielding, a strength/drills mode called The Forge, and quick mini-games, plus real-time multiplayer rooms. Built in vanilla JS and Three.js with a Cloudflare Durable Object powering the multiplayer backend, and MediaPipe pose tracking for fully hands-free play.',
+      'A full browser-based baseball game across eight modes: My Career, Home Run Derby, Dynasty card packs, Batting Practice, Fielding, a strength and drills mode called The Forge, quick mini-games, and real-time multiplayer rooms. The multiplayer runs server-authoritative on a Cloudflare Durable Object, so game state lives at the edge rather than in any client, which is the only honest way to run a competitive room when you do not control the browser on the other end. There is no traditional backend and no server to keep alive. Built in vanilla JavaScript and Three.js on a fixed-timestep simulation, with MediaPipe pose tracking for fully hands-free play: cross your wrist over midline and the bat swings.',
     tags: ['Three.js', 'Cloudflare Durable Objects', 'MediaPipe', 'WebGL'],
     media: asset('golden-spikes.jpg'),
     url: 'https://ethan-goldstein.github.io/golden-spikes/',
@@ -193,18 +231,18 @@ export const projects = [
     category: 'Game · WebGL',
     blurb: 'An 8-player kart racer with real-time multiplayer rooms and four ways to play.',
     description:
-      'A Mario-Kart-style browser racer: 8 racers, 4 karts, a 4-track Grand Prix, and 7 items to fight for position. Realtime multiplayer runs on a Cloudflare Durable Object with AI fill and a solo fallback, and it supports keyboard, gamepad, touch, and hands-free MediaPipe hand tracking.',
+      'A kart racer built as a lesson in graceful degradation: 8 racers, 4 karts, a 4-track Grand Prix, and 7 items to fight for position. Realtime multiplayer runs server-authoritative on a Cloudflare Durable Object, and when a room cannot fill it backfills with AI drivers and falls all the way back to a solo race rather than showing anyone an error. Four input paths are equal citizens, keyboard, gamepad, touch, and hands-free MediaPipe hand tracking where you steer with your palms, and every one of them resolves to the same input abstraction so the physics never knows which is driving.',
     tags: ['Three.js', 'Cloudflare Durable Objects', 'MediaPipe', 'WebGL'],
     media: asset('turbo-rumble-gp.jpg'),
     url: 'https://ethan-goldstein.github.io/turbo-rumble-gp/',
   },
   {
-    title: 'AM — Apple Music Concept',
+    title: 'AM: Apple Music Concept',
     year: '2026',
     category: 'UX/UI · Audio',
-    blurb: 'A glassy, Apple-style music home built from my real playlists — every preview synthesized in-browser.',
+    blurb: 'A glassy, Apple-style music home built from my real playlists, with every preview synthesized in-browser.',
     description:
-      'An unofficial Apple Music fan concept that opens on an AI-generated cinematic reveal (Higgsfield) and lands in a glassmorphic personal music home: four station mixes built from my real synced playlists (house, classy, country, and a rap library), a Listen Now player whose color tint follows the track across the whole page, a searchable library of 480+ real track listings, tilt-and-gloss album tiles, a Higgsfield-generated 3D studio room, and a floating mini-player dock. Every preview is procedurally synthesized with the Web Audio API — no recordings, nothing for sale.',
+      'An unofficial Apple Music fan concept that opens on an AI-generated cinematic reveal (Higgsfield) and lands in a glassmorphic personal music home: four station mixes built from my real synced playlists (house, classy, country, and a rap library), a Listen Now player whose color tint follows the track across the whole page, a searchable library of 480+ real track listings, tilt-and-gloss album tiles, a Higgsfield-generated 3D studio room, and a floating mini-player dock. The licensing problem became the interesting constraint: rather than ship a single audio file, every preview is procedurally synthesized at runtime with the Web Audio API, so there are no recordings anywhere in the project and nothing is for sale.',
     tags: ['Web Audio API', 'JavaScript', 'Higgsfield AI', 'model-viewer 3D'],
     media: asset('apple-music.webm'),
     url: 'https://ethan-goldstein.github.io/AppleMusic/',
@@ -215,7 +253,7 @@ export const projects = [
     category: 'UX/UI · 3D',
     blurb: 'A photoreal 3D globe trip tracker mapping 18 weekends across a semester in Florence.',
     description:
-      'An interactive photoreal globe tracking a full study-abroad semester: 109 days, 8 countries, 20+ cities, 18 weekend trips, each pinned to the map with its own story. Built with React, Three.js, and GSAP/Lenis for smooth scroll-driven travel between stops.',
+      'An interactive photoreal globe tracking a full study-abroad semester: 109 days, 8 countries, 20+ cities, 18 weekend trips, each pinned to the map with its own story. Scroll drives a camera that flies low over real terrain from one stop to the next, with GSAP and Lenis smoothing the travel and every leg interpolated on the sphere so the path curves the way a flight actually would. Built with React, Three.js, and Vite.',
     tags: ['React', 'Three.js', 'GSAP', 'Vite'],
     media: asset('abroad-globe.jpg'),
     url: 'https://ethan-goldstein.github.io/abroad/',
@@ -226,7 +264,7 @@ export const projects = [
     category: 'UX/UI · 3D',
     blurb: '125 years of Red Sox history, told from inside a scroll-animated 3D clubhouse.',
     description:
-      'A scroll-driven 3D museum experience walking through Red Sox history, from the Green Monster to retired numbers to championship years, built with React, Three.js, and GSAP-driven scroll choreography for a cinematic, walk-through feel.',
+      'A scroll-driven 3D museum walking through 125 years of Red Sox history, from the Green Monster to retired numbers to championship years. The whole experience is one continuous camera path with 20+ choreographed stops, where scroll position is the only timeline and GSAP owns every transition, so the visitor never loses the thread of where they are in the room. Built with React, Three.js, and Lenis.',
     tags: ['React', 'Three.js', 'GSAP', 'Lenis'],
     media: asset('fenway.jpg'),
     url: 'https://ethan-goldstein.github.io/REDSOX/',
@@ -237,7 +275,7 @@ export const projects = [
     category: 'E-commerce · 3D',
     blurb: 'A cinematic concept showroom with an interactive 3D R8 and a filterable nine-car lineup.',
     description:
-      'A fan-concept design study of the Audi universe: the landing hero renders an interactive, Draco-compressed 3D R8 in real time via model-viewer, backed by animated spec counters and smooth-scroll choreography. The showroom is one filterable space — sedans, SUVs, and the e-tron era — feeding a localStorage-driven “garage” that tallies a virtual collection. A pure front-end study in cinematic e-commerce; nothing is for sale.',
+      'A fan-concept design study of the Audi universe: the landing hero renders an interactive, Draco-compressed 3D R8 in real time via model-viewer, backed by animated spec counters and smooth-scroll choreography. The showroom is one filterable space covering sedans, SUVs, and the e-tron era, feeding a localStorage-driven "garage" that tallies a virtual collection across visits with no account and no backend. A pure front-end study in cinematic e-commerce. Nothing is for sale.',
     tags: ['HTML', 'CSS', 'JavaScript', 'model-viewer 3D'],
     media: asset('audi-showroom.png'),
     url: 'https://ethan-goldstein.github.io/Audi/',
@@ -246,9 +284,9 @@ export const projects = [
     title: 'Oakridge Medical Group',
     year: '2026',
     category: 'Web Design · Client Demo',
-    blurb: 'A modern medical-practice site demo — appointments, providers, patient portal, the full small-business treatment.',
+    blurb: 'A spec build for a medical practice: appointments, providers, patient portal, and a real accessibility panel.',
     description:
-      'A polished healthcare website for a fictional family practice in Alexandria, VA, built as a client-style demo: appointment booking, provider profiles, services, patient portal and prescription-refill entry points, insurance verification, FAQ, and an emergency banner — everything a real practice needs, presented with a calm, trustworthy design.',
+      'A spec build I produce to win healthcare clients, for a fictional family practice in Alexandria, VA: appointment booking, provider profiles, services, patient portal and prescription-refill entry points, insurance verification, FAQ, and an emergency banner. The part I care about is the genuine user-facing accessibility panel: text scaling, high contrast, reduced motion, and underlined links, all controlled by the visitor rather than decided once by me, alongside dark mode, scrollspy navigation, and focus-trapped modals. Healthcare is exactly where that should not be an afterthought.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Client Demo'],
     media: asset('oakridge-medical.png'),
     url: 'https://ethan-goldstein.github.io/Oakridge-Medical/',
@@ -257,9 +295,9 @@ export const projects = [
     title: 'The Drift House',
     year: '2026',
     category: 'Web Design · Client Demo',
-    blurb: 'A coastal-kitchen restaurant site built as a client-style demo — sunset vibes, oyster bar, full booking flow.',
+    blurb: 'A coastal-kitchen restaurant site built as a spec build: sunset vibes, oyster bar, full booking flow.',
     description:
-      'A complete restaurant website for a fictional coastal kitchen in Seabrook, SC, built as a client-style demo for my web-design business: cinematic hero, full menu and cocktail list, private events and catering sections, a reservation flow, and gift cards. Designed to show a small business exactly what their site could feel like — warm, editorial, and conversion-focused.',
+      'A complete restaurant website for a fictional coastal kitchen in Seabrook, SC, produced as a spec build to win hospitality clients: cinematic hero, full menu and cocktail list, private events and catering sections, a reservation flow, and gift cards. The point of a spec build is that a small business owner should not have to imagine what their site could feel like, so this one is finished to the same standard as paid work: warm, editorial, and built around the two actions that actually make a restaurant money.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Client Demo'],
     media: asset('drift-house.png'),
     url: 'https://ethan-goldstein.github.io/Drift-House/',
@@ -270,9 +308,9 @@ export const projects = [
     category: 'AI · Web',
     blurb: 'A virtual personal trainer with a sleek, futuristic interface. The future is here.',
     description:
-      'Coach AI is a virtual personal trainer built with HTML, CSS, and JavaScript, featuring a unique, modern interface with interactive 3D elements built in Spline for a polished, immersive experience.',
+      'A virtual personal trainer, and the first thing I built where the interface had to carry the product. Workout generation, plan structure, and progress framing sit behind a dark futuristic UI with interactive 3D elements composed in Spline, all on plain HTML, CSS, and JavaScript with no framework and no build step. Looking back it is the project where I started caring about how a thing feels to use rather than only whether it works, which is the habit everything after it is built on.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
-    media: asset('CoachAI.png'),
+    media: asset('CoachAI.jpg'),
     url: 'https://ethan-goldstein.github.io/CoachAI/',
   },
   {
@@ -281,9 +319,9 @@ export const projects = [
     category: 'My First Project',
     blurb: 'Where it all started: my first ever project, a fully responsive portfolio with a clean, modern interface.',
     description:
-      'The first project I ever built and shipped: a fully responsive website in HTML, CSS, and JavaScript, featuring a clean, modern user interface with unique layouts and simple navigation. It includes well-structured content, interactive components, and GitHub integration — the site that started everything.',
+      'The first project I ever built and shipped: a fully responsive site in hand-written HTML, CSS, and JavaScript, with a clean modern interface, unique layouts, simple navigation, interactive components, and GitHub integration. No framework, no build step, no tutorial to copy. What it actually taught me was not syntax, it was the habit of pushing work to a public URL where it either runs or it does not, and everything on this site descends from that.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
-    media: asset('Portfolio.png'),
+    media: asset('Portfolio.jpg'),
     url: 'https://ethan-goldstein.github.io/Protfolio-Old/',
   },
 ]
@@ -305,14 +343,15 @@ export const experience = {
     },
     {
       role: 'AI & Workflow Automation Engineer',
-      org: 'Independent, built with Claude Code',
+      org: 'Independent Practice',
       period: '2025 - Present',
       location: 'Remote',
       points: [
-        'Architected Mission Control, a 9-agent AI platform on a locally hosted LLM with shared long-term memory, cron scheduling, and live SSE dashboards.',
-        'Integrated the Model Context Protocol (MCP) across dozens of tool ecosystems, from email and e-commerce to game deployment pipelines.',
-        'Shipped two multiplayer browser games (Three.js + Cloudflare Durable Objects) and this cinematic portfolio site.',
-        'Ran autonomous business agents in production: a cold-outreach pipeline (125 prospects, 97 sends) and a Shopify storefront agent.',
+        'Built the orchestration core behind Mission Control, a self-hosted 11-agent platform on a Node and Express ESM server, where agents run on cron schedules and also trigger each other on completion, so a research run hands straight off to the agent that acts on it.',
+        'Built a two-tier LLM dispatcher: a headless Claude Code CLI as the primary, a local Ollama llama3.2:3b as the always-on fallback, and a 10-minute persisted circuit breaker that reroutes on any timeout, rate limit, or missing binary.',
+        'Injected prompt-injection guardrails at a single chokepoint into every model call on both providers (fetched web content is data and never instructions, credentials are never echoed, outward-facing actions default to drafts) and routed every outbound action through one egress queue where risky lanes always require a human tap and no toggle can override that.',
+        'Made automated outreach defensible by design: per-lane daily caps dripped across staggered windows instead of bursts, randomized send jitter, DNS MX pre-validation that fails open so a flaky lookup never burns a real address, and an IMAP bounce loop that retires dead addresses the same day.',
+        'Shipped it as a service rather than a script: a launchd daemon that survives reboots, reachable only over Tailscale Serve TLS with no public port, and an installable PWA whose service worker never caches an authenticated route.',
       ],
     },
     {

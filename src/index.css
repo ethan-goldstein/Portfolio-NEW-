@@ -949,7 +949,7 @@ body.home-lock { overflow: hidden; height: 100vh; }
   background: rgba(12, 10, 20, 0.96);
   border: 1px solid rgba(160, 120, 255, 0.4);
   border-radius: 18px;
-  overflow: hidden; /* clips to the radius — the BODY column scrolls, not the card */
+  overflow: hidden; /* clips to the radius, the BODY column scrolls, not the card */
 }
 .folio-card-media { position: relative; min-height: 240px; background: #0a0a0c; }
 .folio-card-media img, .folio-card-media video, .folio-card-media .ring-ph { width: 100%; height: 100%; object-fit: cover; min-height: 240px; }
@@ -965,10 +965,10 @@ body.home-lock { overflow: hidden; height: 100vh; }
 }
 .folio-card-body::-webkit-scrollbar { width: 6px; }
 .folio-card-body::-webkit-scrollbar-thumb { background: rgba(160, 120, 255, 0.35); border-radius: 6px; }
-/* AFTER the base .folio-card-body rule — same specificity, so source order decides */
+/* AFTER the base .folio-card-body rule, same specificity, so source order decides */
 @media (max-width: 720px) {
   .folio-card { grid-template-columns: 1fr; max-height: 92vh; max-height: 92dvh; overflow: auto; }
-  /* on mobile the whole card scrolls — don't nest a second scroller */
+  /* on mobile the whole card scrolls, so don't nest a second scroller */
   .folio-card-body { max-height: none; overflow: visible; }
 }
 .folio-card-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1; margin: 0.3rem 0; }
@@ -1298,41 +1298,118 @@ img.bgd-video.kenburns { animation: bgdKenburns 30s ease-in-out infinite alterna
 .me-photo-ph span { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.55rem; line-height: 1.6; }
 .me-name { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; font-size: clamp(2rem, 6vw, 3.6rem); color: #fff; }
 .me-role { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.72rem; color: var(--fg-dim); }
-.me-socials { display: flex; gap: clamp(0.55rem, 2vw, 0.9rem); flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
-.me-social {
-  position: relative; overflow: hidden;
-  width: 56px; height: 56px; border-radius: 999px;
-  display: grid; place-items: center; cursor: none;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22),
-              0 0 16px -6px var(--brand-color, rgba(255, 255, 255, 0.35));
-  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+/* --- futuristic HUD social nodes ------------------------------------- --
+   Each link is a hexagonal node: a conic "energy rim" rotates underneath an
+   inner glass plate that masks it down to a 1.5px outline, with a targeting
+   reticle and a scanline sweep on hover. Colors come from --brand-color /
+   --brand-color-2, set per platform in pages/Contact.jsx.
+   The rim spins by interpolating --hud-angle, which needs @property; where
+   that is unsupported the rim simply renders static, which is fine.        */
+@property --hud-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }
-/* glossy top highlight */
+
+.me-socials { display: flex; gap: clamp(0.6rem, 2.2vw, 1.05rem); flex-wrap: wrap; justify-content: center; margin-top: 0.65rem; }
+.me-social {
+  --hex: polygon(50% -1%, 94% 24%, 94% 76%, 50% 101%, 6% 76%, 6% 24%);
+  --bc: var(--brand-color, #fff);
+  --bc2: var(--brand-color-2, var(--brand-color, #fff));
+  position: relative; isolation: isolate;
+  width: 60px; height: 60px;
+  display: grid; place-items: center; cursor: none;
+  /* clip-path swallows box-shadow, so the glow is a drop-shadow filter */
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--bc) 26%, transparent));
+  transition: transform 0.3s var(--ease), filter 0.3s var(--ease);
+}
+/* rotating energy rim */
+.me-social::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  clip-path: var(--hex);
+  background: conic-gradient(from var(--hud-angle),
+              color-mix(in srgb, var(--bc) 88%, #fff) 0deg,
+              transparent 70deg,
+              color-mix(in srgb, var(--bc2) 82%, #fff) 150deg,
+              transparent 220deg,
+              color-mix(in srgb, var(--bc) 88%, #fff) 300deg,
+              transparent 360deg);
+  animation: hudSpin 6s linear infinite, hudBreathe 3.4s ease-in-out infinite;
+}
+/* targeting reticle: four corner brackets, snap outward on hover */
 .me-social::before {
   content: '';
-  position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-  background: radial-gradient(120% 90% at 50% -10%, rgba(255, 255, 255, 0.32), transparent 55%);
+  position: absolute; inset: -3px; z-index: 3; pointer-events: none;
+  opacity: 0; transform: scale(0.82);
+  transition: opacity 0.28s var(--ease), transform 0.28s var(--ease), inset 0.28s var(--ease);
+  background:
+    linear-gradient(var(--bc) 0 0) left 0 top 0 / 9px 1.5px no-repeat,
+    linear-gradient(var(--bc) 0 0) left 0 top 0 / 1.5px 9px no-repeat,
+    linear-gradient(var(--bc) 0 0) right 0 top 0 / 9px 1.5px no-repeat,
+    linear-gradient(var(--bc) 0 0) right 0 top 0 / 1.5px 9px no-repeat,
+    linear-gradient(var(--bc2) 0 0) left 0 bottom 0 / 9px 1.5px no-repeat,
+    linear-gradient(var(--bc2) 0 0) left 0 bottom 0 / 1.5px 9px no-repeat,
+    linear-gradient(var(--bc2) 0 0) right 0 bottom 0 / 9px 1.5px no-repeat,
+    linear-gradient(var(--bc2) 0 0) right 0 bottom 0 / 1.5px 9px no-repeat;
+}
+/* inner glass plate: cuts the rim down to a thin hex outline */
+.me-social-hud {
+  position: absolute; inset: 1.5px; z-index: 2;
+  clip-path: var(--hex); overflow: hidden; pointer-events: none;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.015)),
+    radial-gradient(90% 70% at 50% 115%, color-mix(in srgb, var(--bc) 26%, transparent), transparent 72%),
+    #08080b;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+/* glossy crown */
+.me-social-hud::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(120% 80% at 50% -12%, rgba(255, 255, 255, 0.3), transparent 58%);
+}
+/* scanline, parked above the node until hover runs it through */
+.me-social-hud::after {
+  content: '';
+  position: absolute; left: 0; right: 0; top: -50%; height: 45%;
+  background: linear-gradient(to bottom, transparent,
+              color-mix(in srgb, var(--bc) 42%, transparent), transparent);
 }
 .me-social svg {
-  width: 50%; height: 50%;
-  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--brand-color, #fff) 45%, transparent));
+  position: relative; z-index: 4;
+  width: 46%; height: 46%;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--bc) 52%, transparent));
+  transition: transform 0.3s var(--ease);
 }
 .me-social:hover {
-  transform: translateY(-4px) scale(1.05);
-  border-color: color-mix(in srgb, var(--brand-color, #fff) 65%, transparent);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
-              0 0 28px -2px var(--brand-color, rgba(255, 255, 255, 0.5)),
-              0 0 28px -2px var(--brand-color-2, var(--brand-color, rgba(255, 255, 255, 0.5))),
-              0 10px 26px rgba(0, 0, 0, 0.45);
+  transform: translateY(-5px);
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--bc) 60%, transparent))
+          drop-shadow(0 0 34px color-mix(in srgb, var(--bc2) 40%, transparent));
 }
-.me-social:active {
-  transform: translateY(-2px) scale(0.96);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
-              0 0 38px 6px var(--brand-color, rgba(255, 255, 255, 0.6)),
-              0 0 38px 6px var(--brand-color-2, var(--brand-color, rgba(255, 255, 255, 0.6)));
+.me-social:hover::before { opacity: 1; transform: scale(1); inset: -7px; }
+.me-social:hover::after { animation-duration: 1.6s, 3.4s; }
+.me-social:hover .me-social-hud::after { animation: hudScan 0.9s var(--ease); }
+.me-social:hover svg { transform: scale(1.09); }
+.me-social:active { transform: translateY(-2px) scale(0.95); }
+
+@keyframes hudSpin { to { --hud-angle: 360deg; } }
+@keyframes hudBreathe { 0%, 100% { opacity: 0.72; } 50% { opacity: 1; } }
+@keyframes hudScan { from { top: -50%; } to { top: 105%; } }
+
+/* five 60px nodes plus gaps overflow a 375px viewport and wrap 4+1, which
+   orphans the last one. Shrink so the row always stays intact. */
+@media (max-width: 430px) {
+  .me-socials { gap: 0.45rem; }
+  .me-social { width: 52px; height: 52px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .me-social::after { animation: none; opacity: 0.9; }
+  .me-social:hover::after { animation: none; }
+  .me-social:hover .me-social-hud::after { animation: none; }
+  .me-social, .me-social:hover, .me-social:active { transform: none; }
+  .me-social:hover svg { transform: none; }
 }
 .me-email {
   margin-top: 0.4rem;

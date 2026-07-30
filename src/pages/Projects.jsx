@@ -135,7 +135,7 @@ export default function Projects() {
   }, [])
 
   // Lenis swallows wheel events page-wide, so pause it while the modal is
-  // open — otherwise the wheel scrolls the page behind the overlay and the
+  // open, otherwise the wheel scrolls the page behind the overlay and the
   // card body never scrolls.
   useEffect(() => {
     const lenis = lenisRef.current

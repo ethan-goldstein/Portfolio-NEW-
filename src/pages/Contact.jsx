@@ -2,14 +2,17 @@ import { motion } from 'framer-motion'
 import { profile, socials } from '../content/data'
 import { SOCIAL_ICONS } from '../components/SocialIcons'
 
-// Per-platform brand color, drives each icon's glossy glow.
+// Per-platform color pair [primary, accent]. Drives the rotating rim, the
+// targeting brackets, and the glow on each HUD node (see .me-social in
+// index.css). Second value is the chromatic counter-tone, not a brand color.
 const BRAND_COLORS = {
-  github: '#A78BFA',
-  x: '#1DA1F2',
-  linkedin: '#0A66C2',
-  gmail: '#EA4335',
-  tiktok: '#25F4EE',
+  github: ['#A78BFA', '#22D3EE'],
+  x: ['#1DA1F2', '#FFFFFF'],
+  linkedin: ['#0A66C2', '#38BDF8'],
+  gmail: ['#EA4335', '#FBBC04'],
+  tiktok: ['#25F4EE', '#FE2C55'],
 }
+const FALLBACK_COLORS = ['#FFFFFF', '#9CA3AF']
 
 export default function Contact() {
   return (
@@ -41,6 +44,7 @@ export default function Contact() {
         <div className="me-socials">
           {socials.map((s) => {
             const Icon = SOCIAL_ICONS[s.icon]
+            const [c1, c2] = BRAND_COLORS[s.icon] ?? FALLBACK_COLORS
             return (
               <a
                 key={s.label}
@@ -51,11 +55,10 @@ export default function Contact() {
                 aria-label={s.label}
                 title={s.label}
                 data-cursor="hover"
-                style={{
-                  '--brand-color': BRAND_COLORS[s.icon],
-                  ...(s.icon === 'tiktok' ? { '--brand-color-2': '#FE2C55' } : {}),
-                }}
+                style={{ '--brand-color': c1, '--brand-color-2': c2 }}
               >
+                {/* glass plate + gloss + scanline; purely decorative */}
+                <span className="me-social-hud" aria-hidden="true" />
                 {Icon ? <Icon /> : null}
               </a>
             )
