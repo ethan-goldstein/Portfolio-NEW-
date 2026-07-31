@@ -184,6 +184,18 @@ export const projects = [
     repoUrl: 'https://github.com/ethan-goldstein/Autonomous-OS',
   },
   {
+    title: 'NULLHYP: Quantitative Research Engine',
+    year: '2026',
+    category: 'Quant ML · TypeScript',
+    blurb: 'Every learning algorithm hand-written in TypeScript, built around the machinery that stops a backtest from lying to you. Runs in the browser.',
+    description:
+      "A quantitative research engine built on the premise that predicting price is the easy half and the hard half is knowing whether an apparent edge is real. The numerics are written from scratch with zero dependencies and run in a Web Worker in the visitor's own browser: 83 causal features across eleven families, fractional differentiation at the smallest exponent that passes an augmented Dickey-Fuller test so the series becomes stationary without losing all memory, CUSUM event sampling that cuts the sample by roughly four times because predicting every bar oversamples noise, and triple-barrier labelling where a profit target, a stop, and a time limit race and whichever is touched first decides the label. Validation was written before any model, deliberately. Plain K-fold is not merely imprecise on financial labels, it is wrong: a label at bar 100 with a ten day horizon is decided by returns the label at bar 105 also depends on, so putting one in train and the other in test writes the test answer on the training sheet, which alone lifts a no-edge strategy above a Sharpe of 1. Purging drops any training label whose lifespan overlaps the test window, and an embargo removes a further band afterward because rolling features reach backward into it. The part I am most pleased with is the lookahead audit: every feature is recomputed on the series truncated at bar t and must reproduce its own value at t, because a feature that peeked ahead cannot, since the bar it peeked at does not exist. That test found rolling helpers emitting on partial windows, and a fractional differencing family that was silently all NaN because the textbook truncation threshold needs a 3,700 term window on a 2,513 bar series. It also caught one of my own tests passing vacuously on exactly that bug. The data layer survived losing two providers mid-build, one to a proof-of-work bot wall and one to rate limiting, so it fails over across three sources and states on the page which adjustment the prices actually carry. The model and evaluation layers are still being built, and the site says so in plain language rather than filling the gaps with plausible numbers: no Sharpe ratio, no equity curve, and no overfitting statistic appears anywhere until they are measurements.",
+    tags: ['TypeScript', 'Web Workers', 'Zero-dependency ML', 'node:sqlite', 'Purged CV', 'Canvas'],
+    media: asset('nullhyp.jpg'),
+    url: 'https://ethan-goldstein.github.io/nullhyp/',
+    repoUrl: 'https://github.com/ethan-goldstein/nullhyp',
+  },
+  {
     title: 'Turbo Rumble GP',
     year: '2026',
     category: 'Game · WebGL',
