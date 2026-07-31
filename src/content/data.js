@@ -129,6 +129,7 @@ export const skills = {
     { name: 'JavaScript', icon: 'javascript/javascript-original' },
     { name: 'TypeScript', icon: 'typescript/typescript-original' },
     { name: 'Next.js', icon: 'nextjs/nextjs-original-wordmark' },
+    { name: 'C++', icon: 'cplusplus/cplusplus-original' },
     { name: 'HTML5', icon: 'html5/html5-original' },
     { name: 'CSS3', icon: 'css3/css3-original' },
     { name: 'SQL', icon: 'sqlite/sqlite-original' },
@@ -159,26 +160,16 @@ export const skills = {
 // private: true = runs on a private server; the modal shows a PRIVATE badge instead of a link.
 export const projects = [
   {
-    title: 'Casa Cavallino: A Private Ferrari Residence',
+    title: 'PARALLAX: Bitemporal Analytical Engine',
     year: '2026',
-    category: 'Cinematic Web · AI Film',
-    blurb: 'A scroll-scrubbed cinematic flythrough of a fictional Ferrari mansion on the Amalfi Coast. The whole site is one continuous generated camera flight.',
+    category: 'Systems · C++ / WebAssembly',
+    blurb: 'A C++20 analytical engine compiled to WebAssembly that answers what you believed at one time about another time. Runs entirely in the browser.',
     description:
-      "A luxury-brand-film website where scrolling flies you through an entire estate: fifteen AI-generated flythrough clips chained room to room, from the coast approach and infinity pool through a pivot door that swings open as you enter, the family room, kitchen, primary suite, a Ferrari apparel wardrobe, guest suites and a racing-sim lounge, down to a keypad-locked underground collection (the code is Ferrari's founding year), a vintage 'La Storia' wing with a 250 GT and F40, and a cliff tunnel that bursts out into the night. The engineering underneath is a media manifest that degrades every scene from video to a still image to a CSS gradient, so the site stayed navigable and shippable before a single final asset existed. On desktop, scroll position drives video frames directly through all-keyframe encodes; phones get play-through clips with matched hold frames. Twelve-car spotlight configurator with specs and collector notes, synthesized ocean ambience, full keyboard and reduced-motion accessibility. Every still and film clip generated with Higgsfield (Cinema Studio and Seedance) from one locked art direction. Next.js static export on GitHub Pages.",
-    tags: ['Next.js', 'GSAP + Lenis', 'Scroll-scrubbed video', 'Higgsfield AI'],
-    media: asset('casa-cavallino.jpg'),
-    url: 'https://ethan-goldstein.github.io/casa-cavallino/',
-  },
-  {
-    title: 'WALLPR: Wallpaper Storefront',
-    year: '2026',
-    category: 'E-commerce · Web',
-    blurb: 'A minimal one-page hero store selling impasto-painted wallpapers as instant digital downloads.',
-    description:
-      'A single-viewport storefront for AI-assisted oil-painting wallpapers: a non-scrollable hero of four expanding category panels (Sports, Places, Lifestyle, Animals) that open per-category galleries rendered from one product manifest. Checkout is fully outsourced to a merchant-of-record provider, which means hosted overlay checkout, global sales tax and VAT handling, and secure expiring download delivery, so the static site holds zero secrets and touches zero payment data. Per-page Content Security Policy locks script, frame, and connect sources to a known allowlist. No cookies, no trackers, no PII collected, and full-resolution originals never enter source control. Pure HTML, CSS, and JavaScript, no build step, deployed on GitHub Pages.',
-    tags: ['HTML/CSS/JS', 'E-commerce', 'Merchant of Record', 'Higgsfield AI'],
-    media: asset('wallpr.jpg'),
-    url: 'https://wallpr.us/',
+      "An analytical engine written in C++20 and compiled to WebAssembly, answering a question most databases cannot: what did we believe at system-time S about valid-time T. Two independent time axes, so a correction that arrives late does not erase what the record used to say. I wrote the query language end to end: lexer, parser, flat AST, and a cost-based planner with an EXPLAIN viewer. Storage is a columnar bitemporal store with zone maps and a SIMD scan kernel, indexed spatially by a Z-order curve because a range on that curve is a contiguous slice, which is what makes a bounding-box count two binary searches instead of a scan. On top sit entity resolution over real cross-agency duplicates, a CSR graph with k-hop and bidirectional shortest path, and a policy engine that refuses a query at plan time rather than filtering its output. That refusal is sound rather than a guess because two of the four cardinality estimators are exact, not approximate: system time is a monotone transaction id, and a Z-order range is contiguous. The correctness story is differential testing against a deliberately naive oracle written before the optimised version so it could not inherit its bugs, which caught an antimeridian box that inverted and silently matched nothing. The parser is continuously fuzzed in CI at 12.3 million executions per minute under ASan and UBSan. It runs on live seismic and maritime feeds with no backend, no API keys, and no login.",
+    tags: ['C++20', 'WebAssembly', 'Query planner', 'SIMD', 'libFuzzer', 'TypeScript'],
+    media: asset('parallax.jpg'),
+    url: 'https://ethan-goldstein.github.io/parallax/',
+    repoUrl: 'https://github.com/ethan-goldstein/parallax',
   },
   {
     title: 'Autonomous OS: Agent Orchestration Platform',
@@ -186,11 +177,22 @@ export const projects = [
     category: 'AI · Full-Stack',
     blurb: 'Eleven autonomous agents on a framework I built. Running 24/7 on hardware I own, with a human approval gate on every outbound action.',
     description:
-      "A self-hosted platform that runs eleven autonomous agents unattended, with a human approval gate standing between every agent and every action that reaches the outside world. The orchestration framework is open source; the fleet I run on it is not. Adding an agent is one file and one registry line: it inherits cron scheduling, SQLite persistence, live log streaming, and error capture from a shared base class. The model layer is a two-tier dispatcher, a headless Claude Code CLI first with a local Ollama fallback behind a 10-minute persisted circuit breaker, and inference capped at 2 concurrent processes on a FIFO semaphore after unbounded forking crashed an 8GB machine. Storage is Node's built-in SQLite with no ORM, moved to WAL journaling and a 5-second busy timeout after concurrent writes started failing boots. A hand-rolled Server-Sent Events hub streams state into a React and TypeScript dashboard, and a sleep-proof sweep re-parses every cron expression to replay whatever a sleeping machine missed. The part I care about most is the trust layer: prompt-injection guardrails injected at a single chokepoint into every model call, and one egress queue where risky lanes can never be auto-approved, checked before any setting is read. Zero-dependency HMAC session auth sits behind a gate mounted ahead of every route, with deliberately no localhost bypass. Ships as an installable PWA.",
+      "A self-hosted platform that runs eleven autonomous agents unattended, with a human approval gate standing between every agent and every action that reaches the outside world. The orchestration framework is open source; the fleet I run on it is not. Adding an agent is one file and one registry line: it inherits cron scheduling, SQLite persistence, live log streaming, and error capture from a shared base class. The model layer is a two-tier dispatcher, a headless Claude Code CLI first with a local Ollama fallback behind a 10-minute persisted circuit breaker, and inference capped at 2 concurrent processes on a FIFO semaphore after unbounded forking crashed an 8GB machine. Storage is Node's built-in SQLite with no ORM, moved to WAL journaling and a 5-second busy timeout after concurrent writes started failing boots. A hand-rolled Server-Sent Events hub streams state into a React and TypeScript dashboard, and a sleep-proof sweep re-parses every cron expression to replay whatever a sleeping machine missed. The part I care about most is the trust layer: one egress queue where risky lanes can never be auto-approved, checked before any setting is read, and every model call funnelled through a single chokepoint that treats fetched content as data. Zero-dependency HMAC session auth sits behind a gate mounted ahead of every route, with deliberately no localhost bypass. Ships as an installable PWA.",
     tags: ['Node.js', 'React', 'TypeScript', 'node:sqlite', 'SSE', 'Claude + Ollama'],
     media: asset('mission-control.mp4'),
     url: 'https://ethan-goldstein.github.io/Autonomous-OS/',
     repoUrl: 'https://github.com/ethan-goldstein/Autonomous-OS',
+  },
+  {
+    title: 'Turbo Rumble GP',
+    year: '2026',
+    category: 'Game · WebGL',
+    blurb: 'An 8-player kart racer with real-time multiplayer rooms and four ways to play.',
+    description:
+      'A kart racer built as a lesson in graceful degradation: 8 racers, 4 karts, a 4-track Grand Prix, and 7 items to fight for position. Realtime multiplayer runs server-authoritative on a Cloudflare Durable Object, and when a room cannot fill it backfills with AI drivers and falls all the way back to a solo race rather than showing anyone an error. Four input paths are equal citizens, keyboard, gamepad, touch, and hands-free MediaPipe hand tracking where you steer with your palms, and every one of them resolves to the same input abstraction so the physics never knows which is driving.',
+    tags: ['Three.js', 'Cloudflare Durable Objects', 'MediaPipe', 'WebGL'],
+    media: asset('turbo-rumble-gp.jpg'),
+    url: 'https://ethan-goldstein.github.io/turbo-rumble-gp/',
   },
   {
     title: 'Speech Developmental Services',
@@ -226,15 +228,15 @@ export const projects = [
     url: 'https://ethan-goldstein.github.io/golden-spikes/',
   },
   {
-    title: 'Turbo Rumble GP',
+    title: 'Casa Cavallino: A Private Ferrari Residence',
     year: '2026',
-    category: 'Game · WebGL',
-    blurb: 'An 8-player kart racer with real-time multiplayer rooms and four ways to play.',
+    category: 'Cinematic Web · AI Film',
+    blurb: 'A scroll-scrubbed cinematic flythrough of a fictional Ferrari mansion on the Amalfi Coast. The whole site is one continuous generated camera flight.',
     description:
-      'A kart racer built as a lesson in graceful degradation: 8 racers, 4 karts, a 4-track Grand Prix, and 7 items to fight for position. Realtime multiplayer runs server-authoritative on a Cloudflare Durable Object, and when a room cannot fill it backfills with AI drivers and falls all the way back to a solo race rather than showing anyone an error. Four input paths are equal citizens, keyboard, gamepad, touch, and hands-free MediaPipe hand tracking where you steer with your palms, and every one of them resolves to the same input abstraction so the physics never knows which is driving.',
-    tags: ['Three.js', 'Cloudflare Durable Objects', 'MediaPipe', 'WebGL'],
-    media: asset('turbo-rumble-gp.jpg'),
-    url: 'https://ethan-goldstein.github.io/turbo-rumble-gp/',
+      "A luxury-brand-film website where scrolling flies you through an entire estate: fifteen AI-generated flythrough clips chained room to room, from the coast approach and infinity pool through a pivot door that swings open as you enter, the family room, kitchen, primary suite, a Ferrari apparel wardrobe, guest suites and a racing-sim lounge, down to a keypad-locked underground collection (the code is Ferrari's founding year), a vintage 'La Storia' wing with a 250 GT and F40, and a cliff tunnel that bursts out into the night. The engineering underneath is a media manifest that degrades every scene from video to a still image to a CSS gradient, so the site stayed navigable and shippable before a single final asset existed. On desktop, scroll position drives video frames directly through all-keyframe encodes; phones get play-through clips with matched hold frames. Twelve-car spotlight configurator with specs and collector notes, synthesized ocean ambience, full keyboard and reduced-motion accessibility. Every still and film clip generated with Higgsfield (Cinema Studio and Seedance) from one locked art direction. Next.js static export on GitHub Pages.",
+    tags: ['Next.js', 'GSAP + Lenis', 'Scroll-scrubbed video', 'Higgsfield AI'],
+    media: asset('casa-cavallino.jpg'),
+    url: 'https://ethan-goldstein.github.io/casa-cavallino/',
   },
   {
     title: 'AM: Apple Music Concept',
@@ -259,71 +261,17 @@ export const projects = [
     url: 'https://ethan-goldstein.github.io/abroad/',
   },
   {
-    title: 'The Fenway Faithful',
+    title: 'WALLPR: Wallpaper Storefront',
     year: '2026',
-    category: 'UX/UI · 3D',
-    blurb: '125 years of Red Sox history, told from inside a scroll-animated 3D clubhouse.',
+    category: 'E-commerce · Web',
+    blurb: 'A minimal one-page hero store selling impasto-painted wallpapers as instant digital downloads.',
     description:
-      'A scroll-driven 3D museum walking through 125 years of Red Sox history, from the Green Monster to retired numbers to championship years. The whole experience is one continuous camera path with 20+ choreographed stops, where scroll position is the only timeline and GSAP owns every transition, so the visitor never loses the thread of where they are in the room. Built with React, Three.js, and Lenis.',
-    tags: ['React', 'Three.js', 'GSAP', 'Lenis'],
-    media: asset('fenway.jpg'),
-    url: 'https://ethan-goldstein.github.io/REDSOX/',
+      'A single-viewport storefront for AI-assisted oil-painting wallpapers: a non-scrollable hero of four expanding category panels (Sports, Places, Lifestyle, Animals) that open per-category galleries rendered from one product manifest. Checkout is fully outsourced to a merchant-of-record provider, which means hosted overlay checkout, global sales tax and VAT handling, and secure expiring download delivery, so the static site holds zero secrets and touches zero payment data. Per-page Content Security Policy locks script, frame, and connect sources to a known allowlist. No cookies, no trackers, no PII collected, and full-resolution originals never enter source control. Pure HTML, CSS, and JavaScript, no build step, deployed on GitHub Pages.',
+    tags: ['HTML/CSS/JS', 'E-commerce', 'Merchant of Record', 'Higgsfield AI'],
+    media: asset('wallpr.jpg'),
+    url: 'https://wallpr.us/',
   },
-  {
-    title: 'Audi Concept Showroom',
-    year: '2026',
-    category: 'E-commerce · 3D',
-    blurb: 'A cinematic concept showroom with an interactive 3D R8 and a filterable nine-car lineup.',
-    description:
-      'A fan-concept design study of the Audi universe: the landing hero renders an interactive, Draco-compressed 3D R8 in real time via model-viewer, backed by animated spec counters and smooth-scroll choreography. The showroom is one filterable space covering sedans, SUVs, and the e-tron era, feeding a localStorage-driven "garage" that tallies a virtual collection across visits with no account and no backend. A pure front-end study in cinematic e-commerce. Nothing is for sale.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'model-viewer 3D'],
-    media: asset('audi-showroom.png'),
-    url: 'https://ethan-goldstein.github.io/Audi/',
-  },
-  {
-    title: 'Oakridge Medical Group',
-    year: '2026',
-    category: 'Web Design · Client Demo',
-    blurb: 'A spec build for a medical practice: appointments, providers, patient portal, and a real accessibility panel.',
-    description:
-      'A spec build I produce to win healthcare clients, for a fictional family practice in Alexandria, VA: appointment booking, provider profiles, services, patient portal and prescription-refill entry points, insurance verification, FAQ, and an emergency banner. The part I care about is the genuine user-facing accessibility panel: text scaling, high contrast, reduced motion, and underlined links, all controlled by the visitor rather than decided once by me, alongside dark mode, scrollspy navigation, and focus-trapped modals. Healthcare is exactly where that should not be an afterthought.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Client Demo'],
-    media: asset('oakridge-medical.png'),
-    url: 'https://ethan-goldstein.github.io/Oakridge-Medical/',
-  },
-  {
-    title: 'The Drift House',
-    year: '2026',
-    category: 'Web Design · Client Demo',
-    blurb: 'A coastal-kitchen restaurant site built as a spec build: sunset vibes, oyster bar, full booking flow.',
-    description:
-      'A complete restaurant website for a fictional coastal kitchen in Seabrook, SC, produced as a spec build to win hospitality clients: cinematic hero, full menu and cocktail list, private events and catering sections, a reservation flow, and gift cards. The point of a spec build is that a small business owner should not have to imagine what their site could feel like, so this one is finished to the same standard as paid work: warm, editorial, and built around the two actions that actually make a restaurant money.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Client Demo'],
-    media: asset('drift-house.png'),
-    url: 'https://ethan-goldstein.github.io/Drift-House/',
-  },
-  {
-    title: 'Coach AI',
-    year: '2025',
-    category: 'AI · Web',
-    blurb: 'A virtual personal trainer with a sleek, futuristic interface. The future is here.',
-    description:
-      'A virtual personal trainer, and the first thing I built where the interface had to carry the product. Workout generation, plan structure, and progress framing sit behind a dark futuristic UI with interactive 3D elements composed in Spline, all on plain HTML, CSS, and JavaScript with no framework and no build step. Looking back it is the project where I started caring about how a thing feels to use rather than only whether it works, which is the habit everything after it is built on.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
-    media: asset('CoachAI.jpg'),
-    url: 'https://ethan-goldstein.github.io/CoachAI/',
-  },
-  {
-    title: 'Personal Portfolio',
-    year: '2025',
-    category: 'My First Project',
-    blurb: 'Where it all started: my first ever project, a fully responsive portfolio with a clean, modern interface.',
-    description:
-      'The first project I ever built and shipped: a fully responsive site in hand-written HTML, CSS, and JavaScript, with a clean modern interface, unique layouts, simple navigation, interactive components, and GitHub integration. No framework, no build step, no tutorial to copy. What it actually taught me was not syntax, it was the habit of pushing work to a public URL where it either runs or it does not, and everything on this site descends from that.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Spline'],
-    media: asset('Portfolio.jpg'),
-    url: 'https://ethan-goldstein.github.io/Protfolio-Old/',
-  },
+
 ]
 
 /* ----------------------- EXPERIENCE: SCHOOL + WORK ---------------------- */
@@ -349,7 +297,7 @@ export const experience = {
       points: [
         'Built the orchestration core behind Autonomous OS, a self-hosted 11-agent platform on a Node and Express ESM server, where agents run on cron schedules and also trigger each other on completion, so a research run hands straight off to the agent that acts on it.',
         'Built a two-tier LLM dispatcher: a headless Claude Code CLI as the primary, a local Ollama llama3.2:3b as the always-on fallback, and a 10-minute persisted circuit breaker that reroutes on any timeout, rate limit, or missing binary.',
-        'Injected prompt-injection guardrails at a single chokepoint into every model call on both providers (fetched web content is data and never instructions, credentials are never echoed, outward-facing actions default to drafts) and routed every outbound action through one egress queue where risky lanes always require a human tap and no toggle can override that.',
+        'Routed every outbound action through one egress queue where risky lanes always require a human tap that no toggle can override, checked before any setting is read, and funnelled every model call on both providers through a single chokepoint that treats fetched web content as data and never as instructions.',
         'Made automated outreach defensible by design: per-lane daily caps dripped across staggered windows instead of bursts, randomized send jitter, DNS MX pre-validation that fails open so a flaky lookup never burns a real address, and an IMAP bounce loop that retires dead addresses the same day.',
         'Shipped it as a service rather than a script: a launchd daemon that survives reboots, reachable only over Tailscale Serve TLS with no public port, and an installable PWA whose service worker never caches an authenticated route.',
       ],
