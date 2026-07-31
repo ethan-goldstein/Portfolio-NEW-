@@ -248,13 +248,24 @@ export default function Projects() {
                     </svg>
                     Private · self-hosted server
                   </span>
-                ) : cur.url ? (
-                  <Magnetic strength={0.2}>
-                    <a className="btn primary mt-2" href={cur.url} target="_blank" rel="noreferrer">
-                      {/* a repo link is source, not a deployed site */}
-                      {isRepo(cur.url) ? 'View source' : 'View live project'} <span className="arrow">↗</span>
-                    </a>
-                  </Magnetic>
+                ) : cur.url || cur.repoUrl ? (
+                  <div className="folio-card-links mt-2">
+                    {cur.url ? (
+                      <Magnetic strength={0.2}>
+                        <a className="btn primary" href={cur.url} target="_blank" rel="noreferrer">
+                          {/* a repo link is source to read, not a site to visit */}
+                          {isRepo(cur.url) ? 'View source' : 'View live project'} <span className="arrow">↗</span>
+                        </a>
+                      </Magnetic>
+                    ) : null}
+                    {cur.repoUrl ? (
+                      <Magnetic strength={0.2}>
+                        <a className="btn" href={cur.repoUrl} target="_blank" rel="noreferrer">
+                          View source <span className="arrow">↗</span>
+                        </a>
+                      </Magnetic>
+                    ) : null}
+                  </div>
                 ) : null}
               </div>
             </motion.div>

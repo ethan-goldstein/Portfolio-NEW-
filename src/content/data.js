@@ -100,7 +100,7 @@ export const interests = [
   },
   {
     title: 'API Plumbing',
-    text: 'Gmail over IMAP and SMTP, Shopify, Etsy OAuth, Printify, Facebook Graph, OpenStreetMap. Each has its own idea of auth, pagination, and errors, and making them behave like one system is the job.',
+    text: 'Mail over IMAP and SMTP, OAuth 2.0 refresh flows, social and marketplace APIs, geospatial queries. Each has its own idea of auth, pagination, and errors, and making them behave like one system is the job.',
     emoji: '🔌',
   },
   {
@@ -175,21 +175,22 @@ export const projects = [
     category: 'E-commerce · Web',
     blurb: 'A minimal one-page hero store selling impasto-painted wallpapers as instant digital downloads.',
     description:
-      'A single-viewport storefront for AI-assisted oil-painting wallpapers: a non-scrollable hero of four expanding category panels (Sports, Places, Lifestyle, Animals) that open per-category galleries rendered from one product manifest. Checkout is fully outsourced to a merchant-of-record provider, which means hosted overlay checkout, global sales tax and VAT handling, and secure expiring download delivery, so the static site holds zero secrets and touches zero payment data. Per-page Content Security Policy locks script, frame, and connect sources to a known allowlist. No cookies, no trackers, no PII collected, and full-resolution originals never enter source control. Pure HTML, CSS, and JavaScript, no build step, deployed on GitHub Pages. Its catalog is restocked by an agent in Autonomous OS that paints new pieces and commits them straight into this repo.',
+      'A single-viewport storefront for AI-assisted oil-painting wallpapers: a non-scrollable hero of four expanding category panels (Sports, Places, Lifestyle, Animals) that open per-category galleries rendered from one product manifest. Checkout is fully outsourced to a merchant-of-record provider, which means hosted overlay checkout, global sales tax and VAT handling, and secure expiring download delivery, so the static site holds zero secrets and touches zero payment data. Per-page Content Security Policy locks script, frame, and connect sources to a known allowlist. No cookies, no trackers, no PII collected, and full-resolution originals never enter source control. Pure HTML, CSS, and JavaScript, no build step, deployed on GitHub Pages.',
     tags: ['HTML/CSS/JS', 'E-commerce', 'Merchant of Record', 'Higgsfield AI'],
     media: asset('wallpr.jpg'),
     url: 'https://wallpr.us/',
   },
   {
-    title: 'Autonomous OS: 11-Agent Platform',
+    title: 'Autonomous OS: Agent Orchestration Platform',
     year: '2026',
     category: 'AI · Full-Stack',
-    blurb: 'Eleven autonomous AI agents. One self-hosted command center. Running 24/7 on hardware I own.',
+    blurb: 'Eleven autonomous agents on a framework I built. Running 24/7 on hardware I own, with a human approval gate on every outbound action.',
     description:
-      "Eleven named agents that actually do the work of a small business, running unattended on hardware I own. Bruce triages Gmail over IMAP and ranks what matters. Larry finds businesses with no website or an outdated one through OpenStreetMap Overpass and Nominatim. Pure researches Fiverr demand from public signals and hands off on completion to Virtue, who drafts the gig copy, pricing, and thumbnail. Trinity runs three Etsy storefront lanes through Printify and the Etsy Open API. Monet paints oil-style wallpapers and commits them straight into the wallpr.us repo, which wakes Draper to write the social post. Scorsese renders vertical promos with ffmpeg, Mirsky parses bank statements, Parker scouts products, and Mom assembles the whole fleet into one morning brief. Underneath: a Node and Express ESM core, node:sqlite in WAL mode with no ORM, a custom Server-Sent Events hub feeding a React and TypeScript dashboard, and a two-tier LLM dispatcher that runs a headless Claude Code CLI first and fails over to a local Ollama model behind a 10-minute circuit breaker. Nothing reaches the outside world without passing a single approval queue where risky lanes always need a human tap. Zero-dependency HMAC session auth, a sleep-proof cron catch-up sweep, self-distilling long-term memory, hands-free gesture control on a locally vendored model, and an installable PWA reachable from my phone over Tailscale.",
+      "A self-hosted platform that runs eleven autonomous agents unattended, with a human approval gate standing between every agent and every action that reaches the outside world. The orchestration framework is open source; the fleet I run on it is not. Adding an agent is one file and one registry line: it inherits cron scheduling, SQLite persistence, live log streaming, and error capture from a shared base class. The model layer is a two-tier dispatcher, a headless Claude Code CLI first with a local Ollama fallback behind a 10-minute persisted circuit breaker, and inference capped at 2 concurrent processes on a FIFO semaphore after unbounded forking crashed an 8GB machine. Storage is Node's built-in SQLite with no ORM, moved to WAL journaling and a 5-second busy timeout after concurrent writes started failing boots. A hand-rolled Server-Sent Events hub streams state into a React and TypeScript dashboard, and a sleep-proof sweep re-parses every cron expression to replay whatever a sleeping machine missed. The part I care about most is the trust layer: prompt-injection guardrails injected at a single chokepoint into every model call, and one egress queue where risky lanes can never be auto-approved, checked before any setting is read. Zero-dependency HMAC session auth sits behind a gate mounted ahead of every route, with deliberately no localhost bypass. Ships as an installable PWA.",
     tags: ['Node.js', 'React', 'TypeScript', 'node:sqlite', 'SSE', 'Claude + Ollama'],
     media: asset('mission-control.mp4'),
-    url: 'https://github.com/ethan-goldstein/Autonomous-OS',
+    url: 'https://ethan-goldstein.github.io/Autonomous-OS/',
+    repoUrl: 'https://github.com/ethan-goldstein/Autonomous-OS',
   },
   {
     title: 'Speech Developmental Services',

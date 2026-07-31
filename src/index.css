@@ -1620,3 +1620,6 @@ img.bgd-video.kenburns { animation: bgdKenburns 30s ease-in-out infinite alterna
 @media (max-width: 720px) {
   .resume-frame { height: calc(100vh - 12rem); }
 }
+
+/* project modal can carry both a live link and a source link */
+.folio-card-links { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
