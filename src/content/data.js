@@ -227,7 +227,7 @@ export const projects = [
       'Real client work: the live site for Speech Developmental Services (Shana Kilcawley, CCC-SLP), a pediatric speech therapy practice serving Arlington, VA and telehealth clients across four states. The 3-second intro is a custom stroke-drawing engine: her logo is auto-traced into vector contours with marching squares over the PNG, and a three.js fountain pen draws the outline in real time before it crossfades into the periwinkle mark. It is code-split so it never weighs down the main bundle, skippable, and fully reduced-motion aware. Inside, a second three.js scene floats soft glass orbs behind the hero with scroll parallax, and the whole page moves on scroll: a gradient progress bar, 3D card entrances, and a step timeline that fills as you read. Every line of copy is driven from a single content file so the owner can edit her own site without ever touching a component. React 18 and Vite, deployed through GitHub Actions to Pages.',
     tags: ['React', 'Three.js', 'Framer Motion', 'Vite'],
     media: asset('speech-developmental-services.jpg'),
-    url: 'https://ethan-goldstein.github.io/speech-developmental-services/',
+    url: 'https://speechdservices.com/',
   },
   {
     title: 'HAYMAKER: Rise Through the Ranks',
