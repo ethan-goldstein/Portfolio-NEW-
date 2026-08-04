@@ -13,7 +13,7 @@ export const profile = {
   initials: 'EG',
   role: 'Software Engineer',
   // Short punchy tagline shown big on the home hero
-  tagline: 'AI Systems | Workflow Automation | LLM Integration',
+  tagline: 'AI Agents | Systems Engineering | Applied ML',
   // One or two sentences under the hero
   intro:
     'Computer Information Systems major at the University of South Carolina building scalable, AI-driven applications, from autonomous agent systems to workflow automation that runs real businesses.',
@@ -53,12 +53,12 @@ export const socials = [
 export const background = {
   // "About me" lead: who I am right now, in one confident paragraph
   about:
-    "I'm Ethan Goldstein, a software engineer in Washington, DC. My day job is federal: I'm at GovCIO on the Department of Veterans Affairs modernization program, processing and validating IRS records under an active Public Trust credential. The rest of my time goes into agent infrastructure. I designed and built Autonomous OS, an 11-agent orchestration platform, roughly 12,700 lines of Node, TypeScript, and React, that runs around the clock on hardware I own, drives live third-party APIs, and keeps a human approval gate between every agent and every outbound action. The model is the smallest part of that work. The engineering is scheduling, persistence, guardrails, and a defined answer for what happens when the model is wrong. I'm finishing a Computer Information Systems degree at the University of South Carolina.",
+    "I'm Ethan Goldstein, a software engineer in Washington, DC. My day job is federal: I'm at GovCIO on the Department of Veterans Affairs modernization program, processing and validating IRS records under an active Public Trust credential. The rest of my time goes into agent infrastructure. I designed and built Autonomous OS, an 11-agent orchestration platform, roughly 12,800 lines of Node, TypeScript, and React, that runs around the clock on hardware I own, drives live third-party APIs, and keeps a human approval gate between every agent and every outbound action. The model is the smallest part of that work. The engineering is scheduling, persistence, guardrails, and a defined answer for what happens when the model is wrong. The same instinct runs through everything else I build: a bitemporal analytical engine in C++20 compiled to WebAssembly, a quantitative research engine whose headline result is that its own models have no edge, and motion sensing from WiFi signal strength that I measured to p equals 0.017 rather than asserting. In each of them the interesting half is the machinery built to prove the result wrong. I'm finishing a Computer Information Systems degree at the University of South Carolina.",
   // The story: how the judgment got built, told through what broke
   story: [
     'The first thing I ever shipped was a static portfolio in hand-written HTML, CSS, and JavaScript. What stuck was not the code, it was the habit of putting work on a public URL where it either runs or it does not. Browser games came next, and they turned out to be a systems problem in a costume: a simulation loop pinned to a fixed 60Hz step and fully decoupled from rendering, and authoritative state that lives on the server because a client you do not control will always lie to you.',
     'Most of the architecture I am proud of started as something breaking. Unbounded process forking took an 8GB machine down more than once, so model inference now runs behind a FIFO semaphore capped at 2 concurrent processes. Concurrent writes started failing at boot, so the database moved to WAL journaling with a 5-second busy timeout. None of that came from a tutorial. Each one came from a system failing in a specific way and forcing a specific decision.',
-    "The failure modes that interest me now are the ones nobody is awake for. A laptop sleeps through a scheduled run, so a sweep re-parses every agent's cron expression every 10 minutes and replays whatever was missed, with a 45-minute slack window so a recovery never races the live slot and an errored run never sets off a retry storm. That is the direction I am pointed: AI systems and workflow automation, where the hard part is not the prompt, it is everything that has to hold when the prompt is wrong.",
+    "The failure modes that interest me now are the ones nobody is awake for. A laptop sleeps through a scheduled run, so a sweep re-parses every agent's cron expression every 10 minutes and replays whatever was missed, with a 45-minute slack window so a recovery never races the live slot and an errored run never sets off a retry storm. That habit generalizes well past agents. When I wrote a columnar store I wrote a deliberately naive one first, so the fast version had something to be wrong against. When I wrote a research engine I wrote the validation before any model. When I measured motion from WiFi I built the permutation null before I trusted the number. That is the direction I am pointed: systems where the hard part is not the happy path, it is everything that has to hold when the answer is wrong.",
   ],
   // Things people should know about how you work
   values: [
@@ -68,11 +68,11 @@ export const background = {
     },
     {
       title: 'Fewer moving parts',
-      text: "Storage is Node's built-in SQLite: 14 tables, 10 indexes, no ORM, no native builds, nothing to migrate. The LLM runs with MCP disabled, so its tool surface is exactly the code I wrote and nothing else.",
+      text: "Storage is Node's built-in SQLite: 13 tables, no ORM, no native builds, nothing to migrate. The LLM runs with MCP disabled, so its tool surface is exactly the code I wrote. Every agent inherits scheduling, persistence, and live log streaming from a shared base, so adding another one is one file and one line in a registry.",
     },
     {
-      title: 'Make the next one cheap',
-      text: 'The framework matters more than any single feature. Every agent inherits scheduling, persistence, and live log streaming from a shared base, so adding another one is one file and one line in a registry.',
+      title: 'Measured, not asserted',
+      text: 'A result I have not tried to break is not a result. I published a WiFi sensing AUC only after revising it down from 0.960 to 0.671, because the higher number leaned on devices people carry around with them, and I published the two benchmark bugs that had made my own C++ engine look faster than it is.',
     },
   ],
 }
@@ -94,60 +94,70 @@ export const interests = [
     emoji: '📡',
   },
   {
-    title: 'Agent Memory',
-    text: 'After each run an agent distills what it learned into durable facts in a deduplicated table the whole fleet reads. The hard part is not storage, it is deciding what is worth keeping.',
-    emoji: '🗃️',
+    title: 'Falsification',
+    text: 'The interesting half of a result is the machinery built to kill it. A naive oracle written before the fast one, validation written before any model, a permutation null before any p value.',
+    emoji: '🎯',
   },
   {
-    title: 'API Plumbing',
-    text: 'Mail over IMAP and SMTP, OAuth 2.0 refresh flows, social and marketplace APIs, geospatial queries. Each has its own idea of auth, pagination, and errors, and making them behave like one system is the job.',
-    emoji: '🔌',
+    title: 'Two Time Axes',
+    text: 'What you believed at one time, about another time. A correction that arrives late should not erase what the record used to say, so system time and valid time are stored separately.',
+    emoji: '🕰️',
   },
   {
     title: 'Fallback Paths',
-    text: 'Every build gets an answer for what happens when the good path is gone. One site runs off a manifest that degrades video to a still image to a CSS gradient, and stays shippable either way.',
+    text: 'Every build needs an answer for when the good path is gone. One site degrades video to a still to a CSS gradient, and every gesture input I ship has a keyboard and touch equivalent.',
     emoji: '🪜',
   },
   {
-    title: 'Accessibility',
-    text: 'One build ships a real accessibility panel: text scaling, high contrast, reduced motion, underlined links. Every gesture input I ship also has a keyboard and touch equivalent from day one.',
-    emoji: '♿',
+    title: 'Signal vs Noise',
+    text: 'A quiet channel does not read zero. Each link learns its own noise floor and trips at a multiple of it, so one fixed threshold cannot go deaf on weak links and scream on strong ones.',
+    emoji: '📶',
   },
 ]
 
 /* ------------------------------- SKILLS --------------------------------- */
-// Skills page is a single-screen 4×3 grid of tilted icon cards.
+// Skills page is a single-screen grid of tilted icon cards.
 // `icon` is the devicon icon path (folder/file, no extension) - browse
 // https://devicon.dev and use the colored "-original" (or "-plain") variant.
+// Verify a new path resolves against the DEVICON_BASE in pages/Skills.jsx before
+// committing: a 404 renders a silently empty tile.
 export const skills = {
   // Top line shown above the grid
   intro: 'Different stacks, different problems, the same obsession with craft.',
-  // 25 cards = 5 across × 5 down, sized to fit one screen
+  // EXACTLY 30 cards = 6 across × 5 down, sized to fit one screen. Both counts are
+  // hardcoded in .skills-grid (index.css) and /skills does not scroll, so grow the
+  // grid by adding a COLUMN; a sixth row falls off the bottom of the viewport.
   cards: [
-    { name: 'Java', icon: 'java/java-original' },
-    { name: 'Python', icon: 'python/python-original' },
-    { name: 'JavaScript', icon: 'javascript/javascript-original' },
-    { name: 'TypeScript', icon: 'typescript/typescript-original' },
-    { name: 'Next.js', icon: 'nextjs/nextjs-original-wordmark' },
     { name: 'C++', icon: 'cplusplus/cplusplus-original' },
-    { name: 'HTML5', icon: 'html5/html5-original' },
-    { name: 'CSS3', icon: 'css3/css3-original' },
+    { name: 'Python', icon: 'python/python-original' },
+    { name: 'TypeScript', icon: 'typescript/typescript-original' },
+    { name: 'JavaScript', icon: 'javascript/javascript-original' },
+    { name: 'Java', icon: 'java/java-original' },
+    { name: 'WebAssembly', icon: 'wasm/wasm-original' },
+    { name: 'CMake', icon: 'cmake/cmake-original' },
+    { name: 'NumPy', icon: 'numpy/numpy-original' },
+    { name: 'pandas', icon: 'pandas/pandas-original' },
+    { name: 'scikit-learn', icon: 'scikitlearn/scikitlearn-original' },
     { name: 'SQL', icon: 'sqlite/sqlite-original' },
-    { name: 'Git', icon: 'git/git-original' },
-    { name: 'GitHub', icon: 'github/github-original' },
     { name: 'Node.js', icon: 'nodejs/nodejs-original' },
     { name: 'Express', icon: 'express/express-original' },
     { name: 'React', icon: 'react/react-original' },
+    // -original (gradient N in a circle), not -original-wordmark: the wordmark is
+    // solid black and disappears against the dark tile.
+    { name: 'Next.js', icon: 'nextjs/nextjs-original' },
     { name: 'Vite', icon: 'vitejs/vitejs-original' },
     { name: 'Three.js', icon: 'threejs/threejs-original' },
+    { name: 'Tailwind', icon: 'tailwindcss/tailwindcss-original' },
+    { name: 'Framer Motion', icon: 'framermotion/framermotion-original' },
+    { name: 'HTML5', icon: 'html5/html5-original' },
+    { name: 'CSS3', icon: 'css3/css3-original' },
     { name: 'Cloudflare Workers', icon: 'cloudflareworkers/cloudflareworkers-original' },
+    { name: 'Bash', icon: 'bash/bash-original' },
+    { name: 'Git', icon: 'git/git-original' },
+    { name: 'GitHub', icon: 'github/github-original' },
     { name: 'Blender', icon: 'blender/blender-original' },
     { name: 'After Effects', icon: 'aftereffects/aftereffects-original' },
     { name: 'Photoshop', icon: 'photoshop/photoshop-original' },
-    { name: 'VS Code', icon: 'vscode/vscode-original' },
-    { name: 'Framer Motion', icon: 'framermotion/framermotion-original' },
-    { name: 'npm', icon: 'npm/npm-original-wordmark' },
-    { name: 'Bash', icon: 'bash/bash-original' },
     { name: 'CAIO', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='78' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='36' letter-spacing='1' fill='white'%3ECAIO%3C/text%3E%3C/svg%3E" },
     { name: 'SaaS', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='78' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='38' letter-spacing='1' fill='white'%3ESaaS%3C/text%3E%3C/svg%3E" },
   ],
@@ -164,8 +174,14 @@ export const projects = [
     year: '2026',
     category: 'Signals · Python / React',
     blurb: 'Detecting human motion from WiFi signal strength alone, measured against a real gateway rather than asserted. The public demo is structurally incapable of touching a network.',
-    description:
-      "I wanted to know whether the WiFi-sensing demos that go viral, the ones claiming to see a human skeleton through drywall, could be reproduced on a router that already exists in a normal home. The answer is no, and the two reasons why are the interesting part. The first is that pose estimation needs Channel State Information, the per-subcarrier amplitude and phase, and commodity WiFi silicon computes CSI and then discards it before anything in userspace can read it; macOS never exposes it and neither does stock router firmware, so it is a driver limitation rather than something better code routes around. The second I found by writing the bug. Published work uses a 0.5 to 3 Hz gait band because human stride lands near 2 Hz, and I implemented that band faithfully, then watched my own test report less in-band energy for a walking person than for an empty room. Polling a consumer router's association table tops out near 1 to 2 Hz, which puts Nyquist at 0.5 to 1 Hz, and sampling a 2 Hz sine at 4 Hz is not merely aliasing: every sample lands on a zero crossing and the component disappears outright. So the literature's band is unobservable at the only rate you can actually sample, and I retargeted onto the 0.1 to 0.8 Hz body-shadowing envelope, the slower swell as a torso occludes and reveals propagation paths, which is genuinely measurable. The detector that sits on top learns a per-link threshold rather than using a fixed one, because a quiet link does not read zero: white receiver noise of sigma dB spreads across the spectrum and contributes the square root of the band fraction times sigma inside the motion band, roughly 0.34 dB on a link where nothing whatsoever is happening, and that floor differs per link so a fixed threshold either goes deaf on weak links or screams on strong ones. The floor tracker is deliberately asymmetric, falling fast and rising slowly, so a long stretch of motion cannot drag the floor up behind it and blind the detector. The discriminating result is that a slow thermal drift trace has a larger standard deviation than a walking trace and still reads as stillness, because its energy lands below the band: 2.23 dB of in-band RMS for walking against 0.33 for drift, which is the noise floor exactly. None of that would mean anything unmeasured, so I built the collector against my own gateway and ran controlled walks. Two things surfaced that no amount of reasoning would have. The station table the admin UI displays is a cached snapshot that refreshes roughly every twenty seconds no matter how fast you poll, which puts Nyquist at 0.025 Hz and makes motion unrecoverable from it; a different field in the same 142 KB response is read live and updates every 1.7 seconds, about ten times the information rate for the identical request, and switching to it was the difference between a dead system and a working one. The real effective rate is 0.6 Hz rather than the 2 Hz the poll loop implies, so the usable band narrows to 0.1 to 0.27 Hz, meaning events lasting four to ten seconds: a person crossing a room, not a footstep. The validation is a walk with the window read off a wall clock, scored as the probability that a window inside the walk ranks above one outside it, which gave a median AUC of 0.676 across ten links with the best link at 0.960, against a permutation null built by sliding a same-length window over the still-only stretches that sat at 0.503 with a range of 0.480 to 0.525, so p came out at 0.017. The first version of that null was wrong and I caught it because it was too good: it reported a median of 0.381 rather than 0.5, because every fake window's comparison set still contained the real walk, which inflated the baseline and made the observed value look more extreme than it was. What I find most worth keeping is the trial before it, which came back at exactly chance and nearly became a written-up negative result: the only difference was that its walk window had been inferred from a description instead of measured, and imprecise labels had buried a real effect entirely. Because the collector reads a real home, I split the work in two. The public half, which is what you are looking at, contains no network client, no router code, no credential path and no database, so it cannot read a network even if instructed to, which is a stronger guarantee than a disabled demo flag; a leak scan gates every push on both identifying data and the presence of any fetch, XMLHttpRequest, WebSocket or sendBeacon in the shipped bundle, and Vite's modulepreload polyfill is disabled specifically so that check passes with zero exceptions. The private half has no git remote at all. What ties them together is a parity test: the JavaScript signal processing and the Python it was ported from are run against a shared fixture and must agree to within 1e-9, with the DFT written out explicitly rather than pulled from a library so the two can be compared bin for bin. Even the demo video on this card is generated by running the actual simulation and rendering its frames, rather than screen-recorded, so it cannot drift away from the code it depicts.",
+    description: [
+      "I wanted to know whether the WiFi-sensing demos that go viral, the ones claiming to see a human skeleton through drywall, could be reproduced on a router that already exists in a normal home. The answer is no, and the two reasons why are the interesting part. The first is that pose estimation needs Channel State Information, the per-subcarrier amplitude and phase, and commodity WiFi silicon computes CSI and then discards it before anything in userspace can read it; macOS never exposes it and neither does stock router firmware, so it is a driver limitation rather than something better code routes around.",
+      "The second I found by writing the bug. Published work uses a 0.5 to 3 Hz gait band because human stride lands near 2 Hz, and I implemented that band faithfully, then watched my own test report less in-band energy for a walking person than for an empty room. Polling a consumer router's association table tops out near 1 to 2 Hz, which puts Nyquist at 0.5 to 1 Hz, and sampling a 2 Hz sine at 4 Hz is not merely aliasing: every sample lands on a zero crossing and the component disappears outright. So the literature's band is unobservable at the only rate you can actually sample, and I retargeted onto the 0.1 to 0.8 Hz body-shadowing envelope, the slower swell as a torso occludes and reveals propagation paths, which is genuinely measurable.",
+      "The detector that sits on top learns a per-link threshold rather than using a fixed one, because a quiet link does not read zero: white receiver noise of sigma dB spreads across the spectrum and contributes the square root of the band fraction times sigma inside the motion band, roughly 0.34 dB on a link where nothing whatsoever is happening, and that floor differs per link so a fixed threshold either goes deaf on weak links or screams on strong ones. The floor tracker is deliberately asymmetric, falling fast and rising slowly, so a long stretch of motion cannot drag the floor up behind it and blind the detector. The discriminating result is that a slow thermal drift trace has a larger standard deviation than a walking trace and still reads as stillness, because its energy lands below the band: 2.23 dB of in-band RMS for walking against 0.33 for drift, which is the noise floor exactly.",
+      "None of that would mean anything unmeasured, so I built the collector against my own gateway and ran controlled walks. Two things surfaced that no amount of reasoning would have. The station table the admin UI displays is a cached snapshot that refreshes roughly every twenty seconds no matter how fast you poll, which puts Nyquist at 0.025 Hz and makes motion unrecoverable from it; a different field in the same 142 KB response is read live and updates every 1.7 seconds, about ten times the information rate for the identical request, and switching to it was the difference between a dead system and a working one. The real effective rate is 0.6 Hz rather than the 2 Hz the poll loop implies, so the usable band narrows to 0.1 to 0.27 Hz, meaning events lasting four to ten seconds: a person crossing a room, not a footstep.",
+      "The validation is a walk with the window read off a wall clock, scored as the probability that a window inside the walk ranks above one outside it, which gave a median AUC of 0.676 across ten links with the best link at 0.960, against a permutation null built by sliding a same-length window over the still-only stretches that sat at 0.503 with a range of 0.480 to 0.525, so p came out at 0.017. The first version of that null was wrong and I caught it because it was too good: it reported a median of 0.381 rather than 0.5, because every fake window's comparison set still contained the real walk, which inflated the baseline and made the observed value look more extreme than it was. What I find most worth keeping is the trial before it, which came back at exactly chance and nearly became a written-up negative result: the only difference was that its walk window had been inferred from a description instead of measured, and imprecise labels had buried a real effect entirely.",
+      "Because the collector reads a real home, I split the work in two. The public half, which is what you are looking at, contains no network client, no router code, no credential path and no database, so it cannot read a network even if instructed to, which is a stronger guarantee than a disabled demo flag; a leak scan gates every push on both identifying data and the presence of any fetch, XMLHttpRequest, WebSocket or sendBeacon in the shipped bundle, and Vite's modulepreload polyfill is disabled specifically so that check passes with zero exceptions. The private half has no git remote at all. What ties them together is a parity test: the JavaScript signal processing and the Python it was ported from are run against a shared fixture and must agree to within 1e-9, with the DFT written out explicitly rather than pulled from a library so the two can be compared bin for bin. Even the demo video on this card is generated by running the actual simulation and rendering its frames, rather than screen-recorded, so it cannot drift away from the code it depicts.",
+    ],
     tags: ['Signal processing', 'React', 'NumPy', 'FFT', 'Privacy engineering'],
     media: asset('wifi-sensing.mp4'),
     url: 'https://ethan-goldstein.github.io/wifi-sensing-lab/',
@@ -200,8 +216,13 @@ export const projects = [
     year: '2026',
     category: 'Quant ML · TypeScript',
     blurb: 'Hand-written machine learning that proves its own results are fiction. A 2.46 in-sample Sharpe becomes minus 0.18 out of sample, and the engine says so.',
-    description:
-      "A quantitative research engine built on the premise that predicting price is the easy half and the hard half is knowing whether an apparent edge is real. The numerics are written from scratch with zero dependencies and run in a Web Worker in the visitor's own browser: 83 causal features across eleven families, fractional differentiation at the smallest exponent that passes an augmented Dickey-Fuller test so the series becomes stationary without losing all memory, CUSUM event sampling that cuts the sample by roughly four times because predicting every bar oversamples noise, and triple-barrier labelling where a profit target, a stop, and a time limit race and whichever is touched first decides the label. Validation was written before any model, deliberately. Plain K-fold is not merely imprecise on financial labels, it is wrong: a label at bar 100 with a ten day horizon is decided by returns the label at bar 105 also depends on, so putting one in train and the other in test writes the test answer on the training sheet, which alone lifts a no-edge strategy above a Sharpe of 1. Purging drops any training label whose lifespan overlaps the test window, and an embargo removes a further band afterward because rolling features reach backward into it. The part I am most pleased with is the lookahead audit: every feature is recomputed on the series truncated at bar t and must reproduce its own value at t, because a feature that peeked ahead cannot, since the bar it peeked at does not exist. That test found rolling helpers emitting on partial windows, and a fractional differencing family that was silently all NaN because the textbook truncation threshold needs a 3,700 term window on a 2,513 bar series. It also caught one of my own tests passing vacuously on exactly that bug. The data layer survived losing two providers mid-build, one to a proof-of-work bot wall and one to rate limiting, so it fails over across three sources and states on the page which adjustment the prices actually carry. The engine now reports, out of its own mouth, that it has not found an edge: on SPY it scores a Sharpe of 1.49 in sample and minus 0.31 out of sample, a deflated Sharpe of 0.11 against the 0.95 it would need, and it loses to buy and hold. That verdict is printed in red at the top of the results page before any chart, because the honest reading of a backtest should not be something a visitor has to reverse engineer from a wall of statistics. An always-flat control returns exactly zero, which is how I know the cost model is not charging for trades that never happened. Combinatorial purged cross-validation then makes the honest accounting computable: the sample is split into six groups and every pair is used as a test set, so each group is tested five times against differently purged training data and recombining those gives five distinct backtest paths instead of one. Sweeping a twelve point grid across all fifteen splits puts the probability of backtest overfitting at 84 percent and, more damning, gives a degradation slope of minus 0.66. That slope is negative, which means a better in sample score predicts a worse out of sample one: on this data, selecting the best configuration is not merely useless, it is actively harmful compared with picking one at random. The deflated Sharpe uses twelve real trials rather than the hundred that implementations usually assume. Because none of this sits on a library, I reimplemented the whole pipeline a second time in pandas, numpy and scikit-learn and compared it stage by stage: the CUSUM event indices, all 582 triple-barrier labels with their decision times and which barrier was touched, and the train, test, purged and embargoed membership of all five folds match exactly, and both stacks reach the same verdict. That cross-check found three real bugs, including one where a single column CSV of missing values produced blank lines that pandas silently skipped, dropping every warmup row and shifting each index after it. The clearest artefact is the learning curve on the models page: training loss falls steadily to 0.376 while held out validation sits flat at 0.659 and never improves, which is memorisation without generalisation drawn in one picture, and it explains the negative out of sample result better than any paragraph could.",
+    description: [
+      "A quantitative research engine built on the premise that predicting price is the easy half and the hard half is knowing whether an apparent edge is real. The numerics are written from scratch with zero dependencies and run in a Web Worker in the visitor's own browser: 83 causal features across eleven families, fractional differentiation at the smallest exponent that passes an augmented Dickey-Fuller test so the series becomes stationary without losing all memory, CUSUM event sampling that cuts the sample by roughly four times because predicting every bar oversamples noise, and triple-barrier labelling where a profit target, a stop, and a time limit race and whichever is touched first decides the label.",
+      "Validation was written before any model, deliberately. Plain K-fold is not merely imprecise on financial labels, it is wrong: a label at bar 100 with a ten day horizon is decided by returns the label at bar 105 also depends on, so putting one in train and the other in test writes the test answer on the training sheet, which alone lifts a no-edge strategy above a Sharpe of 1. Purging drops any training label whose lifespan overlaps the test window, and an embargo removes a further band afterward because rolling features reach backward into it. The part I am most pleased with is the lookahead audit: every feature is recomputed on the series truncated at bar t and must reproduce its own value at t, because a feature that peeked ahead cannot, since the bar it peeked at does not exist. That test found rolling helpers emitting on partial windows, and a fractional differencing family that was silently all NaN because the textbook truncation threshold needs a 3,700 term window on a 2,513 bar series. It also caught one of my own tests passing vacuously on exactly that bug.",
+      "The data layer survived losing two providers mid-build, one to a proof-of-work bot wall and one to rate limiting, so it fails over across three sources and states on the page which adjustment the prices actually carry. The engine now reports, out of its own mouth, that it has not found an edge: on SPY it scores a Sharpe of 1.49 in sample and minus 0.31 out of sample, a deflated Sharpe of 0.06 against the 0.95 it would need, and it loses to buy and hold. That verdict is printed in red at the top of the results page before any chart, because the honest reading of a backtest should not be something a visitor has to reverse engineer from a wall of statistics. An always-flat control returns exactly zero, which is how I know the cost model is not charging for trades that never happened.",
+      "Combinatorial purged cross-validation then makes the honest accounting computable: the sample is split into six groups and every pair is used as a test set, so each group is tested five times against differently purged training data and recombining those gives five distinct backtest paths instead of one. Sweeping a twelve point grid across all fifteen splits puts the probability of backtest overfitting at 84 percent and, more damning, gives a degradation slope of minus 0.66. That slope is negative, which means a better in sample score predicts a worse out of sample one: on this data, selecting the best configuration is not merely useless, it is actively harmful compared with picking one at random. The deflated Sharpe uses twelve real trials rather than the hundred that implementations usually assume.",
+      "Because none of this sits on a library, I reimplemented the whole pipeline a second time in pandas, numpy and scikit-learn and compared it stage by stage: the CUSUM event indices, all 582 triple-barrier labels with their decision times and which barrier was touched, and the train, test, purged and embargoed membership of all five folds match exactly, and both stacks reach the same verdict. That cross-check found three real bugs, including one where a single column CSV of missing values produced blank lines that pandas silently skipped, dropping every warmup row and shifting each index after it. The clearest artefact is the learning curve on the models page: training loss falls steadily to 0.376 while held out validation sits flat at 0.659 and never improves, which is memorisation without generalisation drawn in one picture, and it explains the negative out of sample result better than any paragraph could.",
+    ],
     tags: ['TypeScript', 'Web Workers', 'Zero-dependency ML', 'node:sqlite', 'Purged CV', 'Canvas'],
     media: asset('nullhyp.mp4'),
     url: 'https://ethan-goldstein.github.io/nullhyp/',
@@ -257,10 +278,11 @@ export const projects = [
     category: 'Cinematic Web · AI Film',
     blurb: 'A scroll-scrubbed cinematic flythrough of a fictional Ferrari mansion on the Amalfi Coast. The whole site is one continuous generated camera flight.',
     description:
-      "A luxury-brand-film website where scrolling flies you through an entire estate: fifteen AI-generated flythrough clips chained room to room, from the coast approach and infinity pool through a pivot door that swings open as you enter, the family room, kitchen, primary suite, a Ferrari apparel wardrobe, guest suites and a racing-sim lounge, down to a keypad-locked underground collection (the code is Ferrari's founding year), a vintage 'La Storia' wing with a 250 GT and F40, and a cliff tunnel that bursts out into the night. The engineering underneath is a media manifest that degrades every scene from video to a still image to a CSS gradient, so the site stayed navigable and shippable before a single final asset existed. On desktop, scroll position drives video frames directly through all-keyframe encodes; phones get play-through clips with matched hold frames. Twelve-car spotlight configurator with specs and collector notes, synthesized ocean ambience, full keyboard and reduced-motion accessibility. Every still and film clip generated with Higgsfield (Cinema Studio and Seedance) from one locked art direction. Next.js static export on GitHub Pages.",
+      "A luxury-brand-film website where scrolling flies you through an entire estate: fourteen AI-generated flythrough clips chained room to room, from the coast approach and infinity pool through a pivot door that swings open as you enter, the family room, kitchen, primary suite, a Ferrari apparel wardrobe, guest suites and a racing-sim lounge, down to a keypad-locked underground collection (the code is Ferrari's founding year), a vintage 'La Storia' wing with a 250 GT and F40, and a cliff tunnel that bursts out into the night. The engineering underneath is a media manifest that degrades every scene from video to a still image to a CSS gradient, so the site stayed navigable and shippable before a single final asset existed. On desktop, scroll position drives video frames directly through all-keyframe encodes; phones get play-through clips with matched hold frames. Twelve-car spotlight configurator with specs and collector notes, synthesized ocean ambience, full keyboard and reduced-motion accessibility. Every still and film clip generated with Higgsfield (Cinema Studio and Seedance) from one locked art direction. Next.js static export on GitHub Pages.",
     tags: ['Next.js', 'GSAP + Lenis', 'Scroll-scrubbed video', 'Higgsfield AI'],
     media: asset('casa-cavallino.jpg'),
     url: 'https://ethan-goldstein.github.io/casa-cavallino/',
+    repoUrl: 'https://github.com/ethan-goldstein/casa-cavallino',
   },
   {
     title: 'AM: Apple Music Concept',
@@ -302,10 +324,10 @@ export const projects = [
 export const experience = {
   work: [
     {
-      role: 'Data Processing',
+      role: 'Data Processor',
       org: 'GovCIO',
       period: '2026 - Present',
-      location: 'Washington, DC',
+      location: 'Tysons Corner, VA',
       points: [
         'Process and validate multiple types of IRS documents in support of the Department of Veterans Affairs modernization program.',
         'Run high-volume digitization workflows: scanning, indexing, and quality checks on confidential federal records.',
@@ -324,6 +346,7 @@ export const experience = {
         'Routed every outbound action through one egress queue where risky lanes always require a human tap that no toggle can override, checked before any setting is read, and funnelled every model call on both providers through a single chokepoint that treats fetched web content as data and never as instructions.',
         'Made automated outreach defensible by design: per-lane daily caps dripped across staggered windows instead of bursts, randomized send jitter, DNS MX pre-validation that fails open so a flaky lookup never burns a real address, and an IMAP bounce loop that retires dead addresses the same day.',
         'Shipped it as a service rather than a script: a launchd daemon that survives reboots, reachable only over Tailscale Serve TLS with no public port, and an installable PWA whose service worker never caches an authenticated route.',
+        'Built the systems and research work the practice runs on: a bitemporal analytical engine in C++20 compiled to WebAssembly with its query language written end to end, lexer through cost-based planner; a quantitative research engine whose validation machinery reports that its own models have no edge; and motion sensing from WiFi signal strength measured at p equals 0.017 against a permutation null.',
       ],
     },
     {

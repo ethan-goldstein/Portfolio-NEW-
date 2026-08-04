@@ -236,7 +236,9 @@ export default function Projects() {
                 <p className="page-index">{pad(active + 1)} / {pad(N)}</p>
                 <h2 className="folio-card-title">{cur.title}</h2>
                 <div className="folio-card-meta"><span>{cur.category}</span><span>·</span><span>{cur.year}</span></div>
-                <p className="folio-card-desc">{cur.description}</p>
+                {(Array.isArray(cur.description) ? cur.description : [cur.description]).map((para, n) => (
+                  <p className="folio-card-desc" key={n}>{para}</p>
+                ))}
                 <div className="folio-card-tags">
                   {cur.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
                 </div>

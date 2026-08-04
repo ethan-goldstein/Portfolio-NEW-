@@ -441,12 +441,15 @@ body.home-lock { overflow: hidden; height: 100vh; }
 
 /* clean, panel-free grid - sized to fit one screen on both axes */
 .skills-grid {
-  width: min(1020px, 96vw);
-  max-height: 68vh;
-  aspect-ratio: 5 / 4.6;
+  /* 6 across x 5 down = 30 tiles. Keeping 5 rows is deliberate: /skills is in
+     the no-scroll list in App.jsx, so a 6th row falls off the viewport. Grow by
+     adding a column, never a row. */
+  width: min(1180px, 96vw);
+  max-height: 64vh;
+  aspect-ratio: 6 / 4.2;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(5, 1fr);
   gap: clamp(0.4rem, 1.1vw, 0.9rem);
 }
@@ -974,6 +977,7 @@ body.home-lock { overflow: hidden; height: 100vh; }
 .folio-card-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1; margin: 0.3rem 0; }
 .folio-card-meta { display: flex; gap: 0.6rem; color: var(--fg-dim); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.72rem; margin-bottom: 1rem; }
 .folio-card-desc { color: var(--fg-dim); line-height: 1.6; font-size: 0.94rem; }
+.folio-card-desc + .folio-card-desc { margin-top: 0.9rem; }
 .folio-card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
 .folio-private {
   display: inline-flex; align-items: center; gap: 0.55rem;
