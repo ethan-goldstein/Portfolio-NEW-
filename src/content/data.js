@@ -420,7 +420,8 @@ export const experience = {
       points: [
         'Coursework: Web Applications, Information Security Principles, Data Structures and Algorithms, Computer Hardware Foundations, Capstone Computing Project I, Professional Issues in CS & Engineering.',
         'Theta Chi Fraternity Executive Board Historian.',
-        'Pursuing Azure (AZ-104, AZ-900), CompTIA Security+ and Network+ certifications.',
+        // Certifications intentionally live only in background.pursuing ("04 · What
+        // I'm Pursuing"), not here, so the same sentence is not on two pages.
       ],
     },
     {
