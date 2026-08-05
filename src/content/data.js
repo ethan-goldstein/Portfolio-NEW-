@@ -414,8 +414,8 @@ export const experience = {
       period: '2021 - 2024',
       location: 'Gaithersburg, MD',
       points: [
-        'In-house operator of HitTrax, a fast-tracking system for baseball development.',
-        'Enhanced the company website to be user-friendly and reliable.',
+        'In-house operator of HitTrax, a ball-tracking and simulation system for baseball development.',
+        'Handled HitTrax hardware and software maintenance within the facility, keeping the system available for lessons and rentals.',
         'Oversaw front desk operations: computing assistance, employee and client schedules, and customer relationships.',
         'Managed customer payments, daily purchases, and finances for the owner.',
       ],
