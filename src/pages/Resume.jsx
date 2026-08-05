@@ -12,7 +12,7 @@ export default function Resume() {
       >
         <div className="resume-head">
           <p className="page-index">06 · Resume</p>
-          <a className="me-resume" href={profile.resumeUrl} download data-cursor="hover">
+          <a className="me-resume" href={profile.resumeUrl} download={profile.resumeFilename} data-cursor="hover">
             ↓ Download PDF
           </a>
         </div>

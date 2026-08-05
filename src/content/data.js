@@ -8,6 +8,13 @@
 // Prefixes public files with the site's base URL so they work on GitHub Pages.
 const asset = (file) => import.meta.env.BASE_URL + 'assets/' + file
 
+// The resume is imported rather than read from /public on purpose. Vite gives an
+// imported asset a content-hashed filename, so replacing the PDF changes its URL
+// and no browser can serve a stale copy. Files in /public keep one fixed URL, and
+// GitHub Pages sends cache-control: max-age=600 on it, which meant an updated
+// resume stayed invisible to anyone who had already loaded the page.
+import resumePdf from '../assets/ethan-goldstein-resume.pdf'
+
 export const profile = {
   name: 'Ethan Goldstein',
   initials: 'EG',
@@ -24,7 +31,10 @@ export const profile = {
   // Leave '' to show a styled placeholder.
   photo: asset('ProfilePicture.jpg'),
   // Resume file: drop a PDF into /public/assets and point here (optional)
-  resumeUrl: asset('ethan-goldstein-resume.pdf'),
+  resumeUrl: resumePdf,
+  // Download filename, so the content-hashed URL does not leak into the visitor's
+  // downloads folder as ethan-goldstein-resume-a1b2c3d4.pdf.
+  resumeFilename: 'Ethan-Goldstein-Resume.pdf',
 }
 
 // Order + labels of the navigation / pages. Keep paths matching App.jsx routes.
