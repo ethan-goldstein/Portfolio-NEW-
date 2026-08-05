@@ -40,7 +40,7 @@ export default function Experience() {
         <div className="bgd-section bgd-section--duo" id={`xp-${pi}`} key={pi}>
           <div className="bgd-pair">
             {pair.map((e, ci) => (
-              <Reveal key={e.org} delay={ci * 0.18} y={46} className="bgd-pair-slot">
+              <Reveal key={`${e.org}-${e.title}`} delay={ci * 0.18} y={46} className="bgd-pair-slot">
                 <article className="bgd-card">
                   <p className="bgd-kicker">{e.kind} · {e.period}</p>
                   <h2 className="bgd-xp-role">{e.title}</h2>

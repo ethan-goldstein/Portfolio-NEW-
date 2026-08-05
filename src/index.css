@@ -1455,6 +1455,9 @@ img.bgd-video.kenburns { animation: bgdKenburns 30s ease-in-out infinite alterna
 }
 .bgd-pair-slot { display: flex; }
 .bgd-pair-slot > article { flex: 1; }
+/* An odd entry count leaves the last row with one card. Let it span the full
+   width instead of sitting half-width beside a void. */
+.bgd-pair:has(> .bgd-pair-slot:only-child) { grid-template-columns: 1fr; }
 @media (max-width: 860px) {
   .bgd-pair { grid-template-columns: 1fr; }
 }

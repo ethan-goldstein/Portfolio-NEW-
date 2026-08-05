@@ -58,6 +58,22 @@ export default function Background() {
         </div>
       </div>
 
+      <div className="bgd-section" id="pursuing">
+        <Reveal blur>
+          <p className="bgd-kicker">04 · What I'm Pursuing</p>
+        </Reveal>
+        <div className="bgd-values">
+          {background.pursuing.map((v, i) => (
+            <Reveal blur delay={0.1 * (i + 1)} key={v.title}>
+              <div className="bgd-value" data-cursor="hover">
+                <h3>{v.title}</h3>
+                <p>{v.text}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
       <div className="bgd-end">
         <Reveal>
           <span className="bgd-end-mark" aria-hidden="true">

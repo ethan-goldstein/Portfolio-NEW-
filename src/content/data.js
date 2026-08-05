@@ -13,7 +13,7 @@ export const profile = {
   initials: 'EG',
   role: 'Software Engineer',
   // Short punchy tagline shown big on the home hero
-  tagline: 'AI Agents | Systems Engineering | Applied ML',
+  tagline: 'Systems Engineering | Applied ML | AI Agents',
   // One or two sentences under the hero
   intro:
     'Computer Information Systems major at the University of South Carolina building scalable, AI-driven applications, from autonomous agent systems to workflow automation that runs real businesses.',
@@ -53,12 +53,12 @@ export const socials = [
 export const background = {
   // "About me" lead: who I am right now, in one confident paragraph
   about:
-    "I'm Ethan Goldstein, a software engineer in Washington, DC. My day job is federal: I'm at GovCIO on the Department of Veterans Affairs modernization program, processing and validating IRS records under an active Public Trust credential. The rest of my time goes into agent infrastructure. I designed and built Autonomous OS, an 11-agent orchestration platform, roughly 12,800 lines of Node, TypeScript, and React, that runs around the clock on hardware I own, drives live third-party APIs, and keeps a human approval gate between every agent and every outbound action. The model is the smallest part of that work. The engineering is scheduling, persistence, guardrails, and a defined answer for what happens when the model is wrong. The same instinct runs through everything else I build: a bitemporal analytical engine in C++20 compiled to WebAssembly, a quantitative research engine whose headline result is that its own models have no edge, and motion sensing from WiFi signal strength that I measured to p equals 0.017 rather than asserting. In each of them the interesting half is the machinery built to prove the result wrong. I'm finishing a Computer Information Systems degree at the University of South Carolina.",
+    "I'm Ethan Goldstein, a software engineer in Washington, DC. My day job is federal: I work in GovCIO's Veteran and Enterprise Technology Sector, supporting the Department of Veterans Affairs modernization program, processing and validating confidential records under an active Public Trust credential. That work is where I learned to treat provenance and access as requirements rather than features, and it shows up in everything I build on my own time. I write systems in three fairly different directions. PARALLAX is a bitemporal analytical engine in C++20 compiled to WebAssembly, where I wrote the query language end to end, lexer through cost-based planner, over a columnar store that answers what you believed at one time about another time. NULLHYP is a quantitative research engine with every model hand-written and zero dependencies, and its headline result is that its own models have no edge: a Sharpe of 2.46 in sample becomes minus 0.18 out of it, and the engine prints that in red before it shows you a single chart. WiFi Sensing Lab detects human motion from signal strength alone, which I measured at p equals 0.017 against a permutation null instead of asserting, after diagnosing that the band the published work uses is unobservable at the rate a consumer router can actually be sampled. Autonomous OS is the fourth: an 11-agent orchestration platform, roughly 12,800 lines of Node, TypeScript, and React, that runs around the clock on hardware I own and keeps a human approval gate between every agent and every outbound action. Across all four the model is the smallest part of the work. The engineering is the machinery built to prove the result wrong. I'm finishing a Computer Information Systems degree at the University of South Carolina, expected May 2027.",
   // The story: how the judgment got built, told through what broke
   story: [
     'The first thing I ever shipped was a static portfolio in hand-written HTML, CSS, and JavaScript. What stuck was not the code, it was the habit of putting work on a public URL where it either runs or it does not. Browser games came next, and they turned out to be a systems problem in a costume: a simulation loop pinned to a fixed 60Hz step and fully decoupled from rendering, and authoritative state that lives on the server because a client you do not control will always lie to you.',
-    'Most of the architecture I am proud of started as something breaking. Unbounded process forking took an 8GB machine down more than once, so model inference now runs behind a FIFO semaphore capped at 2 concurrent processes. Concurrent writes started failing at boot, so the database moved to WAL journaling with a 5-second busy timeout. None of that came from a tutorial. Each one came from a system failing in a specific way and forcing a specific decision.',
-    "The failure modes that interest me now are the ones nobody is awake for. A laptop sleeps through a scheduled run, so a sweep re-parses every agent's cron expression every 10 minutes and replays whatever was missed, with a 45-minute slack window so a recovery never races the live slot and an errored run never sets off a retry storm. That habit generalizes well past agents. When I wrote a columnar store I wrote a deliberately naive one first, so the fast version had something to be wrong against. When I wrote a research engine I wrote the validation before any model. When I measured motion from WiFi I built the permutation null before I trusted the number. That is the direction I am pointed: systems where the hard part is not the happy path, it is everything that has to hold when the answer is wrong.",
+    'Most of the architecture I am proud of started as something breaking, and rarely in the place I was looking. Unbounded process forking took an 8GB machine down more than once, so model inference now runs behind a FIFO semaphore capped at 2 concurrent processes. My own WiFi test reported less in-band energy for a walking person than for an empty room, which turned out to be correct: the 0.5 to 3 Hz gait band the literature uses is unobservable at the rate a consumer router can be polled, so the whole project moved to a slower band I could actually sample. A fractional differencing family in my research engine was silently all NaN because the textbook truncation threshold wants a 3,700 term window on a 2,513 bar series, and the test that should have caught it was passing vacuously on the same bug. In my C++ engine, size_t is 32-bit under wasm32 and 64-bit natively, so code that compiles clean for the browser hard-errors on the desktop build, which is the entire reason I keep both targets. None of that came from a tutorial. Each one came from a system failing in a specific way and forcing a specific decision.',
+    "What interests me now is building the thing that tries to disprove the result before I believe it. When I wrote a columnar store I wrote a deliberately naive one first, so the fast version had something to be wrong against, and it caught an antimeridian box that inverted and silently matched nothing. When I wrote a research engine I wrote the validation before any model, then reimplemented the whole pipeline a second time in pandas to see whether the two agreed. When I measured motion from WiFi I built the permutation null before I trusted the number, and the first version of that null was wrong precisely because it looked too good. Scheduling an agent fleet taught me the same lesson from the other end: a laptop sleeps through a run nobody is awake for, so a sweep replays whatever was missed with a slack window wide enough that recovery never races the live slot. That is the direction I am pointed: systems where the hard part is not the happy path, it is everything that has to hold when the answer is wrong.",
   ],
   // Things people should know about how you work
   values: [
@@ -68,11 +68,39 @@ export const background = {
     },
     {
       title: 'Fewer moving parts',
-      text: "Storage is Node's built-in SQLite: 13 tables, no ORM, no native builds, nothing to migrate. The LLM runs with MCP disabled, so its tool surface is exactly the code I wrote. Every agent inherits scheduling, persistence, and live log streaming from a shared base, so adding another one is one file and one line in a registry.",
+      text: "Storage is Node's built-in SQLite: 13 tables, no ORM, no native builds, nothing to migrate. My research engine has zero dependencies in its numerics, so every model in it is code I can be held responsible for, and it runs with no build step at all. Fewer parts means fewer places for a bug to hide behind someone else's abstraction.",
+    },
+    {
+      title: 'Correct before fast',
+      text: 'Before I optimised my columnar store I wrote a deliberately naive one, a linear scan with no indexes, so the fast version had an oracle it had to agree with rather than a benchmark it had to beat. 130 test cases run under AddressSanitizer and UndefinedBehaviorSanitizer on every push, and the query parser is fuzzed in CI.',
     },
     {
       title: 'Measured, not asserted',
       text: 'A result I have not tried to break is not a result. I published a WiFi sensing AUC only after revising it down from 0.960 to 0.671, because the higher number leaned on devices people carry around with them, and I published the two benchmark bugs that had made my own C++ engine look faster than it is.',
+    },
+    {
+      title: "Careful with other people's data",
+      text: 'I handle confidential federal records under a Public Trust credential by day, and the habit carries. My presence-sensing work is split across two repositories so the half that reads a real home has no remote at all, and the public half contains no network client to remove. Where I query registration data, identity is discarded in the adapter before it ever reaches storage.',
+    },
+  ],
+  // Rendered as the "04 · What I'm Pursuing" section in pages/Background.jsx.
+  // The certifications entry is quoted from Ethan and is not to be reworded.
+  pursuing: [
+    {
+      title: 'The degree',
+      text: 'B.S. Computer Information Systems with a minor in Business Information Management at the University of South Carolina, expected May 2027. Coursework in data structures and algorithms, information security principles, web applications, and a capstone computing project.',
+    },
+    {
+      title: 'Certifications',
+      text: 'Pursuing Azure (AZ-104, AZ-900), CompTIA Security+ and Network+ certifications.',
+    },
+    {
+      title: 'A semester in Florence',
+      text: 'I spent Spring 2026 studying at Florence University of the Arts, 109 days across 8 countries and 18 weekend trips. I built the trip tracker for it too, a photoreal globe that flies between stops, which is on the projects page.',
+    },
+    {
+      title: 'Where I am aiming',
+      text: 'Systems work where correctness is checkable: storage and query engines, numerical code with real validation behind it, and the infrastructure that has to keep holding when a model or a measurement turns out to be wrong. I would rather own a hard guarantee than a large surface.',
     },
   ],
 }
@@ -329,10 +357,22 @@ export const experience = {
       period: '2026 - Present',
       location: 'Tysons Corner, VA',
       points: [
+        "Work within GovCIO's Veteran and Enterprise Technology Sector, the group delivering technology services to the Department of Veterans Affairs.",
         'Process and validate multiple types of IRS documents in support of the Department of Veterans Affairs modernization program.',
         'Run high-volume digitization workflows: scanning, indexing, and quality checks on confidential federal records.',
         'Hold an active USAccess Public Trust credential for work with U.S. Department of the Treasury / IRS data.',
         'Coordinate daily throughput targets with the wider GovCIO processing team.',
+      ],
+    },
+    {
+      role: 'Systems & Research Engineer',
+      org: 'Independent Practice',
+      period: '2025 - Present',
+      location: 'Remote',
+      points: [
+        'Built PARALLAX, a bitemporal analytical engine in C++20 compiled to WebAssembly: the query language written end to end from lexer through cost-based planner, over a columnar store with zone maps and a Z-order spatial index, verified by differential testing against a deliberately naive oracle written first so it could not inherit the optimised version and its bugs.',
+        'Built NULLHYP, a quantitative research engine with every model hand-written and zero dependencies, running in a Web Worker: histogram gradient-boosted trees, elastic net, purged and combinatorial cross-validation, and a lookahead audit that recomputes each feature on data truncated at bar t. It reports that its own models have no edge, and the whole pipeline was reimplemented in pandas as an independent check.',
+        'Built WiFi Sensing Lab, detecting human motion from signal strength alone at a median AUC of 0.676 against a permutation null at 0.503, p equals 0.017, after diagnosing that the gait band used in published work is unobservable at consumer polling rates. Split across two repositories so the public half contains no network client at all, gated by a CI leak scan.',
       ],
     },
     {
@@ -341,12 +381,9 @@ export const experience = {
       period: '2025 - Present',
       location: 'Remote',
       points: [
-        'Built the orchestration core behind Autonomous OS, a self-hosted 11-agent platform on a Node and Express ESM server, where agents run on cron schedules and also trigger each other on completion, so a research run hands straight off to the agent that acts on it.',
-        'Built a two-tier LLM dispatcher: a headless Claude Code CLI as the primary, a local Ollama llama3.2:3b as the always-on fallback, and a 10-minute persisted circuit breaker that reroutes on any timeout, rate limit, or missing binary.',
-        'Routed every outbound action through one egress queue where risky lanes always require a human tap that no toggle can override, checked before any setting is read, and funnelled every model call on both providers through a single chokepoint that treats fetched web content as data and never as instructions.',
-        'Made automated outreach defensible by design: per-lane daily caps dripped across staggered windows instead of bursts, randomized send jitter, DNS MX pre-validation that fails open so a flaky lookup never burns a real address, and an IMAP bounce loop that retires dead addresses the same day.',
-        'Shipped it as a service rather than a script: a launchd daemon that survives reboots, reachable only over Tailscale Serve TLS with no public port, and an installable PWA whose service worker never caches an authenticated route.',
-        'Built the systems and research work the practice runs on: a bitemporal analytical engine in C++20 compiled to WebAssembly with its query language written end to end, lexer through cost-based planner; a quantitative research engine whose validation machinery reports that its own models have no edge; and motion sensing from WiFi signal strength measured at p equals 0.017 against a permutation null.',
+        'Built the orchestration core behind Autonomous OS, a self-hosted 11-agent platform on a Node and Express ESM server, where every agent inherits cron scheduling, SQLite persistence, and live log streaming from a shared base class, so adding one is a single file and a single registry line.',
+        'Built a two-tier LLM dispatcher: a headless Claude Code CLI as the primary, a local Ollama llama3.2:3b as the always-on fallback, a 10-minute persisted circuit breaker that reroutes on any timeout or rate limit, and inference capped at 2 concurrent processes on a FIFO semaphore after unbounded forking crashed an 8GB machine.',
+        'Routed every outbound action through one egress queue where risky lanes always require a human tap that no toggle can override, funnelled every model call through a single chokepoint that treats fetched web content as data and never as instructions, and shipped it as a launchd service reachable only over Tailscale TLS with no public port.',
       ],
     },
     {
