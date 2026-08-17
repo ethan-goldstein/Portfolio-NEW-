@@ -54,7 +54,7 @@ export const nav = [
 export const socials = [
   { label: 'GitHub', handle: '@ethan-goldstein', url: 'https://github.com/ethan-goldstein', icon: 'github' },
   { label: 'Twitter / X', handle: '@egolddev', url: 'https://x.com/egolddev', icon: 'x' },
-  { label: 'LinkedIn', handle: '/in/ethangoldstein', url: 'https://linkedin.com/in/ethangoldstein', icon: 'linkedin' },
+  { label: 'LinkedIn', handle: '/in/ethangoldstein-', url: 'https://www.linkedin.com/in/ethangoldstein-/', icon: 'linkedin' },
   { label: 'Gmail', handle: 'ethan.goldstein.dev@gmail.com', url: 'mailto:ethan.goldstein.dev@gmail.com', icon: 'gmail' },
   { label: 'TikTok', handle: '@ai.dev.work', url: 'https://tiktok.com/@ai.dev.work', icon: 'tiktok' },
 ]
