@@ -267,15 +267,15 @@ export const projects = [
     repoUrl: 'https://github.com/ethan-goldstein/nullhyp',
   },
   {
-    title: 'Turbo Rumble GP',
+    title: 'Baseball Biomechanics',
     year: '2026',
-    category: 'Game · WebGL',
-    blurb: 'An 8-player kart racer with real-time multiplayer rooms and four ways to play.',
+    category: 'Computer Vision · Sports Science',
+    blurb: 'Markerless swing and pitching analysis from one phone clip — and every number carries the evidence behind it.',
     description:
-      'A kart racer built as a lesson in graceful degradation: 8 racers, 4 karts, a 4-track Grand Prix, and 7 items to fight for position. Realtime multiplayer runs server-authoritative on a Cloudflare Durable Object, and when a room cannot fill it backfills with AI drivers and falls all the way back to a solo race rather than showing anyone an error. Four input paths are equal citizens, keyboard, gamepad, touch, and hands-free MediaPipe hand tracking where you steer with your palms, and every one of them resolves to the same input abstraction so the physics never knows which is driving.',
-    tags: ['Three.js', 'Cloudflare Durable Objects', 'MediaPipe', 'WebGL'],
-    media: asset('turbo-rumble-gp.jpg'),
-    url: 'https://ethan-goldstein.github.io/turbo-rumble-gp/',
+      'A movement-analysis lab that runs entirely in the browser: drop in a slow-motion clip and get joint angles, phase timing, and kinematic sequencing without markers, a lab, or an upload — the video never leaves the device. The pipeline demuxes with mp4box and decodes through WebCodecs to read the true frame rate from the container (rather than trusting playback, which silently halves it in some browsers), then runs a two-pass MediaPipe pose estimate — a lite scout pass to find the athlete, a heavy pass on the crop. What makes it different is that honesty is enforced by the type system: no metric returns a bare number, only a banded value with its provenance — measured, modeled, or imported — or a suppression with the reason it could not be trusted. Kinetics like elbow varus torque are permanently cut rather than estimated, because single-camera video cannot support them. 287 tests cover the pure analysis core, including validation against 672 measured swings from OpenBiomechanics, where the collision model lands at 3.82 mph MAE.',
+    tags: ['TypeScript', 'MediaPipe', 'WebCodecs', 'React', 'Vitest'],
+    media: asset('baseball-biomechanics.png'),
+    url: 'https://ethan-goldstein.github.io/baseball-biomechanics/',
   },
   {
     title: 'Speech Developmental Services',
