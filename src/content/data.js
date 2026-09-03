@@ -267,6 +267,17 @@ export const projects = [
     repoUrl: 'https://github.com/ethan-goldstein/nullhyp',
   },
   {
+    title: 'Line Predictor: College Football Markets Engine',
+    year: '2026',
+    category: 'Quant · Full-Stack',
+    blurb: 'A college football lines and props engine on free data, whose headline result is that it does not beat the closing line, and which says so on its own Track page.',
+    description:
+      "A self-hosted engine for college football spreads, totals, and player props, built entirely on free data: twenty-two seasons of play-by-play and box scores in a DuckDB lake, opponent-adjusted efficiency from a ridge fit refit before every week, a margin-based Elo, and a boosted model that takes the market line as a feature and learns the residual. The honest part comes first. A strict walk-forward backtest over 8,212 games from 2015 to 2025 shows the model does not beat the closing line, sitting near 50 percent in every edge bucket, and the app prints that table before it shows a single pick. Probabilities are isotonic-calibrated on out-of-fold seasons so the tiers cannot overclaim, which is why nearly everything grades as a pass. The props engine projects each player as a full distribution, usage share times team volume times efficiency, adjusted for the opponent and the game script implied by the spread, and is validated the only way free data allows: where the actual stat lands in the predicted distribution, with a volume calibration fit on 2023 and checked out of sample. I live in South Carolina, where no sportsbook is legal, so the app knows which books I can actually use. It reads Kalshi and Polymarket order books through their public APIs, filters out placeholder quotes, charges the exchange fee, and flags a contract only when its ask sits below a fair probability blended from the de-vigged sportsbook consensus and the model. Every bet I log is graded on result and on closing line value. One FastAPI process serves the static Next.js export, runs as a launchd service, and is reachable from my phone only over Tailscale, with no public port and deliberately no localhost bypass. Everything fetched is treated as data, never as instructions.",
+    tags: ['Python', 'FastAPI', 'scikit-learn', 'DuckDB', 'Next.js', 'Kalshi + Polymarket'],
+    media: asset('line-predictor.jpg'),
+    private: true,
+  },
+  {
     title: 'Baseball Biomechanics',
     year: '2026',
     category: 'Computer Vision · Sports Science',
