@@ -25,7 +25,7 @@ export const profile = {
   intro:
     'Computer Information Systems major at the University of South Carolina building scalable, AI-driven applications, from autonomous agent systems to workflow automation that runs real businesses.',
   location: 'Washington, DC',
-  availability: 'GovCIO', // e.g. "Available for freelance"
+  availability: 'SafeRides', // e.g. "Available for freelance"
   email: 'ethan.goldstein.dev@gmail.com',
   // Your photo for the Contact page: drop one in /public/assets and point here.
   // Leave '' to show a styled placeholder.
@@ -63,7 +63,7 @@ export const socials = [
 export const background = {
   // "About me" lead: who I am right now, in one confident paragraph
   about:
-    "I'm Ethan Goldstein, a software engineer in Washington, DC. My day job is federal: I work in GovCIO's Veteran and Enterprise Technology Sector, supporting the Department of Veterans Affairs modernization program, processing and validating confidential records under an active Public Trust credential. That work is where I learned to treat provenance and access as requirements rather than features, and it shows up in everything I build on my own time. I write systems in three fairly different directions. PARALLAX is a bitemporal analytical engine in C++20 compiled to WebAssembly, where I wrote the query language end to end, lexer through cost-based planner, over a columnar store that answers what you believed at one time about another time. NULLHYP is a quantitative research engine with every model hand-written and zero dependencies, and its headline result is that its own models have no edge: a Sharpe of 2.46 in sample becomes minus 0.18 out of it, and the engine prints that in red before it shows you a single chart. WiFi Sensing Lab detects human motion from signal strength alone, which I measured at p equals 0.017 against a permutation null instead of asserting, after diagnosing that the band the published work uses is unobservable at the rate a consumer router can actually be sampled. Autonomous OS is the fourth: an 11-agent orchestration platform, roughly 12,800 lines of Node, TypeScript, and React, that runs around the clock on hardware I own and keeps a human approval gate between every agent and every outbound action. Across all four the model is the smallest part of the work. The engineering is the machinery built to prove the result wrong. I'm finishing a Computer Information Systems degree at the University of South Carolina, expected May 2027.",
+    "I'm Ethan Goldstein, a software engineer in Washington, DC, and the sole engineer at SafeRides, a campus rideshare startup, where I own the rider app, driver app, backend services, and admin panel end to end and report to the founder. Alongside that I work in GovCIO's Veteran and Enterprise Technology Sector, processing and validating confidential Veteran records under an active Public Trust clearance. The federal work is where I learned to treat provenance and access as requirements rather than features, and it shows up in everything I build. I write systems in three fairly different directions. PARALLAX is a bitemporal analytical engine in C++20 compiled to WebAssembly, where I wrote the query language end to end, lexer through cost-based planner, over a columnar store that answers what you believed at one time about another time. NULLHYP is a quantitative research engine with every model hand-written and zero dependencies, and its headline result is that its own models have no edge: a Sharpe of 2.46 in sample becomes minus 0.18 out of it, and the engine prints that in red before it shows you a single chart. WiFi Sensing Lab detects human motion from signal strength alone, which I measured at p equals 0.017 against a permutation null instead of asserting, after diagnosing that the band the published work uses is unobservable at the rate a consumer router can actually be sampled. Autonomous OS is the fourth: an 11-agent orchestration platform, roughly 12,800 lines of Node, TypeScript, and React, that runs around the clock on hardware I own and keeps a human approval gate between every agent and every outbound action. Across all four the model is the smallest part of the work. The engineering is the machinery built to prove the result wrong. I'm finishing a Computer Information Systems degree at the University of South Carolina, expected May 2027.",
   // The story: how the judgment got built, told through what broke
   story: [
     'The first thing I ever shipped was a static portfolio in hand-written HTML, CSS, and JavaScript. What stuck was not the code, it was the habit of putting work on a public URL where it either runs or it does not. Browser games came next, and they turned out to be a systems problem in a costume: a simulation loop pinned to a fixed 60Hz step and fully decoupled from rendering, and authoritative state that lives on the server because a client you do not control will always lie to you.',
@@ -162,36 +162,51 @@ export const interests = [
 export const skills = {
   // Top line shown above the grid
   intro: 'Different stacks, different problems, the same obsession with craft.',
-  // EXACTLY 30 cards = 6 across × 5 down, sized to fit one screen. Both counts are
+  // EXACTLY 35 cards = 7 across × 5 down, sized to fit one screen. Both counts are
   // hardcoded in .skills-grid (index.css) and /skills does not scroll, so grow the
   // grid by adding a COLUMN; a sixth row falls off the bottom of the viewport.
+  // Rows read left to right: languages, then verification and ML, then backend
+  // and delivery, then frontend, then tooling and design.
   cards: [
     { name: 'C++', icon: 'cplusplus/cplusplus-original' },
     { name: 'Python', icon: 'python/python-original' },
     { name: 'TypeScript', icon: 'typescript/typescript-original' },
     { name: 'JavaScript', icon: 'javascript/javascript-original' },
     { name: 'Java', icon: 'java/java-original' },
+    { name: 'Bash', icon: 'bash/bash-original' },
+    { name: 'SQL', icon: 'sqlite/sqlite-original' },
+
     { name: 'WebAssembly', icon: 'wasm/wasm-original' },
     { name: 'CMake', icon: 'cmake/cmake-original' },
+    // libFuzzer, AddressSanitizer and UBSan are LLVM projects; devicon has no
+    // separate marks for them, so they share the LLVM dragon.
+    { name: 'ASan / libFuzzer', icon: 'llvm/llvm-original' },
     { name: 'NumPy', icon: 'numpy/numpy-original' },
     { name: 'pandas', icon: 'pandas/pandas-original' },
     { name: 'scikit-learn', icon: 'scikitlearn/scikitlearn-original' },
-    { name: 'SQL', icon: 'sqlite/sqlite-original' },
+    // No devicon mark exists for Ollama or Claude Code, so they get the same
+    // white wordmark treatment as CAIO and SaaS below.
+    { name: 'Ollama', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='78' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='30' letter-spacing='1' fill='white'%3EOllama%3C/text%3E%3C/svg%3E" },
+
+    { name: 'Claude Code', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='60' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='30' letter-spacing='1' fill='white'%3EClaude%3C/text%3E%3Ctext x='64' y='96' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='30' letter-spacing='1' fill='white'%3ECode%3C/text%3E%3C/svg%3E" },
     { name: 'Node.js', icon: 'nodejs/nodejs-original' },
     { name: 'Express', icon: 'express/express-original' },
+    { name: 'Cloudflare Workers', icon: 'cloudflareworkers/cloudflareworkers-original' },
+    { name: 'Playwright', icon: 'playwright/playwright-original' },
+    { name: 'GitHub Actions', icon: 'githubactions/githubactions-original' },
+    { name: 'Git', icon: 'git/git-original' },
+
     { name: 'React', icon: 'react/react-original' },
     // -original (gradient N in a circle), not -original-wordmark: the wordmark is
     // solid black and disappears against the dark tile.
     { name: 'Next.js', icon: 'nextjs/nextjs-original' },
     { name: 'Vite', icon: 'vitejs/vitejs-original' },
     { name: 'Three.js', icon: 'threejs/threejs-original' },
-    { name: 'Tailwind', icon: 'tailwindcss/tailwindcss-original' },
     { name: 'Framer Motion', icon: 'framermotion/framermotion-original' },
+    { name: 'Tailwind', icon: 'tailwindcss/tailwindcss-original' },
     { name: 'HTML5', icon: 'html5/html5-original' },
+
     { name: 'CSS3', icon: 'css3/css3-original' },
-    { name: 'Cloudflare Workers', icon: 'cloudflareworkers/cloudflareworkers-original' },
-    { name: 'Bash', icon: 'bash/bash-original' },
-    { name: 'Git', icon: 'git/git-original' },
     { name: 'GitHub', icon: 'github/github-original' },
     { name: 'Blender', icon: 'blender/blender-original' },
     { name: 'After Effects', icon: 'aftereffects/aftereffects-original' },
@@ -390,10 +405,9 @@ export const experience = {
       location: 'Tysons Corner, VA',
       points: [
         "Work within GovCIO's Veteran and Enterprise Technology Sector, the group delivering technology services to the Department of Veterans Affairs.",
-        'Process and validate multiple types of IRS documents in support of the Department of Veterans Affairs modernization program.',
-        'Run high-volume digitization workflows: scanning, indexing, and quality checks on confidential federal records.',
-        'Hold an active USAccess Public Trust credential for work with U.S. Department of the Treasury / IRS data.',
-        'Coordinate daily throughput targets with the wider GovCIO processing team.',
+        'Hold an active Public Trust clearance (U.S. Treasury, IRS) extended to Department of Veterans Affairs systems by background-investigation reciprocity, PIV-sponsored through GSA USAccess.',
+        'Process and validate confidential Veteran records under the VA HTMS contract in secured remote environments.',
+        'Run high-volume digitization workflows across multiple IRS document types: scanning, indexing, and quality control.',
       ],
     },
     {
@@ -413,8 +427,8 @@ export const experience = {
       period: '2025 - Present',
       location: 'Remote',
       points: [
-        'Built the orchestration core behind Autonomous OS, a self-hosted 11-agent platform on a Node and Express ESM server, where every agent inherits cron scheduling, SQLite persistence, and live log streaming from a shared base class, so adding one is a single file and a single registry line.',
-        'Built a two-tier LLM dispatcher: a headless Claude Code CLI as the primary, a local Ollama llama3.2:3b as the always-on fallback, a 10-minute persisted circuit breaker that reroutes on any timeout or rate limit, and inference capped at 2 concurrent processes on a FIFO semaphore after unbounded forking crashed an 8GB machine.',
+        'Operate Autonomous OS, an 11-agent automation platform, unattended on self-hosted hardware, architected so every agent inherits cron scheduling, node:sqlite persistence, and live log streaming from a shared base class, making a new agent one file and a registry line.',
+        'Built its two-tier model dispatcher, a headless Claude Code CLI as the primary with a local Ollama fallback behind a 10-minute persisted circuit breaker, and capped inference at 2 concurrent processes on a FIFO semaphore after unbounded forking crashed an 8GB machine.',
         'Routed every outbound action through one egress queue where risky lanes always require a human tap that no toggle can override, funnelled every model call through a single chokepoint that treats fetched web content as data and never as instructions, and shipped it as a launchd service reachable only over Tailscale TLS with no public port.',
       ],
     },
@@ -424,10 +438,9 @@ export const experience = {
       period: '2025',
       location: 'Tysons Corner, VA',
       points: [
-        'Obtained USAccess Credential for Public Trust, U.S. Department of the Treasury / IRS (Active).',
-        'Supported a federal modernization project in partnership with GovCIO, processing 2 million IRS images per day.',
-        'Analyzed internal processing software, found inefficiencies, and recommended upgrades to improve service performance.',
-        'Contributed to IRS digitization through scanning, processing, and data entry of confidential taxpayer info.',
+        'Supported the IRS Digitalization-as-a-Service modernization program in partnership with GovCIO, on a pipeline processing 2 million document images per day.',
+        'Analyzed the internal processing software and flagged its inefficiencies for upgrade.',
+        'Obtained the USAccess Public Trust credential for U.S. Department of the Treasury / IRS work, still active.',
       ],
     },
     {
@@ -436,10 +449,9 @@ export const experience = {
       period: '2021 - 2024',
       location: 'Gaithersburg, MD',
       points: [
-        'In-house operator of HitTrax, a ball-tracking and simulation system for baseball development.',
-        'Handled HitTrax hardware and software maintenance within the facility, keeping the system available for lessons and rentals.',
-        'Oversaw front desk operations: computing assistance, employee and client schedules, and customer relationships.',
-        'Managed customer payments, daily purchases, and finances for the owner.',
+        'Maintained the HitTrax ball-tracking and simulation system, hardware and software, on site so it stayed available for lessons and rentals.',
+        'Ran front desk operations: employee and client scheduling, computing assistance, and customer relationships.',
+        'Handled customer payments, daily purchases, and the daily finances for the owner.',
       ],
     },
   ],
