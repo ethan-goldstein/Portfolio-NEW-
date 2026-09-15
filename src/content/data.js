@@ -373,6 +373,17 @@ export const projects = [
 export const experience = {
   work: [
     {
+      role: 'Software Engineer',
+      org: 'SafeRides (Coetzee Tech Inc.)',
+      period: '2026 - Present',
+      location: 'Remote',
+      points: [
+        'Sole engineer on a campus rideshare platform, reporting to the Founder & CEO and owning the rider app, driver app, backend services, and admin panel end to end.',
+        'Own production: diagnose and fix bugs, monitor and resolve live errors, and run releases and deployments with pre-release testing.',
+        'Restructure the codebase for whoever comes next: module boundaries, naming, dead-code removal, behavior-preserving refactors, clean version control, and documentation so a future engineer can continue the work.',
+      ],
+    },
+    {
       role: 'Data Processor',
       org: 'GovCIO',
       period: '2026 - Present',
