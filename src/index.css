@@ -441,18 +441,18 @@ body.home-lock { overflow: hidden; height: 100vh; }
 
 /* clean, panel-free grid - sized to fit one screen on both axes */
 .skills-grid {
-  /* 7 across x 5 down = 35 tiles. Keeping 5 rows is deliberate: /skills is in
+  /* 9 across x 5 down = 45 tiles. Keeping 5 rows is deliberate: /skills is in
      the no-scroll list in App.jsx, so a 6th row falls off the viewport. Grow by
      adding a column, never a row. */
   /* 100% of the padded page, not 96vw: .skills-page already pads 6vw a side, so
      a viewport-relative width overflowed the container below ~1230px and
      scrolled the whole page sideways. */
-  width: min(1320px, 100%);
+  width: min(1400px, 100%);
   max-height: 64vh;
-  aspect-ratio: 7 / 4.2;
+  aspect-ratio: 9 / 4.2;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(5, 1fr);
   gap: clamp(0.4rem, 1.1vw, 0.9rem);
 }
@@ -524,7 +524,8 @@ body.home-lock { overflow: hidden; height: 100vh; }
 .skills-grid .tilted-card-img[alt="GitHub"],
 .skills-grid .tilted-card-img[alt="Three.js"],
 .skills-grid .tilted-card-img[alt="Framer Motion"],
-.skills-grid .tilted-card-img[alt="Bash"] {
+.skills-grid .tilted-card-img[alt="Bash"],
+.skills-grid .tilted-card-img[alt="Unreal Engine"] {
   filter: invert(1) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.4));
 }
 .skills-grid .tilted-card-img {

@@ -162,12 +162,12 @@ export const interests = [
 export const skills = {
   // Top line shown above the grid
   intro: 'Different stacks, different problems, the same obsession with craft.',
-  // EXACTLY 35 cards = 7 across × 5 down, sized to fit one screen. Both counts are
+  // EXACTLY 45 cards = 9 across × 5 down, sized to fit one screen. Both counts are
   // hardcoded in .skills-grid (index.css) and /skills does not scroll, so grow the
   // grid by adding a COLUMN; a sixth row falls off the bottom of the viewport.
-  // Rows read left to right: languages, then verification and ML, then backend
-  // and delivery, then frontend, then tooling and design.
+  // Each row below is one on-screen row, left to right.
   cards: [
+    // languages
     { name: 'C++', icon: 'cplusplus/cplusplus-original' },
     { name: 'Python', icon: 'python/python-original' },
     { name: 'TypeScript', icon: 'typescript/typescript-original' },
@@ -175,39 +175,53 @@ export const skills = {
     { name: 'Java', icon: 'java/java-original' },
     { name: 'Bash', icon: 'bash/bash-original' },
     { name: 'SQL', icon: 'sqlite/sqlite-original' },
-
     { name: 'WebAssembly', icon: 'wasm/wasm-original' },
     { name: 'CMake', icon: 'cmake/cmake-original' },
+
+    // verification, ML and data
     // libFuzzer, AddressSanitizer and UBSan are LLVM projects; devicon has no
     // separate marks for them, so they share the LLVM dragon.
     { name: 'ASan / libFuzzer', icon: 'llvm/llvm-original' },
     { name: 'NumPy', icon: 'numpy/numpy-original' },
     { name: 'pandas', icon: 'pandas/pandas-original' },
     { name: 'scikit-learn', icon: 'scikitlearn/scikitlearn-original' },
-    // No devicon mark exists for Ollama or Claude Code, so they get the same
-    // white wordmark treatment as CAIO and SaaS below.
+    { name: 'Matplotlib', icon: 'matplotlib/matplotlib-original' },
+    { name: 'OpenCV', icon: 'opencv/opencv-original' },
+    // No devicon mark exists for DuckDB, Ollama, Claude Code, WebSockets, GSAP or
+    // MediaPipe, so they get the same white wordmark treatment as CAIO and SaaS.
+    { name: 'DuckDB', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='78' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='30' letter-spacing='1' fill='white'%3EDuckDB%3C/text%3E%3C/svg%3E" },
     { name: 'Ollama', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='78' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='30' letter-spacing='1' fill='white'%3EOllama%3C/text%3E%3C/svg%3E" },
-
     { name: 'Claude Code', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='60' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='30' letter-spacing='1' fill='white'%3EClaude%3C/text%3E%3Ctext x='64' y='96' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='30' letter-spacing='1' fill='white'%3ECode%3C/text%3E%3C/svg%3E" },
+
+    // backend and delivery
     { name: 'Node.js', icon: 'nodejs/nodejs-original' },
     { name: 'Express', icon: 'express/express-original' },
+    { name: 'FastAPI', icon: 'fastapi/fastapi-original' },
+    { name: 'WebSockets', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='60' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='30' letter-spacing='1' fill='white'%3EWeb%3C/text%3E%3Ctext x='64' y='96' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='30' letter-spacing='1' fill='white'%3ESockets%3C/text%3E%3C/svg%3E" },
     { name: 'Cloudflare Workers', icon: 'cloudflareworkers/cloudflareworkers-original' },
     { name: 'Playwright', icon: 'playwright/playwright-original' },
+    { name: 'Vitest', icon: 'vitest/vitest-original' },
     { name: 'GitHub Actions', icon: 'githubactions/githubactions-original' },
     { name: 'Git', icon: 'git/git-original' },
 
+    // frontend
     { name: 'React', icon: 'react/react-original' },
     // -original (gradient N in a circle), not -original-wordmark: the wordmark is
     // solid black and disappears against the dark tile.
     { name: 'Next.js', icon: 'nextjs/nextjs-original' },
     { name: 'Vite', icon: 'vitejs/vitejs-original' },
     { name: 'Three.js', icon: 'threejs/threejs-original' },
+    { name: 'D3.js', icon: 'd3js/d3js-original' },
+    { name: 'GSAP', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='78' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='38' letter-spacing='1' fill='white'%3EGSAP%3C/text%3E%3C/svg%3E" },
     { name: 'Framer Motion', icon: 'framermotion/framermotion-original' },
+    { name: 'MediaPipe', iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='64' y='60' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='30' letter-spacing='1' fill='white'%3EMedia%3C/text%3E%3Ctext x='64' y='96' text-anchor='middle' font-family='Helvetica, Arial, sans-serif' font-weight='800' font-size='30' letter-spacing='1' fill='white'%3EPipe%3C/text%3E%3C/svg%3E" },
     { name: 'Tailwind', icon: 'tailwindcss/tailwindcss-original' },
-    { name: 'HTML5', icon: 'html5/html5-original' },
 
+    // markup, engines and design
+    { name: 'HTML5', icon: 'html5/html5-original' },
     { name: 'CSS3', icon: 'css3/css3-original' },
     { name: 'GitHub', icon: 'github/github-original' },
+    { name: 'Unreal Engine', icon: 'unrealengine/unrealengine-original' },
     { name: 'Blender', icon: 'blender/blender-original' },
     { name: 'After Effects', icon: 'aftereffects/aftereffects-original' },
     { name: 'Photoshop', icon: 'photoshop/photoshop-original' },
