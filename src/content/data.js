@@ -63,7 +63,7 @@ export const socials = [
 export const background = {
   // "About me" lead: who I am right now, in one confident paragraph
   about:
-    "I'm Ethan Goldstein, a software engineer in Washington, DC, and the sole engineer at SafeRides, a campus rideshare startup, where I own the rider app, driver app, backend services, and admin panel end to end and report to the founder. Alongside that I work in GovCIO's Veteran and Enterprise Technology Sector, processing and validating confidential Veteran records under an active Public Trust clearance. The federal work is where I learned to treat provenance and access as requirements rather than features, and it shows up in everything I build. I write systems in three fairly different directions. PARALLAX is a bitemporal analytical engine in C++20 compiled to WebAssembly, where I wrote the query language end to end, lexer through cost-based planner, over a columnar store that answers what you believed at one time about another time. NULLHYP is a quantitative research engine with every model hand-written and zero dependencies, and its headline result is that its own models have no edge: a Sharpe of 2.46 in sample becomes minus 0.18 out of it, and the engine prints that in red before it shows you a single chart. WiFi Sensing Lab detects human motion from signal strength alone, which I measured at p equals 0.017 against a permutation null instead of asserting, after diagnosing that the band the published work uses is unobservable at the rate a consumer router can actually be sampled. Autonomous OS is the fourth: an 11-agent orchestration platform, roughly 12,800 lines of Node, TypeScript, and React, that runs around the clock on hardware I own and keeps a human approval gate between every agent and every outbound action. Across all four the model is the smallest part of the work. The engineering is the machinery built to prove the result wrong. I'm finishing a Computer Information Systems degree at the University of South Carolina, expected May 2027.",
+    "I'm Ethan Goldstein, a software engineer in Washington, DC, and the sole engineer at SafeRides, a campus rideshare startup, where I own the rider app, driver app, backend services, and admin panel end to end and report to the founder. Until August 2026 I also worked in GovCIO's Veteran and Enterprise Technology Sector, processing and validating confidential Veteran records under a Public Trust clearance. The federal work is where I learned to treat provenance and access as requirements rather than features, and it shows up in everything I build. I write systems in three fairly different directions. PARALLAX is a bitemporal analytical engine in C++20 compiled to WebAssembly, where I wrote the query language end to end, lexer through cost-based planner, over a columnar store that answers what you believed at one time about another time. NULLHYP is a quantitative research engine with every model hand-written and zero dependencies, and its headline result is that its own models have no edge: a Sharpe of 2.46 in sample becomes minus 0.18 out of it, and the engine prints that in red before it shows you a single chart. WiFi Sensing Lab detects human motion from signal strength alone, which I measured at p equals 0.017 against a permutation null instead of asserting, after diagnosing that the band the published work uses is unobservable at the rate a consumer router can actually be sampled. Autonomous OS is the fourth: an 11-agent orchestration platform, roughly 12,800 lines of Node, TypeScript, and React, that runs around the clock on hardware I own and keeps a human approval gate between every agent and every outbound action. Across all four the model is the smallest part of the work. The engineering is the machinery built to prove the result wrong. I'm finishing a Computer Information Systems degree at the University of South Carolina, expected May 2027.",
   // The story: how the judgment got built, told through what broke
   story: [
     'The first thing I ever shipped was a static portfolio in hand-written HTML, CSS, and JavaScript. What stuck was not the code, it was the habit of putting work on a public URL where it either runs or it does not. Browser games came next, and they turned out to be a systems problem in a costume: a simulation loop pinned to a fixed 60Hz step and fully decoupled from rendering, and authoritative state that lives on the server because a client you do not control will always lie to you.',
@@ -90,7 +90,7 @@ export const background = {
     },
     {
       title: "Careful with other people's data",
-      text: 'I handle confidential federal records under a Public Trust credential by day, and the habit carries. My presence-sensing work is split across two repositories so the half that reads a real home has no remote at all, and the public half contains no network client to remove. Where I query registration data, identity is discarded in the adapter before it ever reaches storage.',
+      text: 'I spent most of 2026 handling confidential federal records under a Public Trust credential, and the habit carries. My presence-sensing work is split across two repositories so the half that reads a real home has no remote at all, and the public half contains no network client to remove. Where I query registration data, identity is discarded in the adapter before it ever reaches storage.',
     },
   ],
   // Rendered as the "04 · What I'm Pursuing" section in pages/Background.jsx.
@@ -413,18 +413,6 @@ export const experience = {
       ],
     },
     {
-      role: 'Data Processor',
-      org: 'GovCIO',
-      period: '2026 - Present',
-      location: 'Tysons Corner, VA',
-      points: [
-        "Work within GovCIO's Veteran and Enterprise Technology Sector, the group delivering technology services to the Department of Veterans Affairs.",
-        'Hold an active Public Trust clearance (U.S. Treasury, IRS) extended to Department of Veterans Affairs systems by background-investigation reciprocity, PIV-sponsored through GSA USAccess.',
-        'Process and validate confidential Veteran records under the VA HTMS contract in secured remote environments.',
-        'Run high-volume digitization workflows across multiple IRS document types: scanning, indexing, and quality control.',
-      ],
-    },
-    {
       role: 'Systems & Research Engineer',
       org: 'Independent Practice',
       period: '2025 - Present',
@@ -444,6 +432,19 @@ export const experience = {
         'Operate Autonomous OS, an 11-agent automation platform, unattended on self-hosted hardware, architected so every agent inherits cron scheduling, node:sqlite persistence, and live log streaming from a shared base class, making a new agent one file and a registry line.',
         'Built its two-tier model dispatcher, a headless Claude Code CLI as the primary with a local Ollama fallback behind a 10-minute persisted circuit breaker, and capped inference at 2 concurrent processes on a FIFO semaphore after unbounded forking crashed an 8GB machine.',
         'Routed every outbound action through one egress queue where risky lanes always require a human tap that no toggle can override, funnelled every model call through a single chokepoint that treats fetched web content as data and never as instructions, and shipped it as a launchd service reachable only over Tailscale TLS with no public port.',
+      ],
+    },
+    {
+      // Ended August 2026, so it sits below the current roles.
+      role: 'Data Processor',
+      org: 'GovCIO',
+      period: '2026',
+      location: 'Tysons Corner, VA',
+      points: [
+        "Worked within GovCIO's Veteran and Enterprise Technology Sector, the group delivering technology services to the Department of Veterans Affairs.",
+        'Held a Public Trust clearance (U.S. Treasury, IRS) extended to Department of Veterans Affairs systems by background-investigation reciprocity, PIV-sponsored through GSA USAccess.',
+        'Processed and validated confidential Veteran records under the VA HTMS contract in secured remote environments.',
+        'Ran high-volume digitization workflows across multiple IRS document types: scanning, indexing, and quality control.',
       ],
     },
     {
