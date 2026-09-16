@@ -1419,19 +1419,130 @@ img.bgd-video.kenburns { animation: bgdKenburns 30s ease-in-out infinite alterna
   .me-social, .me-social:hover, .me-social:active { transform: none; }
   .me-social:hover svg { transform: none; }
 }
-.me-email {
+/* Email button: the node HUD (rotating rim, glass plate, scanline) stretched
+   into a pill. Left segment is mailto, right segment copies the address. */
+.me-mail {
+  --bc: var(--brand-color, #fff);
+  --bc2: var(--brand-color-2, var(--brand-color, #fff));
+  position: relative; isolation: isolate;
+  display: inline-flex; align-items: stretch;
   margin-top: 0.4rem;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 0.74rem;
-  color: var(--fg-dim);
+  border-radius: 999px;
   cursor: none;
-  padding-bottom: 2px;
-  border-bottom: 1px solid transparent;
-  transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--bc) 20%, transparent));
+  transition: transform 0.3s var(--ease), filter 0.3s var(--ease);
 }
-.me-email:hover { color: #fff; border-color: #fff; }
+/* rotating energy rim, masked down to a 1.5px ring */
+.me-mail::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--hud-angle),
+              color-mix(in srgb, var(--bc) 88%, #fff) 0deg,
+              transparent 70deg,
+              color-mix(in srgb, var(--bc2) 82%, #fff) 150deg,
+              transparent 220deg,
+              color-mix(in srgb, var(--bc) 88%, #fff) 300deg,
+              transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: hudSpin 6s linear infinite, hudBreathe 3.4s ease-in-out infinite;
+}
+/* glass plate */
+.me-mail-hud {
+  position: absolute; inset: 1.5px; z-index: 1;
+  border-radius: inherit; overflow: hidden; pointer-events: none;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.015)),
+    radial-gradient(90% 90% at 50% 130%, color-mix(in srgb, var(--bc) 22%, transparent), transparent 72%),
+    #08080b;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.me-mail-hud::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(120% 90% at 50% -20%, rgba(255, 255, 255, 0.22), transparent 58%);
+}
+.me-mail-hud::after {
+  content: '';
+  position: absolute; left: 0; right: 0; top: -50%; height: 45%;
+  background: linear-gradient(to bottom, transparent,
+              color-mix(in srgb, var(--bc) 40%, transparent), transparent);
+}
+.me-mail-send,
+.me-mail-copy {
+  position: relative; z-index: 3;
+  display: inline-flex; align-items: center;
+  font-family: var(--font-mono);
+  color: var(--fg);
+  cursor: none;
+  background: transparent; border: 0;
+  transition: color 0.25s var(--ease), background 0.25s var(--ease);
+}
+.me-mail-send {
+  gap: 0.6rem;
+  padding: 0.62rem 0.9rem 0.62rem 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  border-radius: 999px 0 0 999px;
+}
+.me-mail-mark { width: 16px; height: 16px; display: grid; place-items: center; flex: 0 0 auto; }
+.me-mail-mark svg {
+  width: 100%; height: 100%;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--bc) 55%, transparent));
+}
+.me-mail-arrow {
+  color: var(--fg-dim);
+  transform: translate(-2px, 2px);
+  transition: transform 0.3s var(--ease), color 0.3s var(--ease);
+}
+.me-mail-copy {
+  width: 42px; justify-content: center;
+  color: var(--fg-dim);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0 999px 999px 0;
+  padding: 0;
+}
+.me-mail-copy svg { width: 15px; height: 15px; }
+.me-mail-send:hover { color: #fff; }
+.me-mail-send:hover .me-mail-arrow { color: #fff; transform: translate(0, 0); }
+.me-mail-copy:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+.me-mail[data-copied] .me-mail-copy { color: var(--bc2); }
+.me-mail:hover {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 0 16px color-mix(in srgb, var(--bc) 50%, transparent))
+          drop-shadow(0 0 30px color-mix(in srgb, var(--bc2) 30%, transparent));
+}
+.me-mail:hover::before { animation-duration: 1.6s, 3.4s; }
+.me-mail:hover .me-mail-hud::after { animation: hudScan 0.9s var(--ease); }
+/* "Copied" readout, parked under the pill */
+.me-mail-toast {
+  position: absolute; left: 0; right: 0; top: calc(100% + 0.45rem);
+  text-align: center; pointer-events: none;
+  font-family: var(--font-mono); text-transform: uppercase;
+  letter-spacing: 0.22em; font-size: 0.58rem;
+  color: var(--bc2);
+  opacity: 0; transform: translateY(-4px);
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.me-mail[data-copied] .me-mail-toast { opacity: 1; transform: translateY(0); }
+/* the address is 29 characters: on a phone, tighten it so the pill fits in
+   one row instead of clipping */
+@media (max-width: 480px) {
+  .me-mail-send { letter-spacing: 0.05em; font-size: 0.64rem; padding: 0.58rem 0.7rem; gap: 0.45rem; }
+  .me-mail-arrow { display: none; }
+  .me-mail-copy { width: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .me-mail::before { animation: none; opacity: 0.9; }
+  .me-mail:hover::before { animation: none; }
+  .me-mail:hover .me-mail-hud::after { animation: none; }
+  .me-mail, .me-mail:hover { transform: none; }
+}
 
 /* ========== experience (cinematic scroll - shares .bgd classes) ========= */
 /* smaller single-line hero title variant */
