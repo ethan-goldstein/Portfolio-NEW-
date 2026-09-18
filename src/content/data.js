@@ -235,24 +235,22 @@ export const skills = {
 //        Leave media empty ('') to show a stylised gradient placeholder.
 // url:     the LIVE project link (shows a "View live project" button in the modal).
 // private: true = runs on a private server; the modal shows a PRIVATE badge instead of a link.
+//          A string replaces the badge text, for private work that is not a server.
 export const projects = [
   {
-    title: 'WiFi Sensing Lab: Motion Detection from Signal Strength',
+    title: 'ORRERY: An Atlas of Worlds from Real Data',
     year: '2026',
-    category: 'Signals · Python / React',
-    blurb: 'Detecting human motion from WiFi signal strength alone, measured against a real gateway rather than asserted. The public demo is structurally incapable of touching a network.',
+    category: 'Graphics · TypeScript / three.js',
+    blurb: 'Eight explorable worlds, from the Solar System on any date to every tracked satellite in orbit, rendered in the browser from real data and tested against JPL.',
     description: [
-      "I wanted to know whether the WiFi-sensing demos that go viral, the ones claiming to see a human skeleton through drywall, could be reproduced on a router that already exists in a normal home. The answer is no, and the two reasons why are the interesting part. The first is that pose estimation needs Channel State Information, the per-subcarrier amplitude and phase, and commodity WiFi silicon computes CSI and then discards it before anything in userspace can read it; macOS never exposes it and neither does stock router firmware, so it is a driver limitation rather than something better code routes around.",
-      "The second I found by writing the bug. Published work uses a 0.5 to 3 Hz gait band because human stride lands near 2 Hz, and I implemented that band faithfully, then watched my own test report less in-band energy for a walking person than for an empty room. Polling a consumer router's association table tops out near 1 to 2 Hz, which puts Nyquist at 0.5 to 1 Hz, and sampling a 2 Hz sine at 4 Hz is not merely aliasing: every sample lands on a zero crossing and the component disappears outright. So the literature's band is unobservable at the only rate you can actually sample, and I retargeted onto the 0.1 to 0.8 Hz body-shadowing envelope, the slower swell as a torso occludes and reveals propagation paths, which is genuinely measurable.",
-      "The detector that sits on top learns a per-link threshold rather than using a fixed one, because a quiet link does not read zero: white receiver noise of sigma dB spreads across the spectrum and contributes the square root of the band fraction times sigma inside the motion band, roughly 0.34 dB on a link where nothing whatsoever is happening, and that floor differs per link so a fixed threshold either goes deaf on weak links or screams on strong ones. The floor tracker is deliberately asymmetric, falling fast and rising slowly, so a long stretch of motion cannot drag the floor up behind it and blind the detector. The discriminating result is that a slow thermal drift trace has a larger standard deviation than a walking trace and still reads as stillness, because its energy lands below the band: 2.23 dB of in-band RMS for walking against 0.33 for drift, which is the noise floor exactly.",
-      "None of that would mean anything unmeasured, so I built the collector against my own gateway and ran controlled walks. Two things surfaced that no amount of reasoning would have. The station table the admin UI displays is a cached snapshot that refreshes roughly every twenty seconds no matter how fast you poll, which puts Nyquist at 0.025 Hz and makes motion unrecoverable from it; a different field in the same 142 KB response is read live and updates every 1.7 seconds, about ten times the information rate for the identical request, and switching to it was the difference between a dead system and a working one. The real effective rate is 0.6 Hz rather than the 2 Hz the poll loop implies, so the usable band narrows to 0.1 to 0.27 Hz, meaning events lasting four to ten seconds: a person crossing a room, not a footstep.",
-      "The validation is a walk with the window read off a wall clock, scored as the probability that a window inside the walk ranks above one outside it, which gave a median AUC of 0.676 across ten links with the best link at 0.960, against a permutation null built by sliding a same-length window over the still-only stretches that sat at 0.503 with a range of 0.480 to 0.525, so p came out at 0.017. The first version of that null was wrong and I caught it because it was too good: it reported a median of 0.381 rather than 0.5, because every fake window's comparison set still contained the real walk, which inflated the baseline and made the observed value look more extreme than it was. What I find most worth keeping is the trial before it, which came back at exactly chance and nearly became a written-up negative result: the only difference was that its walk window had been inferred from a description instead of measured, and imprecise labels had buried a real effect entirely.",
-      "Because the collector reads a real home, I split the work in two. The public half, which is what you are looking at, contains no network client, no router code, no credential path and no database, so it cannot read a network even if instructed to, which is a stronger guarantee than a disabled demo flag; a leak scan gates every push on both identifying data and the presence of any fetch, XMLHttpRequest, WebSocket or sendBeacon in the shipped bundle, and Vite's modulepreload polyfill is disabled specifically so that check passes with zero exceptions. The private half has no git remote at all. What ties them together is a parity test: the JavaScript signal processing and the Python it was ported from are run against a shared fixture and must agree to within 1e-9, with the DFT written out explicitly rather than pulled from a library so the two can be compared bin for bin. Even the demo video on this card is generated by running the actual simulation and rendering its frames, rather than screen-recorded, so it cannot drift away from the code it depicts.",
+      "Orrery is eight worlds you can fly between: the Solar System on any date, Earth across 4.54 billion years, Mars, the Moon, every tracked object in orbit, every M6+ earthquake since 2000, the ocean's surface currents, and the human story told through night lights. The rule for all of it is that nothing is decorative. The Sun, eight planets, Pluto and 22 moons are computed live with astronomy-engine for whatever date you pick, and the test suite checks those positions against fixtures pulled from JPL Horizons: the Moon has to land within 600 km of where Horizons puts it, which is about a tenth of a degree at lunar distance.",
+      "The heavy worlds are heavy for real reasons. Orbit propagates 19,799 tracked objects with SGP4 inside a Web Worker so the main thread only draws. Oceans advects 100,000 particles through OSCAR surface currents on the GPU. Earth blends 109 PALEOMAP elevation frames in the shader rather than swapping textures, so deep time plays as a continuous surface. The engine underneath is framework-free three.js with a floating origin, so solar-system distances do not shred float precision, and React 19 with zustand sits on top purely as chrome. Textures ship as GPU-compressed KTX2 with a WebP fallback the loader picks per device, and the whole site installs as a PWA.",
+      "It is maintained like a product rather than a demo. Every data pipeline is a reproducible script, the satellite and earthquake catalogues refresh themselves through a scheduled workflow with guard rails, and CI runs 121 unit tests plus a Playwright suite that smoke-tests every route and checks accessibility with axe, gated on Chromium with Firefox and WebKit running a cross-browser subset. A Sources dialog is generated from the asset manifest, so every image and dataset on screen can be traced to its license.",
     ],
-    tags: ['Signal processing', 'React', 'NumPy', 'FFT', 'Privacy engineering'],
-    media: asset('wifi-sensing.mp4'),
-    url: 'https://ethan-goldstein.github.io/wifi-sensing-lab/',
-    repoUrl: 'https://github.com/ethan-goldstein/wifi-sensing-lab',
+    tags: ['TypeScript', 'three.js', 'WebGL', 'Web Workers', 'SGP4', 'Playwright'],
+    media: asset('orrery.jpg'),
+    url: 'https://ethan-goldstein.github.io/orrery/',
+    repoUrl: 'https://github.com/ethan-goldstein/orrery',
   },
   {
     title: 'PARALLAX: Bitemporal Analytical Engine',
@@ -267,16 +265,15 @@ export const projects = [
     repoUrl: 'https://github.com/ethan-goldstein/parallax',
   },
   {
-    title: 'Autonomous OS: Agent Orchestration Platform',
+    title: 'Baseball Biomechanics',
     year: '2026',
-    category: 'AI · Full-Stack',
-    blurb: 'Eleven autonomous agents on a framework I built. Running 24/7 on hardware I own, with a human approval gate on every outbound action.',
+    category: 'Computer Vision · Sports Science',
+    blurb: 'Markerless swing and pitching analysis from one phone clip — and every number carries the evidence behind it.',
     description:
-      "A self-hosted platform that runs eleven autonomous agents unattended, with a human approval gate standing between every agent and every action that reaches the outside world. The orchestration framework is open source; the fleet I run on it is not. Adding an agent is one file and one registry line: it inherits cron scheduling, SQLite persistence, live log streaming, and error capture from a shared base class. The model layer is a two-tier dispatcher, a headless Claude Code CLI first with a local Ollama fallback behind a 10-minute persisted circuit breaker, and inference capped at 2 concurrent processes on a FIFO semaphore after unbounded forking crashed an 8GB machine. Storage is Node's built-in SQLite with no ORM, moved to WAL journaling and a 5-second busy timeout after concurrent writes started failing boots. A hand-rolled Server-Sent Events hub streams state into a React and TypeScript dashboard, and a sleep-proof sweep re-parses every cron expression to replay whatever a sleeping machine missed. The part I care about most is the trust layer: one egress queue where risky lanes can never be auto-approved, checked before any setting is read, and every model call funnelled through a single chokepoint that treats fetched content as data. Zero-dependency HMAC session auth sits behind a gate mounted ahead of every route, with deliberately no localhost bypass. Ships as an installable PWA.",
-    tags: ['Node.js', 'React', 'TypeScript', 'node:sqlite', 'SSE', 'Claude + Ollama'],
-    media: asset('mission-control.mp4'),
-    url: 'https://ethan-goldstein.github.io/Autonomous-OS/',
-    repoUrl: 'https://github.com/ethan-goldstein/Autonomous-OS',
+      'A movement-analysis lab that runs entirely in the browser: drop in a slow-motion clip and get joint angles, phase timing, and kinematic sequencing without markers, a lab, or an upload — the video never leaves the device. The pipeline demuxes with mp4box and decodes through WebCodecs to read the true frame rate from the container (rather than trusting playback, which silently halves it in some browsers), then runs a two-pass MediaPipe pose estimate — a lite scout pass to find the athlete, a heavy pass on the crop. What makes it different is that honesty is enforced by the type system: no metric returns a bare number, only a banded value with its provenance — measured, modeled, or imported — or a suppression with the reason it could not be trusted. Kinetics like elbow varus torque are permanently cut rather than estimated, because single-camera video cannot support them. 287 tests cover the pure analysis core, including validation against 672 measured swings from OpenBiomechanics, where the collision model lands at 3.82 mph MAE.',
+    tags: ['TypeScript', 'MediaPipe', 'WebCodecs', 'React', 'Vitest'],
+    media: asset('baseball-biomechanics.png'),
+    url: 'https://ethan-goldstein.github.io/baseball-biomechanics/',
   },
   {
     title: 'NULLHYP: Quantitative Research Engine',
@@ -296,6 +293,50 @@ export const projects = [
     repoUrl: 'https://github.com/ethan-goldstein/nullhyp',
   },
   {
+    title: 'BLACKTOP: Streetball in Unreal Engine 5',
+    year: '2026',
+    category: 'Game Engine · C++ / UE5',
+    blurb: 'A 3v3 and full-court streetball game in Unreal Engine 5, with its gameplay, AI and rules written in C++ and every fix proven by an automated test.',
+    description: [
+      "Blacktop is an original streetball game in Unreal Engine 5, with half-court 3v3 and full-court play across four venues and a roster of twelve original players. The gameplay is C++ split into Core, Input, Animation, Abilities, AI, Ball and Player modules: timed shots on a ballistic solve, passing and catch-and-shoot, steals and blocks, a six-brain team AI that was verified by letting it play a full game against itself, and an authoritative game state that owns the rules, so the HUD reports what the rules decided rather than what it assumes.",
+      "Input goes through a real intent layer. Handlers only write intent bits and one dispatcher reads them, which is what made a 140 ms input buffer possible. The refactor was proven by the automation suite passing unchanged. That suite is 24 Unreal automation tests covering the AI, rules, passing, camera framing, out-of-bounds, a screenshot check that refuses to photograph the editor, and a frame-time benchmark.",
+      "The benchmark exists because of a wrong diagnosis. Every frame-time number had come from play-in-editor, which ticks the editor on the same game thread as the game, and it reported 37 ms. Run standalone with a tickable subsystem that settles for 12 seconds and samples 600 frames, the game thread is 3.3 ms. The slowdown was the harness, not the game. The strangest bug was in version control: Git LFS was marking Unreal assets lockable, which made them read-only, so every save call returned false and silently threw the edit away. The material, the mask and the math behind the court lines were right the whole time, and nothing ever reached disk.",
+    ],
+    tags: ['C++', 'Unreal Engine 5', 'Gameplay AI', 'Automation testing', 'Python'],
+    media: asset('blacktop.jpg'),
+    private: 'Private · local Unreal project',
+  },
+  {
+    title: 'Autonomous OS: Agent Orchestration Platform',
+    year: '2026',
+    category: 'AI · Full-Stack',
+    blurb: 'Eleven autonomous agents on a framework I built. Running 24/7 on hardware I own, with a human approval gate on every outbound action.',
+    description:
+      "A self-hosted platform that runs eleven autonomous agents unattended, with a human approval gate standing between every agent and every action that reaches the outside world. The orchestration framework is open source; the fleet I run on it is not. Adding an agent is one file and one registry line: it inherits cron scheduling, SQLite persistence, live log streaming, and error capture from a shared base class. The model layer is a two-tier dispatcher, a headless Claude Code CLI first with a local Ollama fallback behind a 10-minute persisted circuit breaker, and inference capped at 2 concurrent processes on a FIFO semaphore after unbounded forking crashed an 8GB machine. Storage is Node's built-in SQLite with no ORM, moved to WAL journaling and a 5-second busy timeout after concurrent writes started failing boots. A hand-rolled Server-Sent Events hub streams state into a React and TypeScript dashboard, and a sleep-proof sweep re-parses every cron expression to replay whatever a sleeping machine missed. The part I care about most is the trust layer: one egress queue where risky lanes can never be auto-approved, checked before any setting is read, and every model call funnelled through a single chokepoint that treats fetched content as data. Zero-dependency HMAC session auth sits behind a gate mounted ahead of every route, with deliberately no localhost bypass. Ships as an installable PWA.",
+    tags: ['Node.js', 'React', 'TypeScript', 'node:sqlite', 'SSE', 'Claude + Ollama'],
+    media: asset('mission-control.mp4'),
+    url: 'https://ethan-goldstein.github.io/Autonomous-OS/',
+    repoUrl: 'https://github.com/ethan-goldstein/Autonomous-OS',
+  },
+  {
+    title: 'WiFi Sensing Lab: Motion Detection from Signal Strength',
+    year: '2026',
+    category: 'Signals · Python / React',
+    blurb: 'Detecting human motion from WiFi signal strength alone, measured against a real gateway rather than asserted. The public demo is structurally incapable of touching a network.',
+    description: [
+      "I wanted to know whether the WiFi-sensing demos that go viral, the ones claiming to see a human skeleton through drywall, could be reproduced on a router that already exists in a normal home. The answer is no, and the two reasons why are the interesting part. The first is that pose estimation needs Channel State Information, the per-subcarrier amplitude and phase, and commodity WiFi silicon computes CSI and then discards it before anything in userspace can read it; macOS never exposes it and neither does stock router firmware, so it is a driver limitation rather than something better code routes around.",
+      "The second I found by writing the bug. Published work uses a 0.5 to 3 Hz gait band because human stride lands near 2 Hz, and I implemented that band faithfully, then watched my own test report less in-band energy for a walking person than for an empty room. Polling a consumer router's association table tops out near 1 to 2 Hz, which puts Nyquist at 0.5 to 1 Hz, and sampling a 2 Hz sine at 4 Hz is not merely aliasing: every sample lands on a zero crossing and the component disappears outright. So the literature's band is unobservable at the only rate you can actually sample, and I retargeted onto the 0.1 to 0.8 Hz body-shadowing envelope, the slower swell as a torso occludes and reveals propagation paths, which is genuinely measurable.",
+      "The detector that sits on top learns a per-link threshold rather than using a fixed one, because a quiet link does not read zero: white receiver noise of sigma dB spreads across the spectrum and contributes the square root of the band fraction times sigma inside the motion band, roughly 0.34 dB on a link where nothing whatsoever is happening, and that floor differs per link so a fixed threshold either goes deaf on weak links or screams on strong ones. The floor tracker is deliberately asymmetric, falling fast and rising slowly, so a long stretch of motion cannot drag the floor up behind it and blind the detector. The discriminating result is that a slow thermal drift trace has a larger standard deviation than a walking trace and still reads as stillness, because its energy lands below the band: 2.23 dB of in-band RMS for walking against 0.33 for drift, which is the noise floor exactly.",
+      "None of that would mean anything unmeasured, so I built the collector against my own gateway and ran controlled walks. Two things surfaced that no amount of reasoning would have. The station table the admin UI displays is a cached snapshot that refreshes roughly every twenty seconds no matter how fast you poll, which puts Nyquist at 0.025 Hz and makes motion unrecoverable from it; a different field in the same 142 KB response is read live and updates every 1.7 seconds, about ten times the information rate for the identical request, and switching to it was the difference between a dead system and a working one. The real effective rate is 0.6 Hz rather than the 2 Hz the poll loop implies, so the usable band narrows to 0.1 to 0.27 Hz, meaning events lasting four to ten seconds: a person crossing a room, not a footstep.",
+      "The validation is a walk with the window read off a wall clock, scored as the probability that a window inside the walk ranks above one outside it, which gave a median AUC of 0.676 across ten links with the best link at 0.960, against a permutation null built by sliding a same-length window over the still-only stretches that sat at 0.503 with a range of 0.480 to 0.525, so p came out at 0.017. The first version of that null was wrong and I caught it because it was too good: it reported a median of 0.381 rather than 0.5, because every fake window's comparison set still contained the real walk, which inflated the baseline and made the observed value look more extreme than it was. What I find most worth keeping is the trial before it, which came back at exactly chance and nearly became a written-up negative result: the only difference was that its walk window had been inferred from a description instead of measured, and imprecise labels had buried a real effect entirely.",
+      "Because the collector reads a real home, I split the work in two. The public half, which is what you are looking at, contains no network client, no router code, no credential path and no database, so it cannot read a network even if instructed to, which is a stronger guarantee than a disabled demo flag; a leak scan gates every push on both identifying data and the presence of any fetch, XMLHttpRequest, WebSocket or sendBeacon in the shipped bundle, and Vite's modulepreload polyfill is disabled specifically so that check passes with zero exceptions. The private half has no git remote at all. What ties them together is a parity test: the JavaScript signal processing and the Python it was ported from are run against a shared fixture and must agree to within 1e-9, with the DFT written out explicitly rather than pulled from a library so the two can be compared bin for bin. Even the demo video on this card is generated by running the actual simulation and rendering its frames, rather than screen-recorded, so it cannot drift away from the code it depicts.",
+    ],
+    tags: ['Signal processing', 'React', 'NumPy', 'FFT', 'Privacy engineering'],
+    media: asset('wifi-sensing.mp4'),
+    url: 'https://ethan-goldstein.github.io/wifi-sensing-lab/',
+    repoUrl: 'https://github.com/ethan-goldstein/wifi-sensing-lab',
+  },
+  {
     title: 'Line Predictor: College Football Markets Engine',
     year: '2026',
     category: 'Quant · Full-Stack',
@@ -305,39 +346,6 @@ export const projects = [
     tags: ['Python', 'FastAPI', 'scikit-learn', 'DuckDB', 'Next.js', 'Kalshi + Polymarket'],
     media: asset('line-predictor.jpg'),
     private: true,
-  },
-  {
-    title: 'Baseball Biomechanics',
-    year: '2026',
-    category: 'Computer Vision · Sports Science',
-    blurb: 'Markerless swing and pitching analysis from one phone clip — and every number carries the evidence behind it.',
-    description:
-      'A movement-analysis lab that runs entirely in the browser: drop in a slow-motion clip and get joint angles, phase timing, and kinematic sequencing without markers, a lab, or an upload — the video never leaves the device. The pipeline demuxes with mp4box and decodes through WebCodecs to read the true frame rate from the container (rather than trusting playback, which silently halves it in some browsers), then runs a two-pass MediaPipe pose estimate — a lite scout pass to find the athlete, a heavy pass on the crop. What makes it different is that honesty is enforced by the type system: no metric returns a bare number, only a banded value with its provenance — measured, modeled, or imported — or a suppression with the reason it could not be trusted. Kinetics like elbow varus torque are permanently cut rather than estimated, because single-camera video cannot support them. 287 tests cover the pure analysis core, including validation against 672 measured swings from OpenBiomechanics, where the collision model lands at 3.82 mph MAE.',
-    tags: ['TypeScript', 'MediaPipe', 'WebCodecs', 'React', 'Vitest'],
-    media: asset('baseball-biomechanics.png'),
-    url: 'https://ethan-goldstein.github.io/baseball-biomechanics/',
-  },
-  {
-    title: 'Speech Developmental Services',
-    year: '2026',
-    category: 'Client Work · Web',
-    blurb: 'A dimensional, scroll-driven site for a pediatric speech-language pathologist, opened by a 3D pen drawing her logo in ink.',
-    description:
-      'Real client work: the live site for Speech Developmental Services (Shana Kilcawley, CCC-SLP), a pediatric speech therapy practice serving Arlington, VA and telehealth clients across four states. The 3-second intro is a custom stroke-drawing engine: her logo is auto-traced into vector contours with marching squares over the PNG, and a three.js fountain pen draws the outline in real time before it crossfades into the periwinkle mark. It is code-split so it never weighs down the main bundle, skippable, and fully reduced-motion aware. Inside, a second three.js scene floats soft glass orbs behind the hero with scroll parallax, and the whole page moves on scroll: a gradient progress bar, 3D card entrances, and a step timeline that fills as you read. Every line of copy is driven from a single content file so the owner can edit her own site without ever touching a component. React 18 and Vite, deployed through GitHub Actions to Pages.',
-    tags: ['React', 'Three.js', 'Framer Motion', 'Vite'],
-    media: asset('speech-developmental-services.jpg'),
-    url: 'https://speechdservices.com/',
-  },
-  {
-    title: 'HAYMAKER: Rise Through the Ranks',
-    year: '2026',
-    category: 'Game · WebGL',
-    blurb: 'A first-person boxing sim you can literally punch your way through: webcam, controller, keyboard, or touch.',
-    description:
-      'A first-person 3D boxing sim in the browser, and a study in simulation design: the fight loop runs on a fixed 60Hz timestep fully decoupled from rendering, so scoring, stamina drain, and knockdown counts stay deterministic no matter what frame rate the machine can hold. On top of that sit real boxing systems: breakable guard, slips, ducks, counters, stamina, knockdowns with a 10-count mash, and three judges scoring to a decision. Career mode has you create a boxer and climb from rank #20 to a Vegas title fight with purses, training camps, and title defenses; freeplay adds an 8-fighter roster, 5 arenas, and selectable 1, 3, 5, 8, or 12-round bouts. All four input methods are first-class and degrade cleanly into each other, including fully in-browser MediaPipe hand tracking so you throw real punches at the camera and never touch a key. Every portrait, arena, and sound was generated with Higgsfield under one locked art direction.',
-    tags: ['Three.js', 'MediaPipe', 'WebGL', 'Higgsfield AI'],
-    media: asset('haymaker.jpg'),
-    url: 'https://ethan-goldstein.github.io/haymaker-boxing/',
   },
   {
     title: 'Golden Spikes',
@@ -351,27 +359,26 @@ export const projects = [
     url: 'https://ethan-goldstein.github.io/golden-spikes/',
   },
   {
-    title: 'Casa Cavallino: A Private Ferrari Residence',
+    title: 'HAYMAKER: Rise Through the Ranks',
     year: '2026',
-    category: 'Cinematic Web · AI Film',
-    blurb: 'A scroll-scrubbed cinematic flythrough of a fictional Ferrari mansion on the Amalfi Coast. The whole site is one continuous generated camera flight.',
+    category: 'Game · WebGL',
+    blurb: 'A first-person boxing sim you can literally punch your way through: webcam, controller, keyboard, or touch.',
     description:
-      "A luxury-brand-film website where scrolling flies you through an entire estate: fourteen AI-generated flythrough clips chained room to room, from the coast approach and infinity pool through a pivot door that swings open as you enter, the family room, kitchen, primary suite, a Ferrari apparel wardrobe, guest suites and a racing-sim lounge, down to a keypad-locked underground collection (the code is Ferrari's founding year), a vintage 'La Storia' wing with a 250 GT and F40, and a cliff tunnel that bursts out into the night. The engineering underneath is a media manifest that degrades every scene from video to a still image to a CSS gradient, so the site stayed navigable and shippable before a single final asset existed. On desktop, scroll position drives video frames directly through all-keyframe encodes; phones get play-through clips with matched hold frames. Twelve-car spotlight configurator with specs and collector notes, synthesized ocean ambience, full keyboard and reduced-motion accessibility. Every still and film clip generated with Higgsfield (Cinema Studio and Seedance) from one locked art direction. Next.js static export on GitHub Pages.",
-    tags: ['Next.js', 'GSAP + Lenis', 'Scroll-scrubbed video', 'Higgsfield AI'],
-    media: asset('casa-cavallino.jpg'),
-    url: 'https://ethan-goldstein.github.io/casa-cavallino/',
-    repoUrl: 'https://github.com/ethan-goldstein/casa-cavallino',
+      'A first-person 3D boxing sim in the browser, and a study in simulation design: the fight loop runs on a fixed 60Hz timestep fully decoupled from rendering, so scoring, stamina drain, and knockdown counts stay deterministic no matter what frame rate the machine can hold. On top of that sit real boxing systems: breakable guard, slips, ducks, counters, stamina, knockdowns with a 10-count mash, and three judges scoring to a decision. Career mode has you create a boxer and climb from rank #20 to a Vegas title fight with purses, training camps, and title defenses; freeplay adds an 8-fighter roster, 5 arenas, and selectable 1, 3, 5, 8, or 12-round bouts. All four input methods are first-class and degrade cleanly into each other, including fully in-browser MediaPipe hand tracking so you throw real punches at the camera and never touch a key. Every portrait, arena, and sound was generated with Higgsfield under one locked art direction.',
+    tags: ['Three.js', 'MediaPipe', 'WebGL', 'Higgsfield AI'],
+    media: asset('haymaker.jpg'),
+    url: 'https://ethan-goldstein.github.io/haymaker-boxing/',
   },
   {
-    title: 'AM: Apple Music Concept',
+    title: 'Speech Developmental Services',
     year: '2026',
-    category: 'UX/UI · Audio',
-    blurb: 'A glassy, Apple-style music home built from my real playlists, with every preview synthesized in-browser.',
+    category: 'Client Work · Web',
+    blurb: 'A dimensional, scroll-driven site for a pediatric speech-language pathologist, opened by a 3D pen drawing her logo in ink.',
     description:
-      'An unofficial Apple Music fan concept that opens on an AI-generated cinematic reveal (Higgsfield) and lands in a glassmorphic personal music home: four station mixes built from my real synced playlists (house, classy, country, and a rap library), a Listen Now player whose color tint follows the track across the whole page, a searchable library of 480+ real track listings, tilt-and-gloss album tiles, a Higgsfield-generated 3D studio room, and a floating mini-player dock. The licensing problem became the interesting constraint: rather than ship a single audio file, every preview is procedurally synthesized at runtime with the Web Audio API, so there are no recordings anywhere in the project and nothing is for sale.',
-    tags: ['Web Audio API', 'JavaScript', 'Higgsfield AI', 'model-viewer 3D'],
-    media: asset('apple-music.webm'),
-    url: 'https://ethan-goldstein.github.io/AppleMusic/',
+      'Real client work: the live site for Speech Developmental Services (Shana Kilcawley, CCC-SLP), a pediatric speech therapy practice serving Arlington, VA and telehealth clients across four states. The 3-second intro is a custom stroke-drawing engine: her logo is auto-traced into vector contours with marching squares over the PNG, and a three.js fountain pen draws the outline in real time before it crossfades into the periwinkle mark. It is code-split so it never weighs down the main bundle, skippable, and fully reduced-motion aware. Inside, a second three.js scene floats soft glass orbs behind the hero with scroll parallax, and the whole page moves on scroll: a gradient progress bar, 3D card entrances, and a step timeline that fills as you read. Every line of copy is driven from a single content file so the owner can edit her own site without ever touching a component. React 18 and Vite, deployed through GitHub Actions to Pages.',
+    tags: ['React', 'Three.js', 'Framer Motion', 'Vite'],
+    media: asset('speech-developmental-services.jpg'),
+    url: 'https://speechdservices.com/',
   },
   {
     title: 'ABROAD: A Semester in Motion',
@@ -384,18 +391,6 @@ export const projects = [
     media: asset('abroad-globe.jpg'),
     url: 'https://ethan-goldstein.github.io/abroad/',
   },
-  {
-    title: 'WALLPR: Wallpaper Storefront',
-    year: '2026',
-    category: 'E-commerce · Web',
-    blurb: 'A minimal one-page hero store selling impasto-painted wallpapers as instant digital downloads.',
-    description:
-      'A single-viewport storefront for AI-assisted oil-painting wallpapers: a non-scrollable hero of four expanding category panels (Sports, Places, Lifestyle, Animals) that open per-category galleries rendered from one product manifest. Checkout is fully outsourced to a merchant-of-record provider, which means hosted overlay checkout, global sales tax and VAT handling, and secure expiring download delivery, so the static site holds zero secrets and touches zero payment data. Per-page Content Security Policy locks script, frame, and connect sources to a known allowlist. No cookies, no trackers, no PII collected, and full-resolution originals never enter source control. Pure HTML, CSS, and JavaScript, no build step, deployed on GitHub Pages.',
-    tags: ['HTML/CSS/JS', 'E-commerce', 'Merchant of Record', 'Higgsfield AI'],
-    media: asset('wallpr.jpg'),
-    url: 'https://wallpr.us/',
-  },
-
 ]
 
 /* ----------------------- EXPERIENCE: SCHOOL + WORK ---------------------- */

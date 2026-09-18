@@ -248,7 +248,7 @@ export default function Projects() {
                       <rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" strokeWidth="1.6" />
                       <path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" strokeWidth="1.6" />
                     </svg>
-                    Private · self-hosted server
+                    {typeof cur.private === 'string' ? cur.private : 'Private · self-hosted server'}
                   </span>
                 ) : cur.url || cur.repoUrl ? (
                   <div className="folio-card-links mt-2">
