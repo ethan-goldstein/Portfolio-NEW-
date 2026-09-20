@@ -253,6 +253,21 @@ export const projects = [
     repoUrl: 'https://github.com/ethan-goldstein/orrery',
   },
   {
+    title: 'ARCHIVE: Twenty-Two Years, Rendered at the Quality of Their Time',
+    year: '2026',
+    category: 'Interactive · React / three.js',
+    blurb: 'A personal time capsule where every year from 2005 to 2026 scrolls through its four seasons over a 3D world, and the whole interface sharpens from 240p to 4K as the years pass.',
+    description: [
+      "An archive of growing up, built as a site that ages with its subject. Every year from 2005 to 2026 is one page that scrolls through winter, spring, summer and fall over a procedural three.js world: a snowed-in house, a low-poly ball field, the pool at dusk, a porch with a jack-o'-lantern. The camera rides a single spline through all four sets as you scroll. Nothing about the layout is retro; what changes is rendering quality, the way screens actually improved. 2005 is pixelated and posterized with square panels and motion in hard steps; 2026 has depth of field, bloom, translucent panels and long soft easing. One render profile per era drives the 3D side and one set of design tokens drives the 2D side, so the two never disagree.",
+      "Smoothness is a measured requirement, not a hope. A Playwright script scrolls a full year and fires rapid year changes on a real GPU and reports frame times, visible hitches and layout shift; the site holds a flat 16.7 ms with zero long frames. Getting there meant removing every backdrop blur and blend layer over the live canvas, routing scroll resets through Lenis so it could not snap back, building particle geometry once and moving only its draw range, and covering a year change with a viewport-sized wash held until the new year has painted. A test fails if anyone reintroduces a blur.",
+      "The content system keeps personal facts and cultural context in separate files and never invents the former: anything unknown is a visible slot. Music comes from a read-only pass over the Music app that also decodes the library backups macOS keeps and recovers deleted playlists, which is how a real Apple Music Replay from 2023 made it onto the page. It ships as a static export to GitHub Pages behind 27 unit tests and 75 end-to-end tests across three screen widths, with Lighthouse at 100 on the home and year pages. There is also an original 8-bit backyard baseball game inside it, because there had to be.",
+    ],
+    tags: ['React 19', 'three.js', 'Lenis', 'Next.js', 'Playwright', 'Tailwind'],
+    media: asset('archive.jpg'),
+    url: 'https://ethan-goldstein.github.io/archive/',
+    repoUrl: 'https://github.com/ethan-goldstein/archive',
+  },
+  {
     title: 'PARALLAX: Bitemporal Analytical Engine',
     year: '2026',
     category: 'Systems · C++ / WebAssembly',
@@ -346,39 +361,6 @@ export const projects = [
     tags: ['Python', 'FastAPI', 'scikit-learn', 'DuckDB', 'Next.js', 'Kalshi + Polymarket'],
     media: asset('line-predictor.jpg'),
     private: true,
-  },
-  {
-    title: 'Golden Spikes',
-    year: '2026',
-    category: 'Game · WebGL',
-    blurb: 'An 8-mode baseball game playable with a keyboard, touch, a PS4 controller, or your bare hands.',
-    description:
-      'A full browser-based baseball game across eight modes: My Career, Home Run Derby, Dynasty card packs, Batting Practice, Fielding, a strength and drills mode called The Forge, quick mini-games, and real-time multiplayer rooms. The multiplayer runs server-authoritative on a Cloudflare Durable Object, so game state lives at the edge rather than in any client, which is the only honest way to run a competitive room when you do not control the browser on the other end. There is no traditional backend and no server to keep alive. Built in vanilla JavaScript and Three.js on a fixed-timestep simulation, with MediaPipe pose tracking for fully hands-free play: cross your wrist over midline and the bat swings.',
-    tags: ['Three.js', 'Cloudflare Durable Objects', 'MediaPipe', 'WebGL'],
-    media: asset('golden-spikes.jpg'),
-    url: 'https://ethan-goldstein.github.io/golden-spikes/',
-  },
-  {
-    title: 'HAYMAKER: Rise Through the Ranks',
-    year: '2026',
-    category: 'Game · WebGL',
-    blurb: 'A first-person boxing sim you can literally punch your way through: webcam, controller, keyboard, or touch.',
-    description:
-      'A first-person 3D boxing sim in the browser, and a study in simulation design: the fight loop runs on a fixed 60Hz timestep fully decoupled from rendering, so scoring, stamina drain, and knockdown counts stay deterministic no matter what frame rate the machine can hold. On top of that sit real boxing systems: breakable guard, slips, ducks, counters, stamina, knockdowns with a 10-count mash, and three judges scoring to a decision. Career mode has you create a boxer and climb from rank #20 to a Vegas title fight with purses, training camps, and title defenses; freeplay adds an 8-fighter roster, 5 arenas, and selectable 1, 3, 5, 8, or 12-round bouts. All four input methods are first-class and degrade cleanly into each other, including fully in-browser MediaPipe hand tracking so you throw real punches at the camera and never touch a key. Every portrait, arena, and sound was generated with Higgsfield under one locked art direction.',
-    tags: ['Three.js', 'MediaPipe', 'WebGL', 'Higgsfield AI'],
-    media: asset('haymaker.jpg'),
-    url: 'https://ethan-goldstein.github.io/haymaker-boxing/',
-  },
-  {
-    title: 'Speech Developmental Services',
-    year: '2026',
-    category: 'Client Work · Web',
-    blurb: 'A dimensional, scroll-driven site for a pediatric speech-language pathologist, opened by a 3D pen drawing her logo in ink.',
-    description:
-      'Real client work: the live site for Speech Developmental Services (Shana Kilcawley, CCC-SLP), a pediatric speech therapy practice serving Arlington, VA and telehealth clients across four states. The 3-second intro is a custom stroke-drawing engine: her logo is auto-traced into vector contours with marching squares over the PNG, and a three.js fountain pen draws the outline in real time before it crossfades into the periwinkle mark. It is code-split so it never weighs down the main bundle, skippable, and fully reduced-motion aware. Inside, a second three.js scene floats soft glass orbs behind the hero with scroll parallax, and the whole page moves on scroll: a gradient progress bar, 3D card entrances, and a step timeline that fills as you read. Every line of copy is driven from a single content file so the owner can edit her own site without ever touching a component. React 18 and Vite, deployed through GitHub Actions to Pages.',
-    tags: ['React', 'Three.js', 'Framer Motion', 'Vite'],
-    media: asset('speech-developmental-services.jpg'),
-    url: 'https://speechdservices.com/',
   },
   {
     title: 'ABROAD: A Semester in Motion',
