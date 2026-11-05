@@ -236,7 +236,7 @@ export const skills = {
 // url:     the LIVE project link (shows a "View live project" button in the modal).
 // private: true = runs on a private server; the modal shows a PRIVATE badge instead of a link.
 //          A string replaces the badge text, for private work that is not a server.
-// film:    optional full-length video with sound. The modal shows a "Watch the full video"
+// film:    optional full-length video. The modal shows a "Watch the full video"
 //          button over the media; filmPoster is its still frame.
 export const projects = [
   {

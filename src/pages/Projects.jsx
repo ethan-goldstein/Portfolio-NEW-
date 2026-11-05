@@ -108,7 +108,7 @@ export default function Projects() {
 
   const [index, setIndex] = useState(0)
   const [open, setOpen] = useState(false)
-  // full-length video with sound, opened on top of the modal
+  // full-length video, opened on top of the modal
   const [film, setFilm] = useState(false)
   const active = ((index % N) + N) % N
   const go = useCallback((d) => setIndex((i) => i + d), [])
@@ -243,9 +243,9 @@ export default function Projects() {
               <div className="folio-card-media">
                 <Media p={cur} i={active} />
                 {cur.film ? (
-                  <button className="folio-film-play" onClick={() => setFilm(true)} aria-label="Watch the full video with sound">
+                  <button className="folio-film-play" onClick={() => setFilm(true)} aria-label="Watch the full video">
                     <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
-                    Watch the full video · sound on
+                    Watch the full video
                   </button>
                 ) : null}
               </div>
