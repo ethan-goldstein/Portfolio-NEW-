@@ -108,6 +108,8 @@ export default function Projects() {
 
   const [index, setIndex] = useState(0)
   const [open, setOpen] = useState(false)
+  // full-length video with sound, opened on top of the modal
+  const [film, setFilm] = useState(false)
   const active = ((index % N) + N) % N
   const go = useCallback((d) => setIndex((i) => i + d), [])
   const goTo = (i) => { let d = ((i - active + N) % N); if (d > N / 2) d -= N; setIndex((c) => c + d) }
@@ -131,10 +133,17 @@ export default function Projects() {
   const onLeave = () => { rotX.set(0); rotY.set(0) }
 
   useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') setOpen(false) }
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return
+      if (film) setFilm(false)
+      else setOpen(false)
+    }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [])
+  }, [film])
+
+  // the film belongs to the project that opened it
+  useEffect(() => { if (!open) setFilm(false) }, [open, active])
 
   // Lenis swallows wheel events page-wide, so pause it while the modal is
   // open, otherwise the wheel scrolls the page behind the overlay and the
@@ -231,7 +240,15 @@ export default function Projects() {
               data-lenis-prevent
             >
               <button className="folio-close" onClick={() => setOpen(false)} aria-label="Close">✕</button>
-              <div className="folio-card-media"><Media p={cur} i={active} /></div>
+              <div className="folio-card-media">
+                <Media p={cur} i={active} />
+                {cur.film ? (
+                  <button className="folio-film-play" onClick={() => setFilm(true)} aria-label="Watch the full video with sound">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
+                    Watch the full video · sound on
+                  </button>
+                ) : null}
+              </div>
               <div className="folio-card-body">
                 <p className="page-index">{pad(active + 1)} / {pad(N)}</p>
                 <h2 className="folio-card-title">{cur.title}</h2>
@@ -271,6 +288,19 @@ export default function Projects() {
                 ) : null}
               </div>
             </motion.div>
+            {film && cur.film ? (
+              <div className="folio-film" onClick={(e) => { e.stopPropagation(); setFilm(false) }}>
+                <button className="folio-close" onClick={() => setFilm(false)} aria-label="Close video">✕</button>
+                <video
+                  src={cur.film}
+                  poster={cur.filmPoster}
+                  controls
+                  autoPlay
+                  playsInline
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+            ) : null}
           </motion.div>
         )}
       </AnimatePresence>

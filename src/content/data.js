@@ -236,7 +236,26 @@ export const skills = {
 // url:     the LIVE project link (shows a "View live project" button in the modal).
 // private: true = runs on a private server; the modal shows a PRIVATE badge instead of a link.
 //          A string replaces the badge text, for private work that is not a server.
+// film:    optional full-length video with sound. The modal shows a "Watch the full video"
+//          button over the media; filmPoster is its still frame.
 export const projects = [
+  {
+    title: 'SENTINEL: Gesture-Controlled Follow-Me Drone',
+    year: '2026',
+    category: 'Robotics · Python / Computer Vision',
+    blurb: 'A $60 Wi-Fi drone flown hands-free with gestures, that can lock onto a person and follow them, then rebuild the flight as a 3D map.',
+    description: [
+      "A $60 Wi-Fi toy drone, flown with my hands. A MacBook webcam reads gestures through MediaPipe, a mapper turns them into intent, and a safety governor decides what actually reaches the motors: sticks are capped at 35 percent, a gesture only counts after three matching frames, the sticks drop to zero within 0.4 seconds of losing my hand, and a watchdog zeroes them if the main loop stalls, so a frozen camera can't leave the drone flying on old input. The laptop joins the drone's own Wi-Fi and speaks the UDP protocol of its phone app, which the open source turbodrone project had already reverse engineered. I pinned it as a submodule under its Apache 2.0 license and built everything above it.",
+      "Two of the most useful fixes came from flight data rather than from the code. Takeoff and landing share one toggle bit on this drone, so a single dropped or doubled packet left the app and the drone disagreeing about whether it was in the air, which showed up as a fist that didn't land it and props still spinning on the floor. Landing now never touches that bit: it holds the throttle down for three seconds and then repeats the motor stop command. Separately, every flight that drifted badly turned out to be after sunset. The camera the drone uses to hold its position read 3 to 17 out of 255 against 106 to 140 in daylight, and one flight went more than 10 meters into a building in about four seconds, so the app now refuses to take off when it's that dark.",
+      "Follow mode turns it into a security drone. It locks onto a person in the drone's own camera, turns to keep them centered and holds 4 meters away, with a Kalman filter coasting through short gaps and re-locking only on someone wearing the same clothes. On the first real follow flight the object detector alone kept the lock 8 percent of the time; adding MediaPipe's pose tracker and fixing the tracker brought the same footage to 84 percent. Raising both arms lands it, losing the person for five seconds cuts the motors, and a FACE LOCK panel shows range, lock time and confidence beside the person's box. It doesn't recognize anyone, and it only follows people who agreed to it.",
+      "The drone reports nothing about where it is, so position hold works like a motion capture lab: an overhead camera reads a printed ArUco tag on the drone about 30 times a second, and a PID controller holds the takeoff spot, enforces a geofence and flies autopilot paths, tuned first in a simulator with wind. After a flight, COLMAP rebuilds the scene from the drone's video as a point cloud colored by height, with the drone's and the person's paths drawn through it, and a showreel tool plays the tracking replay beside the spinning map. I also designed a parametric prop guard in OpenSCAD, sized to keep the drone under the 250 gram FAA registration limit. 202 tests cover the governor, the trackers, the follow controller and the simulator, across 19 recorded field flights.",
+    ],
+    tags: ['Python', 'MediaPipe', 'OpenCV', 'Kalman filter', 'PID control', 'COLMAP'],
+    media: asset('sentinel-preview.mp4'),
+    film: asset('sentinel.mp4'),
+    filmPoster: asset('sentinel.jpg'),
+    repoUrl: 'https://github.com/ethan-goldstein/rev-engr-drone',
+  },
   {
     title: 'ORRERY: An Atlas of Worlds from Real Data',
     year: '2026',
@@ -251,21 +270,6 @@ export const projects = [
     media: asset('orrery.jpg'),
     url: 'https://ethan-goldstein.github.io/orrery/',
     repoUrl: 'https://github.com/ethan-goldstein/orrery',
-  },
-  {
-    title: 'ARCHIVE: Twenty-Two Years, Rendered at the Quality of Their Time',
-    year: '2026',
-    category: 'Interactive · React / three.js',
-    blurb: 'A personal time capsule where every year from 2005 to 2026 scrolls through its four seasons over a 3D world, and the whole interface sharpens from 240p to 4K as the years pass.',
-    description: [
-      "An archive of growing up, built as a site that ages with its subject. Every year from 2005 to 2026 is one page that scrolls through winter, spring, summer and fall over a procedural three.js world: a snowed-in house, a low-poly ball field, the pool at dusk, a porch with a jack-o'-lantern. The camera rides a single spline through all four sets as you scroll. Nothing about the layout is retro; what changes is rendering quality, the way screens actually improved. 2005 is pixelated and posterized with square panels and motion in hard steps; 2026 has depth of field, bloom, translucent panels and long soft easing. One render profile per era drives the 3D side and one set of design tokens drives the 2D side, so the two never disagree.",
-      "Smoothness is a measured requirement, not a hope. A Playwright script scrolls a full year and fires rapid year changes on a real GPU and reports frame times, visible hitches and layout shift; the site holds a flat 16.7 ms with zero long frames. Getting there meant removing every backdrop blur and blend layer over the live canvas, routing scroll resets through Lenis so it could not snap back, building particle geometry once and moving only its draw range, and covering a year change with a viewport-sized wash held until the new year has painted. A test fails if anyone reintroduces a blur.",
-      "The content system keeps personal facts and cultural context in separate files and never invents the former: anything unknown is a visible slot. Music comes from a read-only pass over the Music app that also decodes the library backups macOS keeps and recovers deleted playlists, which is how a real Apple Music Replay from 2023 made it onto the page. It ships as a static export to GitHub Pages behind 27 unit tests and 75 end-to-end tests across three screen widths, with Lighthouse at 100 on the home and year pages. There is also an original 8-bit backyard baseball game inside it, because there had to be.",
-    ],
-    tags: ['React 19', 'three.js', 'Lenis', 'Next.js', 'Playwright', 'Tailwind'],
-    media: asset('archive.jpg'),
-    url: 'https://ethan-goldstein.github.io/archive/',
-    repoUrl: 'https://github.com/ethan-goldstein/archive',
   },
   {
     title: 'PARALLAX: Bitemporal Analytical Engine',
@@ -306,20 +310,6 @@ export const projects = [
     media: asset('nullhyp.mp4'),
     url: 'https://ethan-goldstein.github.io/nullhyp/',
     repoUrl: 'https://github.com/ethan-goldstein/nullhyp',
-  },
-  {
-    title: 'BLACKTOP: Streetball in Unreal Engine 5',
-    year: '2026',
-    category: 'Game Engine · C++ / UE5',
-    blurb: 'A 3v3 and full-court streetball game in Unreal Engine 5, with its gameplay, AI and rules written in C++ and every fix proven by an automated test.',
-    description: [
-      "Blacktop is an original streetball game in Unreal Engine 5, with half-court 3v3 and full-court play across four venues and a roster of twelve original players. The gameplay is C++ split into Core, Input, Animation, Abilities, AI, Ball and Player modules: timed shots on a ballistic solve, passing and catch-and-shoot, steals and blocks, a six-brain team AI that was verified by letting it play a full game against itself, and an authoritative game state that owns the rules, so the HUD reports what the rules decided rather than what it assumes.",
-      "Input goes through a real intent layer. Handlers only write intent bits and one dispatcher reads them, which is what made a 140 ms input buffer possible. The refactor was proven by the automation suite passing unchanged. That suite is 24 Unreal automation tests covering the AI, rules, passing, camera framing, out-of-bounds, a screenshot check that refuses to photograph the editor, and a frame-time benchmark.",
-      "The benchmark exists because of a wrong diagnosis. Every frame-time number had come from play-in-editor, which ticks the editor on the same game thread as the game, and it reported 37 ms. Run standalone with a tickable subsystem that settles for 12 seconds and samples 600 frames, the game thread is 3.3 ms. The slowdown was the harness, not the game. The strangest bug was in version control: Git LFS was marking Unreal assets lockable, which made them read-only, so every save call returned false and silently threw the edit away. The material, the mask and the math behind the court lines were right the whole time, and nothing ever reached disk.",
-    ],
-    tags: ['C++', 'Unreal Engine 5', 'Gameplay AI', 'Automation testing', 'Python'],
-    media: asset('blacktop.jpg'),
-    private: 'Private · local Unreal project',
   },
   {
     title: 'Autonomous OS: Agent Orchestration Platform',
@@ -372,6 +362,20 @@ export const projects = [
     tags: ['React', 'Three.js', 'GSAP', 'Vite'],
     media: asset('abroad-globe.jpg'),
     url: 'https://ethan-goldstein.github.io/abroad/',
+  },
+  {
+    title: 'BLACKTOP: Streetball in Unreal Engine 5',
+    year: '2026',
+    category: 'Game Engine · C++ / UE5',
+    blurb: 'A 3v3 and full-court streetball game in Unreal Engine 5, with its gameplay, AI and rules written in C++ and every fix proven by an automated test.',
+    description: [
+      "Blacktop is an original streetball game in Unreal Engine 5, with half-court 3v3 and full-court play across four venues and a roster of twelve original players. The gameplay is C++ split into Core, Input, Animation, Abilities, AI, Ball and Player modules: timed shots on a ballistic solve, passing and catch-and-shoot, steals and blocks, a six-brain team AI that was verified by letting it play a full game against itself, and an authoritative game state that owns the rules, so the HUD reports what the rules decided rather than what it assumes.",
+      "Input goes through a real intent layer. Handlers only write intent bits and one dispatcher reads them, which is what made a 140 ms input buffer possible. The refactor was proven by the automation suite passing unchanged. That suite is 24 Unreal automation tests covering the AI, rules, passing, camera framing, out-of-bounds, a screenshot check that refuses to photograph the editor, and a frame-time benchmark.",
+      "The benchmark exists because of a wrong diagnosis. Every frame-time number had come from play-in-editor, which ticks the editor on the same game thread as the game, and it reported 37 ms. Run standalone with a tickable subsystem that settles for 12 seconds and samples 600 frames, the game thread is 3.3 ms. The slowdown was the harness, not the game. The strangest bug was in version control: Git LFS was marking Unreal assets lockable, which made them read-only, so every save call returned false and silently threw the edit away. The material, the mask and the math behind the court lines were right the whole time, and nothing ever reached disk.",
+    ],
+    tags: ['C++', 'Unreal Engine 5', 'Gameplay AI', 'Automation testing', 'Python'],
+    media: asset('blacktop.jpg'),
+    private: 'Private · local Unreal project',
   },
 ]
 

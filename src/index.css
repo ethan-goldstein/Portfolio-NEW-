@@ -996,6 +996,26 @@ body.home-lock { overflow: hidden; height: 100vh; }
   background: rgba(0, 0, 0, 0.5); color: #fff; border: 1px solid var(--line);
 }
 .folio-close:hover { background: rgba(255, 255, 255, 0.2); }
+/* full-length project video with sound: a button over the modal media opens it */
+.folio-film-play {
+  position: absolute; left: 50%; bottom: 1rem; transform: translateX(-50%); z-index: 3;
+  display: inline-flex; align-items: center; gap: 0.55rem; white-space: nowrap;
+  padding: 0.7rem 1.2rem; border-radius: 999px; cursor: none;
+  background: rgba(0, 0, 0, 0.62); color: #fff; border: 1px solid var(--line-strong);
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.folio-film-play:hover { background: rgba(255, 255, 255, 0.18); }
+.folio-film {
+  position: fixed; inset: 0; z-index: 10;
+  display: grid; place-items: center; padding: clamp(0.75rem, 3vw, 2.5rem);
+  background: rgba(0, 0, 0, 0.97);
+}
+.folio-film video {
+  width: auto; height: auto; max-width: 100%; max-height: 100%;
+  border-radius: 10px; background: #000; cursor: auto;
+}
+.folio-film .folio-close { position: fixed; top: 1rem; right: 1rem; z-index: 11; }
 
 /* ============ background (cinematic scroll + monolith video) ============ */
 /* -- backdrop layers (rendered by App via CinematicBackdrop, z 0) -- */
