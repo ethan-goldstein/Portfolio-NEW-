@@ -296,6 +296,7 @@ export default function Projects() {
                   poster={cur.filmPoster}
                   controls
                   autoPlay
+                  muted
                   playsInline
                   onClick={(e) => e.stopPropagation()}
                 />

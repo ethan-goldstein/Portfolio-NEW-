@@ -252,7 +252,7 @@ export const projects = [
     ],
     tags: ['Python', 'MediaPipe', 'OpenCV', 'Kalman filter', 'PID control', 'COLMAP'],
     media: asset('sentinel-preview.mp4'),
-    film: asset('sentinel.mp4'),
+    film: asset('sentinel-film.mp4'),
     filmPoster: asset('sentinel.jpg'),
     repoUrl: 'https://github.com/ethan-goldstein/rev-engr-drone',
   },
